@@ -1,0 +1,64 @@
+# ============================================================================
+#  Cloudflare Pages _redirects  —  mezcalchulele.com
+#  Rules are evaluated top-to-bottom; the FIRST match wins. Order is load-
+#  bearing: specific exemptions and 301s must precede the catch-all blocks.
+# ============================================================================
+
+# --- RSS feed (Cloudflare won't auto-serve index.xml for a directory) -----
+/feed/             /feed/index.xml   200
+/feed              /feed/index.xml   200
+/comments/feed/    /feed/index.xml   301
+
+# --- Stylesheet exemption -------------------------------------------------
+#  The malware spam lives under /css/?page=* so /css/* is 410'd below. Our
+#  real stylesheet also lives at /css/style.css, so exempt it FIRST.
+/css/style.css                                  /css/style.css            200
+
+# --- Named, secure media download routes (Step 7) -------------------------
+#  Files live internally at /assets/downloads/ and are served only via these
+#  named routes (200 = rewrite, URL stays clean, internal path hidden).
+/media/press-release-sfwsc-award                /assets/downloads/1_Chulele-Mezcal.PR_.SFWSC2023-GoldMedal.pdf            200
+/media/media-kit-2025                           /assets/downloads/2_Chulele-Media-Kit-2025.1.pdf                          200
+/media/press-release-july-2025                  /assets/downloads/3_Chulele-_-Press-Release-07.16.2025.pdf                200
+/media/press-release-october-2024               /assets/downloads/4_Chulele-Mezcal.10.2024DayotDead.pdf                   200
+/media/product-photo-dia-de-muertos             /assets/downloads/1_Photo_Mezcalistas-ID-841_product_v2.png               200
+/media/press-release-may-2024                   /assets/downloads/5_Chulele-Mezcal.PR_.SFWSC2023-GoldMedal.pdf            200
+/media/plain-dealer-article-2024                /assets/downloads/6_THE-PLAIN-DEALER-CLEVELAND-WEDNESDAY-MAY-1-2024.pdf   200
+/media/press-release-march-2024                 /assets/downloads/7_Chulele-Mezcal.M.rls_.Final_.pdf                      200
+/media/product-brief-guelaguetza-2022           /assets/downloads/8_PRODUCT-BRIEF-Chulele-Mezcal-Guelaguetza-2022.pdf     200
+/media/product-brief-dia-de-muertos-2022        /assets/downloads/9_PRODUCT-BRIEF-Chulele-Mezcal-Dia-de-los-Muertos-2022.pdf 200
+
+# --- 301s: old WordPress PDF URLs -> named routes (must precede /wp-content/*) ---
+/wp-content/uploads/2026/03/1_Chulele-Mezcal.PR_.SFWSC2023-GoldMedal.pdf      /media/press-release-sfwsc-award          301
+/wp-content/uploads/2026/03/2_Chulele-Media-Kit-2025.1.pdf                    /media/media-kit-2025                     301
+/wp-content/uploads/2026/03/3_Chulele-_-Press-Release-07.16.2025.pdf          /media/press-release-july-2025            301
+/wp-content/uploads/2026/03/4_Chulele-Mezcal.10.2024DayotDead.pdf             /media/press-release-october-2024         301
+/wp-content/uploads/2026/03/5_Chulele-Mezcal.PR_.SFWSC2023-GoldMedal.pdf      /media/press-release-may-2024             301
+/wp-content/uploads/2026/03/6_THE-PLAIN-DEALER-CLEVELAND-WEDNESDAY-MAY-1-2024.pdf /media/plain-dealer-article-2024      301
+/wp-content/uploads/2026/03/7_Chulele-Mezcal.M.rls_.Final_.pdf                /media/press-release-march-2024           301
+/wp-content/uploads/2026/03/8_PRODUCT-BRIEF-Chulele-Mezcal-Guelaguetza-2022.pdf   /media/product-brief-guelaguetza-2022 301
+/wp-content/uploads/2026/03/9_PRODUCT-BRIEF-Chulele-Mezcal-Dia-de-los-Muertos-2022.pdf /media/product-brief-dia-de-muertos-2022 301
+
+# --- 301s: old downloads folders -> branded gallery / route pages ---------
+/downloads/Logos/                                                 /media/logos/                       301
+/downloads/Graphics%20and%20Icons/                                /media/graphics/                    301
+/downloads/SF%20World%20Spirits%20Competition/                    /media/award-creatives/             301
+/downloads/Photos/Guelaguetza%202022%20Photos/                    /media/photos/guelaguetza-2022/     301
+/downloads/Photos/D%c3%ada%20de%20los%20Muertos%202022%20Photos/  /media/photos/dia-de-muertos-2022/  301
+/downloads/Photos/Chulele%20Production%20Process/                 /media/photos/production-process/   301
+
+# --- Block direct access to internal download store + legacy folders ------
+/assets/downloads/*    /404.html   404
+/assets/downloads      /404.html   404
+/downloads/*           /404.html   404
+/downloads             /404.html   404
+
+# --- Malware spam paths: 410 Gone (signals permanent removal to Google) ----
+/css/*         /404.html   410
+/shopdetail/*  /404.html   410
+
+# --- Legacy WordPress paths: 404 (no real files exist here anymore) --------
+/wp-content/*  /404.html   404
+
+# --- www -> non-www canonical ---------------------------------------------
+https://www.mezcalchulele.com/*  https://mezcalchulele.com/:splat  301

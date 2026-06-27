@@ -1,0 +1,50 @@
+# ============================================================================
+#  Cloudflare Pages _headers  —  mezcalchulele.com
+# ============================================================================
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://player.vimeo.com; frame-src https://player.vimeo.com https://www.youtube.com; connect-src 'self' https://api.mailchimp.com https://www.google-analytics.com
+
+# --- Secure download store: never index, force-download handled per-route ---
+/assets/downloads/*
+  X-Robots-Tag: noindex, nofollow
+
+/assets/*
+  X-Robots-Tag: noindex
+
+# --- Force browser download (attachment) on media documents ----------------
+/media/press-release-*
+  Content-Disposition: attachment
+/media/media-kit-*
+  Content-Disposition: attachment
+/media/product-brief-*
+  Content-Disposition: attachment
+/media/plain-dealer-*
+  Content-Disposition: attachment
+
+# --- Cache policy ----------------------------------------------------------
+#  HTML: 1 hour. CSS/JS: 1 year immutable. Images & PDFs: 30 days.
+/*.html
+  Cache-Control: public, max-age=3600
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*.jpg
+  Cache-Control: public, max-age=2592000
+/assets/*.jpeg
+  Cache-Control: public, max-age=2592000
+/assets/*.png
+  Cache-Control: public, max-age=2592000
+/assets/*.webp
+  Cache-Control: public, max-age=2592000
+/assets/*.svg
+  Cache-Control: public, max-age=2592000
+/assets/*.gif
+  Cache-Control: public, max-age=2592000
+/assets/downloads/*.pdf
+  Cache-Control: public, max-age=2592000

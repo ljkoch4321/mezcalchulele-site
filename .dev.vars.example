@@ -1,0 +1,11 @@
+# Cloudflare Pages environment variables for the Mailchimp Functions.
+# Copy to `.dev.vars` for local `wrangler pages dev`, OR set these in the
+# Cloudflare Pages dashboard (Settings -> Environment variables) for prod.
+# NEVER commit real values. (.dev.vars and .env are gitignored.)
+
+MAILCHIMP_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-usXX
+MAILCHIMP_AUDIENCE_ID=xxxxxxxxxx
+
+# GA4 is already wired in /js/main.js to the existing property G-HD2ZC291W8.
+# It is NOT an env var (static, client-side, consent-gated). To change it,
+# edit GA_ID in /js/main.js.

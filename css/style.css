@@ -1,0 +1,98 @@
+/* ==========================================================================
+   Chulele Artisanal Mezcal — overlay components + print rules
+   (Site layout/typography come from the mirrored Elementor CSS. This file
+    only styles the components injected by /js/main.js, plus print rules.)
+   ========================================================================== */
+:root {
+  --chulele-magenta: #af0061;
+  --chulele-pink: #c70057;
+  --chulele-indigo: #343b93;
+  --chulele-teal: #12cbc4;
+  --chulele-ink: #1a1a1a;
+}
+
+html.chulele-lock, html.chulele-lock body { overflow: hidden !important; }
+
+/* ---------- Age gate ------------------------------------------------------ */
+.chulele-agegate {
+  position: fixed; inset: 0; z-index: 100000;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(20, 8, 18, 0.94);
+  padding: 20px; overflow-y: auto;
+  font-family: 'Open Sans', Arial, sans-serif;
+}
+.chulele-agegate__box {
+  background: #fff; color: var(--chulele-ink);
+  max-width: 460px; width: 100%; border-radius: 10px;
+  padding: 36px 30px; text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.chulele-agegate__logo { width: 96px; height: auto; margin: 0 auto 14px; display: block; }
+.chulele-agegate__box h2 {
+  font-family: 'Akrobat', 'Oswald', sans-serif; font-weight: 700;
+  color: var(--chulele-magenta); font-size: 26px; margin: 0 0 8px; line-height: 1.15;
+}
+.chulele-agegate__box p { font-size: 15px; line-height: 1.5; margin: 0 0 18px; color: #444; }
+.chulele-agegate__selects { display: flex; gap: 8px; justify-content: center; margin-bottom: 14px; }
+.chulele-agegate__selects select {
+  flex: 1 1 0; min-width: 0; padding: 11px 8px; font-size: 15px;
+  border: 1px solid #ccc; border-radius: 6px; background: #fff; color: #222;
+}
+.chulele-agegate__flag { display: block; margin: 0 auto 12px; width: 40px; height: auto; }
+.chulele-agegate__error { color: var(--chulele-pink); font-weight: 600; font-size: 14px; margin: 0 0 12px; }
+.chulele-agegate__btn {
+  display: inline-block; width: 100%; padding: 13px 24px;
+  background: var(--chulele-magenta); color: #fff;
+  font-family: 'Akrobat', 'Oswald', sans-serif; font-weight: 700;
+  font-size: 18px; letter-spacing: 1px; border: 0; border-radius: 6px; cursor: pointer;
+  transition: background .2s ease;
+}
+.chulele-agegate__btn:hover { background: var(--chulele-indigo); }
+
+/* ---------- Cookie consent ------------------------------------------------ */
+.chulele-consent {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 99000;
+  background: #1a1014; color: #fff;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 14px 24px; padding: 16px 22px;
+  font-family: 'Open Sans', Arial, sans-serif; font-size: 14px; line-height: 1.45;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35);
+}
+.chulele-consent__text { margin: 0; max-width: 760px; }
+.chulele-consent__text a { color: var(--chulele-teal); text-decoration: underline; }
+.chulele-consent__actions { display: flex; gap: 10px; }
+.chulele-consent__btn {
+  padding: 10px 22px; border: 0; border-radius: 5px; cursor: pointer;
+  font-weight: 700; font-size: 14px; letter-spacing: .5px;
+}
+.chulele-consent__btn--accept { background: var(--chulele-magenta); color: #fff; }
+.chulele-consent__btn--accept:hover { background: var(--chulele-pink); }
+.chulele-consent__btn--decline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.5); }
+.chulele-consent__btn--decline:hover { border-color: #fff; }
+
+/* ---------- Vimeo modal --------------------------------------------------- */
+.chulele-vmodal { position: fixed; inset: 0; z-index: 100001; }
+.chulele-vmodal[hidden] { display: none; }
+.chulele-vmodal__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.9); }
+.chulele-vmodal__inner {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: min(92vw, 1100px);
+}
+.chulele-vmodal__frame { position: relative; width: 100%; padding-top: 56.25%; }
+.chulele-vmodal__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.chulele-vmodal__close {
+  position: absolute; top: -44px; right: 0; background: none; border: 0;
+  color: #fff; font-size: 34px; line-height: 1; cursor: pointer; padding: 4px 10px;
+}
+
+/* ---------- Form status message ------------------------------------------ */
+.chulele-formmsg { margin: 10px 0 0; font-size: 14px; font-weight: 600; }
+
+/* ---------- Print --------------------------------------------------------- */
+@media print {
+  .chulele-agegate, .chulele-consent, .chulele-vmodal,
+  header, nav, .elementor-location-header,
+  .elementor-menu-toggle, [data-elementor-type="header"] { display: none !important; }
+  html.chulele-lock, html.chulele-lock body { overflow: visible !important; }
+  body { color: #000; background: #fff; }
+}

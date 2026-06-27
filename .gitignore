@@ -1,0 +1,10 @@
+# Local tooling + raw crawl captures — never deployed
+_tools/
+_capture/
+node_modules/
+.DS_Store
+*.log
+
+# Local env (Cloudflare Pages env vars are set in the dashboard)
+.dev.vars
+.env
