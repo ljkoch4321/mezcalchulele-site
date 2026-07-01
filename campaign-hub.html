@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Held in Reserve — Campaign Hub</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{--ink:#0b0b0c;--card:#141416;--bone:#e9e4da;--dim:#8c8881;--wine:#AF0061;--line:rgba(233,228,218,.14)}
+*{box-sizing:border-box}
+body{margin:0;background:#161618;color:var(--bone);font-family:"Jost",sans-serif;font-weight:300;line-height:1.7}
+.serif{font-family:"Cormorant Garamond",serif}
+.wrap{max-width:920px;margin:0 auto;padding:54px 28px 120px}
+h1.title{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:40px;margin:0 0 6px}
+.sub{color:var(--dim);margin:0 0 40px}
+.ey{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--wine);margin-bottom:14px}
+h2.sec{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:27px;margin:54px 0 18px;padding-top:24px;border-top:1px solid var(--line)}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px;text-decoration:none;color:var(--bone);transition:.2s}
+.card:hover{border-color:var(--wine);transform:translateY(-2px)}
+.card .n{font-family:"Cormorant Garamond",serif;font-size:20px;margin-bottom:8px}
+.card .d{font-size:13px;color:var(--dim);line-height:1.5}
+.card .go{margin-top:14px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--wine)}
+details{background:var(--card);border:1px solid var(--line);border-radius:6px;margin-bottom:12px;overflow:hidden}
+summary{cursor:pointer;padding:18px 22px;font-size:14px;letter-spacing:.04em;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary .tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+summary:hover{color:#fff}
+.md{padding:6px 30px 26px;border-top:1px solid var(--line);color:#cfcabf}
+.md h1{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:28px;color:var(--bone);margin:18px 0 8px}
+.md h2{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:21px;color:var(--bone);margin:24px 0 8px}
+.md h3{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin:18px 0 6px}
+.md a{color:var(--wine)}
+.md code{background:rgba(255,255,255,.06);padding:1px 5px;border-radius:3px;font-size:.9em}
+.md hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+.md table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.md th,.md td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.md ul{padding-left:20px}
+.md blockquote{border-left:2px solid var(--wine);margin:10px 0;padding:2px 16px;color:#bdb8ad}
+.note{font-size:13px;color:var(--dim);margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="ey">Chulele · internal review</div>
+  <h1 class="title serif">Held in Reserve — Campaign Hub</h1>
+  <p class="sub">Everything in one place. Click a mockup to open it full-screen; expand any content piece to read it.</p>
+
+  <h2 class="sec serif">Design mockups</h2>
+  <div class="cards">
+    <a class="card" href="mockup-reserve-ab-matrix.html"><div class="n serif">A/B Matrix</div><div class="d">4 treatments × 2 wordings = 8 testable cells.</div><div class="go">Open →</div></a>
+    <a class="card" href="mockup-reserve-landing.html"><div class="n serif">/reserve Landing</div><div class="d">The reserve page — all three releases (incl. Añejo).</div><div class="go">Open →</div></a>
+    <a class="card" href="mockup-product-anejo.html"><div class="n serif">Añejo Product Page</div><div class="d">The barrel-aging story · still-aging reserve.</div><div class="go">Open →</div></a>
+    <a class="card" href="mockup-reserve-refined.html"><div class="n serif">Refined 01 &amp; 05</div><div class="d">The two front-runners, polished.</div><div class="go">Open →</div></a>
+  </div>
+  <p class="note">Also: <a href="mockup-dia-de-los-muertos-allocation-v2.html" style="color:var(--wine)">subtle product-page reference (v2)</a> · <a href="mockup-reserve-options.html" style="color:var(--wine)">original 5-option board</a></p>
+
+  <h2 class="sec serif">Traffic content</h2>
+  <div id="content"></div>
+
+</div>
+
+<script>
+const files = [
+  ['README.md','Campaign overview · linking plan · launch checklist','Overview'],
+  ['blog-what-single-batch-means.md','SEO blog · top of funnel','Blog'],
+  ['blog-why-held-in-reserve.md','SEO blog · brand / philosophy','Blog'],
+  ['blog-dia-de-los-muertos-2022.md','SEO blog · Día de los Muertos 2022','Blog'],
+  ['blog-guelaguetza-2022.md','SEO blog · Guelaguetza 2022','Blog'],
+  ['blog-anejo-still-aging.md','SEO blog · Añejo (still aging)','Blog'],
+  ['email-reserve-announcement.md','Newsletter announcement','Email'],
+  ['social-teasers.md','Instagram + stories copy','Social'],
+];
+const root = document.getElementById('content');
+files.forEach(async ([f, desc, tag], i) => {
+  const det = document.createElement('details');
+  if(i===0) det.open = true;
+  det.innerHTML = `<summary><span>${desc}</span><span class="tag">${tag}</span></summary><div class="md">Loading…</div>`;
+  root.appendChild(det);
+  try{
+    const res = await fetch('_reserve-campaign/'+f);
+    const txt = await res.text();
+    // strip leading YAML frontmatter for display
+    const body = txt.replace(/^---[\s\S]*?---\n/, '');
+    det.querySelector('.md').innerHTML = marked.parse(body);
+  }catch(e){
+    det.querySelector('.md').innerHTML = '<p style="color:#c66">Could not load '+f+' — '+e+'</p>';
+  }
+});
+</script>
+</body>
+</html>

@@ -8,3 +8,8 @@ node_modules/
 # Local env (Cloudflare Pages env vars are set in the dashboard)
 .dev.vars
 .env
+.gstack/
+
+# Raw design source (PSD/PDF/JPF) — extracted PNGs live in assets/mockup/
+Chulele Añejo 2022/
+.claude/

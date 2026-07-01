@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Homepage · Reserve treatments — 5 options</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-bold-webfont.woff") format("woff");font-weight:700;font-display:swap}
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-semibold-webfont.woff") format("woff");font-weight:600;font-display:swap}
+:root{
+  --ink:#0b0b0c; --panel:#101012; --bone:#e9e4da; --dim:#8c8881; --faint:#56534e;
+  --wine:#AF0061; --line:rgba(233,228,218,.14);
+}
+*{box-sizing:border-box}
+body{margin:0;background:#161618;color:var(--bone);font-family:"Roboto",sans-serif;font-weight:300;line-height:1.6}
+.serif{font-family:"Akrobat",sans-serif}
+.page{max-width:1180px;margin:0 auto;padding:54px 32px 100px}
+.intro{margin-bottom:46px}
+.intro h1{font-family:"Akrobat",sans-serif;font-weight:400;font-size:34px;margin:0 0 8px}
+.intro p{color:var(--dim);max-width:680px;font-size:15px;margin:0}
+.intro .mini{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--wine);margin-bottom:14px}
+
+/* each option = real homepage right-panel context */
+.opt{margin-bottom:40px;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:#0e0e10}
+.opt .cap{display:flex;align-items:baseline;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line);background:#121214}
+.opt .cap .num{font-family:"Akrobat",sans-serif;font-size:22px;color:var(--wine)}
+.opt .cap .ttl{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--bone)}
+.opt .cap .desc{font-size:13px;color:var(--dim);margin-left:auto}
+
+/* the hero panel mimics the homepage: left copy on agave, right black panel + bottle */
+.panel{display:grid;grid-template-columns:1fr 1fr;min-height:380px}
+.left .vlogo{height:64px;width:auto;display:block;align-self:flex-start;opacity:.9;margin-bottom:16px}
+.left{padding:48px 40px;display:flex;flex-direction:column;justify-content:center;
+  background:linear-gradient(180deg,rgba(11,11,12,.55),rgba(11,11,12,.78)),
+  url('assets/2023/10/repeat-grid-black.svg');background-size:cover;background-position:center}
+.left .kic{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--bone);font-weight:400;line-height:2}
+.left .blurb{color:var(--dim);font-size:14px;margin:14px 0 0;max-width:300px}
+.left .learn{margin-top:26px;align-self:flex-start;font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--bone);border:1px solid var(--line);padding:12px 22px;text-decoration:none}
+
+.right{position:relative;background:var(--ink);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.right .bottle{height:320px;width:auto;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
+
+/* ============ OPTION 1 — Reserve Seal (circular stamp) ============ */
+.seal{position:absolute;top:40px;left:40px;width:118px;height:118px;border-radius:50%;
+  border:1px solid rgba(233,228,218,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:rgba(11,11,12,.25)}
+.seal::before{content:"";position:absolute;inset:7px;border-radius:50%;border:1px solid rgba(233,228,218,.16)}
+.seal .s1{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
+.seal .s2{font-family:"Akrobat",sans-serif;font-size:22px;line-height:1.05;margin:5px 0;color:var(--bone)}
+.seal .s3{font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint)}
+.seal .star{color:var(--wine);font-size:11px;margin-bottom:4px}
+
+/* ============ OPTION 2 — Vertical spine tag ============ */
+.spine{position:absolute;top:0;left:54px;bottom:0;display:flex;align-items:center}
+.spine .rule{width:1px;height:64%;background:linear-gradient(180deg,transparent,rgba(233,228,218,.35),transparent)}
+.spine .vtxt{writing-mode:vertical-rl;transform:rotate(180deg);margin-left:14px;
+  font-size:12px;letter-spacing:.5em;text-transform:uppercase;color:var(--bone)}
+.spine .vtxt b{color:var(--wine);font-weight:400}
+
+/* ============ OPTION 3 — Pure text lockup (most subtle) ============ */
+.lockup{position:absolute;top:50%;left:46px;transform:translateY(-50%);max-width:190px}
+.lockup .l1{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
+.lockup .l2{font-family:"Akrobat",sans-serif;font-size:25px;line-height:1.25;margin:14px 0 0;color:var(--bone)}
+.lockup .l3{display:inline-block;margin-top:20px;font-family:"Akrobat",sans-serif;font-size:17px;color:var(--bone);
+  text-decoration:none;border-bottom:1px solid var(--wine);padding-bottom:3px}
+.lockup .l3 .ar{font-family:"Roboto";font-size:12px;color:var(--wine);margin-left:8px}
+
+/* ============ OPTION 4 — Corner ribbon ============ */
+.ribbon{position:absolute;top:26px;right:-46px;transform:rotate(45deg);background:rgba(11,11,12,.9);
+  border-top:1px solid rgba(233,228,218,.3);border-bottom:1px solid rgba(233,228,218,.3);
+  color:var(--bone);font-size:10px;letter-spacing:.4em;text-transform:uppercase;padding:9px 60px}
+.cornercap{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);text-align:center;width:90%}
+.cornercap .c1{font-family:"Akrobat",sans-serif;font-style:italic;font-size:19px;color:#d9d3c8}
+.cornercap .c2{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+
+/* ============ OPTION 5 — Plaque ============ */
+.plaque{position:absolute;top:50%;left:42px;transform:translateY(-50%);width:200px;
+  border:1px solid var(--line);padding:24px 22px;background:rgba(11,11,12,.4);text-align:center}
+.plaque .p0{font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--wine)}
+.plaque .p1{font-family:"Akrobat",sans-serif;font-size:21px;line-height:1.3;margin:12px 0;color:var(--bone)}
+.plaque .pr{height:1px;background:var(--line);margin:14px 0}
+.plaque .p2{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+
+@media(max-width:760px){
+  .panel{grid-template-columns:1fr}
+  .left{display:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="intro">
+    <div class="mini">Homepage · product panel</div>
+    <h1 class="serif">Five ways to retire the “Buy Now” button</h1>
+    <p>Each option replaces the BUY NOW graphic on the homepage product panel. None says “sold out.” The bottle stays the hero; the message is that the 2022 release is resting, held back for a future moment. Shown in the real panel context so you can judge placement, not just the element.</p>
+  </div>
+
+  <!-- OPTION 1 -->
+  <div class="opt">
+    <div class="cap"><span class="num">01</span><span class="ttl">Reserve Seal</span><span class="desc">A vault stamp. Quiet authority, no words wasted.</span></div>
+    <div class="panel">
+      <div class="left">
+        <img class="vlogo" src="assets/2023/10/chulele.png" alt="Chulele">
+        <div class="kic">Día de los Muertos<br>Single-batch release</div>
+        <p class="blurb">Only 1,250 bottles were ever made. Our mezcal teleports you to the moment of its creation.</p>
+        <a class="learn" href="#">Learn more about this batch</a>
+      </div>
+      <div class="right">
+        <div class="seal">
+          <div class="star">✦</div>
+          <div class="s1">Held in</div>
+          <div class="s2 serif">Reserve</div>
+          <div class="s3">Est. 2022</div>
+        </div>
+        <img class="bottle" src="assets/2024/06/bottle-joven-Gold-Medal-dio-de-los-muertos-front-view-dark.png" alt="">
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION 2 -->
+  <div class="opt">
+    <div class="cap"><span class="num">02</span><span class="ttl">Vertical Spine</span><span class="desc">Fills the tall button footprint. Editorial, architectural.</span></div>
+    <div class="panel">
+      <div class="left">
+        <img class="vlogo" src="assets/2023/10/chulele.png" alt="Chulele">
+        <div class="kic">Día de los Muertos<br>Single-batch release</div>
+        <p class="blurb">Only 1,250 bottles were ever made. Our mezcal teleports you to the moment of its creation.</p>
+        <a class="learn" href="#">Learn more about this batch</a>
+      </div>
+      <div class="right">
+        <div class="spine">
+          <div class="rule"></div>
+          <div class="vtxt">In <b>Reserve</b> · Awaiting its next release</div>
+        </div>
+        <img class="bottle" src="assets/2024/06/bottle-joven-Gold-Medal-dio-de-los-muertos-front-view-dark.png" alt="">
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION 3 -->
+  <div class="opt">
+    <div class="cap"><span class="num">03</span><span class="ttl">Text Lockup</span><span class="desc">The most subtle. No button at all — a sentence and a thread.</span></div>
+    <div class="panel">
+      <div class="left">
+        <img class="vlogo" src="assets/2023/10/chulele.png" alt="Chulele">
+        <div class="kic">Día de los Muertos<br>Single-batch release</div>
+        <p class="blurb">Only 1,250 bottles were ever made. Our mezcal teleports you to the moment of its creation.</p>
+        <a class="learn" href="#">Learn more about this batch</a>
+      </div>
+      <div class="right">
+        <div class="lockup">
+          <div class="l1">Not currently released</div>
+          <div class="l2 serif">Held in reserve for a future release.</div>
+          <a class="l3 serif" href="#">Join the reserve list <span class="ar">→</span></a>
+        </div>
+        <img class="bottle" src="assets/2024/06/bottle-joven-Gold-Medal-dio-de-los-muertos-front-view-dark.png" alt="">
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION 4 -->
+  <div class="opt">
+    <div class="cap"><span class="num">04</span><span class="ttl">Corner Ribbon</span><span class="desc">Smallest footprint. A whisper in the corner.</span></div>
+    <div class="panel">
+      <div class="left">
+        <img class="vlogo" src="assets/2023/10/chulele.png" alt="Chulele">
+        <div class="kic">Día de los Muertos<br>Single-batch release</div>
+        <p class="blurb">Only 1,250 bottles were ever made. Our mezcal teleports you to the moment of its creation.</p>
+        <a class="learn" href="#">Learn more about this batch</a>
+      </div>
+      <div class="right">
+        <div class="ribbon">In Reserve</div>
+        <img class="bottle" src="assets/2024/06/bottle-joven-Gold-Medal-dio-de-los-muertos-front-view-dark.png" alt="">
+        <div class="cornercap">
+          <div class="c1 serif">The 2022 release has found its homes.</div>
+          <div class="c2">A future batch will follow</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION 5 -->
+  <div class="opt">
+    <div class="cap"><span class="num">05</span><span class="ttl">Plaque</span><span class="desc">Museum label. Frames the bottle as an artifact, not stock.</span></div>
+    <div class="panel">
+      <div class="left">
+        <img class="vlogo" src="assets/2023/10/chulele.png" alt="Chulele">
+        <div class="kic">Día de los Muertos<br>Single-batch release</div>
+        <p class="blurb">Only 1,250 bottles were ever made. Our mezcal teleports you to the moment of its creation.</p>
+        <a class="learn" href="#">Learn more about this batch</a>
+      </div>
+      <div class="right">
+        <div class="plaque">
+          <div class="p0">Reserve</div>
+          <div class="p1 serif">Resting until the next release</div>
+          <div class="pr"></div>
+          <div class="p2">Request an invitation →</div>
+        </div>
+        <img class="bottle" src="assets/2024/06/bottle-joven-Gold-Medal-dio-de-los-muertos-front-view-dark.png" alt="">
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

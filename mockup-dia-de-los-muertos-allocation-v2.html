@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Día de los Muertos — Chulele</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-bold-webfont.woff") format("woff");font-weight:700;font-display:swap}
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-semibold-webfont.woff") format("woff");font-weight:600;font-display:swap}
+:root{
+  --ink:#0b0b0c;
+  --bone:#e9e4da;
+  --dim:#8c8881;
+  --faint:#56534e;
+  --wine:#AF0061;          /* used only as a hairline / single dot */
+  --line:rgba(233,228,218,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ink);color:var(--bone);
+  font-family:"Roboto",sans-serif;font-weight:300;
+  -webkit-font-smoothing:antialiased;line-height:1.7;
+}
+.serif{font-family:"Akrobat",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:0 40px}
+
+/* micro label */
+.label{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--dim);font-weight:400}
+
+/* tiny dev note, easy to ignore */
+.dev{position:fixed;bottom:14px;right:16px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);opacity:.6;z-index:5}
+
+/* header */
+header{position:absolute;top:0;left:0;right:0;z-index:3}
+header .wrap{display:flex;align-items:center;justify-content:center;padding:30px 40px}
+header img{height:40px;opacity:.9}
+
+/* hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0}
+.hero .bottle{display:flex;justify-content:center;align-items:center;padding:80px 0}
+.hero .bottle img{max-height:74vh;width:auto;filter:drop-shadow(0 40px 70px rgba(0,0,0,.7))}
+.hero .copy{padding:0 30px 0 10px;max-width:460px}
+.hero .copy .vlogo{height:78px;width:auto;display:block;opacity:.92;margin-bottom:26px}
+.hero .copy .label{display:block;margin-bottom:26px}
+.hero h1{font-weight:300;font-size:68px;line-height:.98;letter-spacing:.005em;margin:0}
+.hero h1 .yr{display:block;font-size:23px;letter-spacing:.45em;color:var(--dim);margin-top:20px;font-family:"Roboto",sans-serif;font-weight:300}
+.hero .line{font-size:22px;font-style:italic;color:#cfc9bd;margin:40px 0 0;font-weight:300;line-height:1.5}
+
+/* allocation — a quiet statement, not a button */
+.alloc{margin-top:52px;padding-top:30px;border-top:1px solid var(--line)}
+.alloc .k{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--dim)}
+.alloc a{display:inline-block;margin-top:16px;color:var(--bone);text-decoration:none;font-family:"Akrobat",sans-serif;
+  font-size:21px;letter-spacing:.02em;border-bottom:1px solid var(--wine);padding-bottom:4px;transition:.4s}
+.alloc a:hover{color:#fff;border-bottom-color:var(--bone)}
+.alloc a .ar{font-family:"Roboto";font-size:14px;margin-left:10px;color:var(--wine);transition:.4s}
+.alloc a:hover .ar{margin-left:16px;color:var(--bone)}
+
+/* quiet statement band */
+.statement{padding:22vh 0;text-align:center}
+.statement p{font-family:"Akrobat",sans-serif;font-weight:300;font-size:38px;line-height:1.45;
+  max-width:780px;margin:0 auto;color:#d9d3c8}
+.statement .dot{display:block;width:5px;height:5px;border-radius:50%;background:var(--wine);margin:46px auto 0}
+
+/* story — restrained, single column, airy */
+.story{padding:16vh 0;border-top:1px solid var(--line)}
+.story .wrap{max-width:640px}
+.story .label{display:block;text-align:center;margin-bottom:46px}
+.story p{font-family:"Akrobat",sans-serif;font-size:22px;line-height:1.7;color:#cbc5ba;font-weight:300;margin:0 0 26px;text-align:center}
+.story .notes{margin-top:60px;text-align:center;font-size:13px;letter-spacing:.16em;color:var(--dim);line-height:2.4}
+.story .notes span{color:var(--bone)}
+.story .sig{margin-top:64px;text-align:center}
+.story .sig img{height:54px;filter:invert(1) brightness(1.7);opacity:.85}
+.story .sig .n{font-family:"Akrobat",sans-serif;font-style:italic;font-size:20px;margin-top:14px;color:#d9d3c8}
+.story .sig .r{font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--faint);margin-top:8px}
+
+/* request — minimal */
+.request{padding:18vh 0 16vh;border-top:1px solid var(--line);text-align:center}
+.request .label{display:block;margin-bottom:30px}
+.request h2{font-family:"Akrobat",sans-serif;font-weight:300;font-size:46px;margin:0;line-height:1.1}
+.request .sub{color:var(--dim);font-size:16px;margin:22px auto 0;max-width:440px}
+form{max-width:420px;margin:54px auto 0;text-align:left}
+.field{margin-bottom:30px}
+.field label{display:block;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+.field input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--bone);
+  font-family:"Akrobat",sans-serif;font-size:22px;padding:6px 0;outline:none;transition:.4s}
+.field input::placeholder{color:var(--faint)}
+.field input:focus{border-bottom-color:var(--wine)}
+.send{display:block;margin:46px auto 0;background:transparent;border:1px solid var(--line);color:var(--bone);
+  font-family:"Roboto";font-weight:300;font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+  padding:18px 46px;cursor:pointer;transition:.4s}
+.send:hover{border-color:var(--bone);background:rgba(233,228,218,.04)}
+.thanks{display:none;font-family:"Akrobat",sans-serif;font-style:italic;font-size:30px;color:#d9d3c8;margin-top:30px}
+.thanks.show{display:block;animation:fade 1s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+footer{padding:60px 0;text-align:center;border-top:1px solid var(--line)}
+footer .label{opacity:.7}
+
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero .bottle{padding:120px 0 30px}
+  .hero .bottle img{max-height:56vh}
+  .hero .copy{padding:0;margin:0 auto;text-align:center}
+  .hero .copy .label,.alloc .k{text-align:center}
+  .hero h1{font-size:52px}
+  .alloc{display:inline-block}
+  .statement p{font-size:28px}
+  .request h2{font-size:36px}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><img src="assets/mockup/chulele-crest-white.png" alt="Chulele"></div></header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="bottle">
+    <img src="assets/2024/05/bottle-joven-002-dio-de-los-muertos-front-view-light.png" alt="Día de los Muertos">
+  </div>
+  <div class="copy">
+    <img class="vlogo" src="assets/2023/10/chulele.png" alt="Chulele">
+    <h1 class="serif">Día de<br>los Muertos<span class="yr">2022</span></h1>
+    <p class="line">A single harvest, distilled once, in Santiago Matatlán.</p>
+
+    <div class="alloc">
+      <div class="k">By allocation</div>
+      <a href="#request">Request an allocation <span class="ar">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- QUIET STATEMENT -->
+<section class="statement">
+  <div class="wrap">
+    <p class="serif">It is not sold here. It is given to those who are meant to have it.</p>
+    <span class="dot"></span>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="wrap">
+    <span class="label">2022</span>
+    <p class="serif">One hundred and fifty agave, cut by hand before the heat. Roasted in earth, rested in copper, closed into bottles that were numbered and then not offered again.</p>
+    <p class="serif">We made it for a single autumn in Oaxaca. What remains, remains.</p>
+
+    <div class="notes serif">
+      <span>Ripe fruit</span> · <span>Cinnamon</span> · <span>A gentle smoke</span><br>
+      Espadín Joven &nbsp;—&nbsp; 51.3%
+    </div>
+
+    <div class="sig">
+      <img src="assets/2023/10/Signature.png" alt="">
+      <div class="n">Tomás Mendéz Hernández</div>
+      <div class="r">Maestro Mezcalero</div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUEST -->
+<section class="request" id="request">
+  <div class="wrap">
+    <span class="label">By allocation</span>
+    <h2 class="serif">Leave your name.</h2>
+    <p class="sub">If a bottle is meant for you, we will write to you.</p>
+
+    <form id="f" onsubmit="return done(event)">
+      <div class="field"><label>Name</label><input required placeholder=""></div>
+      <div class="field"><label>Email</label><input type="email" required placeholder=""></div>
+      <button class="send" type="submit">Submit</button>
+    </form>
+    <p class="thanks serif" id="thanks">Thank you. We'll be in touch.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span class="label">Chulele · Oaxaca</span></div></footer>
+
+<div class="dev">Internal mockup v2 · subtle</div>
+
+<script>
+function done(e){
+  e.preventDefault();
+  document.getElementById('f').style.display='none';
+  document.getElementById('thanks').classList.add('show');
+  return false;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Reserve — Chulele Artisanal Mezcal | Held in Reserve</title>
+<meta name="description" content="Chulele's single-batch mezcals are held in reserve and released in limited windows, by invitation. Día de los Muertos and Guelaguetza 2022 — kept for those who are meant to have them.">
+<link rel="canonical" href="https://mezcalchulele.com/reserve/">
+<meta property="og:title" content="The Reserve — Chulele Artisanal Mezcal">
+<meta property="og:description" content="Single-batch mezcal, held in reserve. Released in limited windows, by invitation.">
+<meta name="robots" content="noindex,nofollow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"The Reserve — Chulele Artisanal Mezcal","description":"Single-batch mezcal held in reserve, released in limited windows by allocation.","publisher":{"@type":"Organization","name":"Chulele Artisanal Mezcal"}}
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ---- brand fonts ---- */
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-bold-webfont.woff") format("woff");font-weight:700;font-display:swap}
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-semibold-webfont.woff") format("woff");font-weight:600;font-display:swap}
+
+:root{
+  --ink:#0a0a0b; --ink2:#0f0f11; --bone:#ece7dd; --dim:#8f8b83; --faint:#56534e;
+  --wine:#AF0061; --gold:#b8915a; --line:rgba(236,231,221,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--bone);font-family:"Roboto",sans-serif;font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+.ak{font-family:"Akrobat",sans-serif;font-weight:700}
+.wrap{max-width:1120px;margin:0 auto;padding:0 44px}
+.ey{font-family:"Akrobat",sans-serif;font-weight:600;font-size:12px;letter-spacing:.5em;text-transform:uppercase;color:var(--dim)}
+.dev{position:fixed;bottom:12px;right:14px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);opacity:.55;z-index:9}
+
+/* header */
+header{position:absolute;top:0;left:0;right:0;z-index:4}
+header .wrap{display:flex;justify-content:center;padding:32px 44px}
+header img{height:42px;opacity:.92}
+
+/* hero */
+.hero{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 0 90px}
+.hero .ey{margin-bottom:34px;color:var(--gold)}
+.hero h1{font-family:"Akrobat",sans-serif;font-weight:700;font-size:104px;line-height:.9;margin:0;letter-spacing:.02em;text-transform:uppercase}
+.hero .rule{width:64px;height:1px;background:var(--gold);margin:42px auto}
+.hero .sub{font-size:17px;color:#c7c2b8;max-width:540px;margin:0 auto;font-weight:300}
+.hero .sub b{color:var(--bone);font-weight:400}
+
+/* limited windows strip */
+.windows{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:42px 0}
+.windows .wrap{display:flex;align-items:center;justify-content:center;gap:60px;flex-wrap:wrap;text-align:center}
+.windows .w{display:flex;flex-direction:column;gap:8px}
+.windows .w .k{font-family:"Akrobat";font-weight:600;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--dim)}
+.windows .w .v{font-family:"Akrobat";font-weight:700;font-size:19px;letter-spacing:.06em;text-transform:uppercase;color:var(--bone)}
+.windows .sep{width:1px;height:38px;background:var(--line)}
+
+/* releases */
+.releases{padding:140px 0 40px}
+.rel{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center;margin-bottom:150px}
+.rel:last-child{margin-bottom:0}
+.rel.flip .art{order:2}
+
+.art{position:relative;display:flex;align-items:center;justify-content:center;min-height:560px}
+.art .bottle{height:520px;width:auto;filter:drop-shadow(0 36px 60px rgba(0,0,0,.65));position:relative;z-index:2}
+.art .stamp{position:absolute;z-index:3;width:150px;height:150px;border-radius:50%;
+  background:var(--ink2);padding:0;
+  box-shadow:0 0 0 1px rgba(184,145,90,.5), 0 24px 46px rgba(0,0,0,.6)}
+.art .stamp img{width:100%;height:100%;border-radius:50%;display:block}
+.rel .stamp{top:40px;left:6px}
+.rel.flip .stamp{top:40px;right:6px;left:auto}
+
+.txt .num{font-family:"Akrobat";font-weight:600;font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold)}
+.txt .nm{font-family:"Akrobat",sans-serif;font-weight:700;font-size:58px;line-height:.94;margin:16px 0 0;text-transform:uppercase;letter-spacing:.01em}
+.txt .sp{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin:20px 0 0;font-family:"Akrobat";font-weight:600}
+.txt p{font-size:16px;color:#bdb8ae;margin:26px 0 0;max-width:430px;line-height:1.75}
+.txt .meta{display:flex;gap:34px;margin-top:30px;flex-wrap:wrap}
+.txt .meta .m .mk{font-family:"Akrobat";font-weight:600;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint)}
+.txt .meta .m .mv{font-size:14px;color:var(--bone);margin-top:5px}
+.txt .more{display:inline-flex;align-items:center;gap:10px;margin-top:36px;font-family:"Akrobat";font-weight:600;
+  font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--bone);text-decoration:none;
+  border-bottom:1px solid var(--gold);padding-bottom:7px;transition:.3s}
+.txt .more:hover{color:#fff;gap:16px}
+.txt .more .ar{color:var(--gold)}
+
+/* join */
+.join{padding:150px 0 130px;border-top:1px solid var(--line);text-align:center}
+.join .ey{display:block;margin-bottom:26px;color:var(--gold)}
+.join h2{font-family:"Akrobat",sans-serif;font-weight:700;font-size:62px;margin:0;line-height:1;text-transform:uppercase;letter-spacing:.02em}
+.join .lead{color:#bdb8ae;font-size:16px;margin:26px auto 0;max-width:500px}
+form{max-width:440px;margin:56px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:22px;text-align:left}
+.field{display:flex;flex-direction:column}
+.field label{font-family:"Akrobat";font-weight:600;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--faint);margin-bottom:11px}
+.field input{background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--bone);font-family:"Roboto";font-weight:400;font-size:17px;padding:8px 0;outline:none;transition:.3s}
+.field input:focus{border-bottom-color:var(--gold)}
+.submit{grid-column:1/-1;display:flex;justify-content:center}
+.send{margin-top:20px;background:transparent;border:1px solid var(--line);color:var(--bone);font-family:"Akrobat";font-weight:600;
+  font-size:12px;letter-spacing:.3em;text-transform:uppercase;padding:18px 50px;cursor:pointer;transition:.3s}
+.send:hover{border-color:var(--gold);color:#fff}
+.thanks{display:none;font-family:"Akrobat";font-weight:600;font-size:22px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold);margin-top:36px}
+.thanks.show{display:block;animation:fade .9s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+footer{padding:54px 0;text-align:center;border-top:1px solid var(--line)}
+footer img{height:30px;opacity:.6;margin-bottom:16px}
+footer .ey{font-size:10px;letter-spacing:.34em}
+
+@media(max-width:860px){
+  .hero h1{font-size:54px}
+  .windows .wrap{gap:28px}.windows .sep{display:none}
+  .rel,.rel.flip .art{grid-template-columns:1fr;order:0}
+  .art{min-height:440px}.art .bottle{height:400px}
+  .txt .nm{font-size:42px}.join h2{font-size:40px}
+  form{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><img src="assets/mockup/chulele-crest-white.png" alt="Chulele Artisanal Mezcal"></div></header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="ey">The Reserve</span>
+    <h1>Held in<br>Reserve</h1>
+    <div class="rule"></div>
+    <p class="sub">Single-batch mezcal from Santiago Matatlán, <b>released in limited windows</b> — by invitation, never on demand.</p>
+  </div>
+</section>
+
+<!-- LIMITED WINDOWS -->
+<section class="windows">
+  <div class="wrap">
+    <div class="w"><span class="k">The principle</span><span class="v">Made once</span></div>
+    <div class="sep"></div>
+    <div class="w"><span class="k">How it opens</span><span class="v">Limited windows</span></div>
+    <div class="sep"></div>
+    <div class="w"><span class="k">How to enter</span><span class="v">By invitation</span></div>
+  </div>
+</section>
+
+<!-- RELEASES -->
+<section class="releases">
+  <div class="wrap">
+
+    <!-- DDLM -->
+    <div class="rel">
+      <div class="art">
+        <div class="stamp"><img src="assets/mockup/stamp-ddlm.png" alt="Día de los Muertos 2022 batch stamp"></div>
+        <img class="bottle" src="assets/mockup/bottle-ddlm-dark-nomedal.png" alt="Día de los Muertos 2022 mezcal">
+      </div>
+      <div class="txt">
+        <div class="num">Reserve No. 002</div>
+        <h2 class="nm">Día de los<br>Muertos</h2>
+        <div class="sp">2022 · Espadín Joven · 51.3% ABV</div>
+        <p>Distilled to mark the year Oaxaca welcomed its dead home again. One harvest, cut by hand, twice-distilled in copper. Fifty bottles remain.</p>
+        <div class="meta">
+          <div class="m"><div class="mk">The batch</div><div class="mv">1,250 bottles</div></div>
+          <div class="m"><div class="mk">Release window</div><div class="mv">Opens late October</div></div>
+          <div class="m"><div class="mk">Notes</div><div class="mv">Ripe fruit · Cinnamon · Smoke</div></div>
+        </div>
+        <a class="more" href="/product/dia-de-muertos-2022/">The story of this batch <span class="ar">→</span></a>
+      </div>
+    </div>
+
+    <!-- GUELAGUETZA -->
+    <div class="rel flip">
+      <div class="art">
+        <div class="stamp"><img src="assets/mockup/stamp-guela.png" alt="Guelaguetza 2022 batch stamp"></div>
+        <img class="bottle" src="assets/mockup/bottle-guela-dark-nomedal.png" alt="Guelaguetza 2022 mezcal">
+      </div>
+      <div class="txt">
+        <div class="num">Reserve No. 001</div>
+        <h2 class="nm" style="font-size:42px">Guelaguetza</h2>
+        <div class="sp">2022 · Espadín Joven · 50.4% ABV</div>
+        <p>Made in the spirit of Oaxaca's great gathering — a mezcal of offering and celebration, bottled in a single run and then kept.</p>
+        <div class="meta">
+          <div class="m"><div class="mk">The batch</div><div class="mv">Single batch</div></div>
+          <div class="m"><div class="mk">Release window</div><div class="mv">Opens in July</div></div>
+          <div class="m"><div class="mk">Notes</div><div class="mv">Bright agave · Citrus · Earth</div></div>
+        </div>
+        <a class="more" href="/product/guelaguetza-2022/">The story of this batch <span class="ar">→</span></a>
+      </div>
+    </div>
+
+    <!-- AÑEJO — still aging -->
+    <div class="rel">
+      <div class="art">
+        <div class="stamp"><img src="assets/mockup/stamp-anejo.png" alt="Chulele Añejo 5 Años Día de los Muertos 2022 batch stamp"></div>
+        <img class="bottle" src="assets/mockup/bottle-anejo-dark-nomedal.png" alt="Chulele Añejo Día de los Muertos mezcal, aging in oak">
+      </div>
+      <div class="txt">
+        <div class="num">Reserve No. 003 · Still Aging</div>
+        <h2 class="nm">Añejo</h2>
+        <div class="sp">2022 Batch · Espadín · Añejo 5 Años</div>
+        <p>Drawn from the same 2022 harvest as our Día de los Muertos joven, then set apart to rest. It has been aging in oak in Oaxaca since November 2022 — and is not yet finished. This one, the barrel decides.</p>
+        <div class="meta">
+          <div class="m"><div class="mk">Resting since</div><div class="mv">November 2022</div></div>
+          <div class="m"><div class="mk">Release window</div><div class="mv">When the cask is ready</div></div>
+          <div class="m"><div class="mk">Notes</div><div class="mv">Oak · Vanilla · Dried fruit</div></div>
+        </div>
+        <a class="more" href="/product/dia-de-muertos-anejo/">The story of this cask <span class="ar">→</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join" id="reserve-list">
+  <div class="wrap">
+    <span class="ey">The Reserve List</span>
+    <h2>Request an<br>invitation</h2>
+    <p class="lead">There is no checkout. When a release window opens — or the next harvest is ready — the list is written to first.</p>
+    <form id="f" onsubmit="return done(event)">
+      <div class="field"><label>Name</label><input required></div>
+      <div class="field"><label>Email</label><input type="email" required></div>
+      <div class="submit"><button class="send" type="submit">Join the reserve</button></div>
+    </form>
+    <p class="thanks" id="thanks">Thank you — your name is on the list.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/mockup/chulele-crest-white.png" alt="Chulele"><br>
+    <span class="ey">Chulele Artisanal Mezcal · Santiago Matatlán, Oaxaca</span>
+  </div>
+</footer>
+
+<div class="dev">Mockup · /reserve · v2</div>
+<script>
+function done(e){e.preventDefault();document.getElementById('f').style.display='none';document.getElementById('thanks').classList.add('show');return false;}
+</script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Día de los Muertos 2022 — By Allocation Only · Chulele [MOCKUP]</title>
+<style>
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-bold-webfont.woff") format("woff");font-weight:700;font-display:swap}
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-semibold-webfont.woff") format("woff");font-weight:600;font-display:swap}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Roboto+Slab:wght@300;400;500&display=swap');
+
+:root{
+  --ink:#0E0F10;        /* brand black */
+  --magenta:#AF0061;    /* Chulele wine/magenta */
+  --magenta-soft:#d84a98;
+  --paper:#FFFFFF;
+  --muted:#9a9a9c;
+  --line:rgba(255,255,255,.12);
+  --gold:#caa86a;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--ink);
+  color:#e9e9ea;
+  font-family:"Roboto",sans-serif;
+  font-weight:300;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+h1,h2,h3,.akro{font-family:"Akrobat","Roboto",sans-serif;font-weight:700;letter-spacing:.01em;line-height:1.05;margin:0}
+.eyebrow{font-family:"Akrobat",sans-serif;font-weight:700;letter-spacing:.34em;text-transform:uppercase;font-size:12px;color:var(--magenta-soft)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+/* mockup ribbon */
+.mock{position:fixed;top:0;left:0;right:0;z-index:99;background:#1c1d1f;border-bottom:1px solid var(--line);
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-align:center;padding:7px}
+.mock b{color:var(--gold);font-weight:500}
+
+/* top status bar (#1 + #5) */
+.statusbar{background:linear-gradient(90deg,#15060f,#220a1a);border-bottom:1px solid var(--line);margin-top:31px}
+.statusbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:11px;padding-bottom:11px;flex-wrap:wrap}
+.statusbar .lock{font-family:"Akrobat",sans-serif;font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:12.5px;color:#fff;display:flex;align-items:center;gap:10px}
+.statusbar .lock svg{width:15px;height:15px;fill:var(--magenta-soft)}
+.statusbar .archived{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.statusbar .archived em{color:var(--gold);font-style:normal}
+
+/* header */
+header.site{padding:26px 0 6px}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between}
+header.site img{height:46px;width:auto;opacity:.95}
+header.site nav{font-family:"Akrobat",sans-serif;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:11.5px;color:var(--muted);display:flex;gap:26px}
+header.site nav a{text-decoration:none}
+header.site nav a:hover{color:#fff}
+
+/* hero */
+.hero{display:grid;grid-template-columns:0.9fr 1.1fr;gap:54px;align-items:center;padding:46px 0 30px}
+.bottle{position:relative;text-align:center}
+.bottle .halo{position:absolute;inset:0;margin:auto;width:62%;height:62%;border-radius:50%;
+  background:radial-gradient(circle,rgba(175,0,97,.35),transparent 65%);filter:blur(20px)}
+.bottle img{position:relative;max-height:560px;width:auto;filter:drop-shadow(0 30px 50px rgba(0,0,0,.6))}
+.bottle .seal{position:absolute;top:8px;left:8px;width:96px;height:96px;border-radius:50%;
+  border:1px solid var(--gold);color:var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:"Akrobat",sans-serif;text-align:center;background:rgba(14,15,16,.6);backdrop-filter:blur(2px)}
+.bottle .seal .n{font-weight:700;font-size:23px;line-height:1}
+.bottle .seal .l{font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;margin-top:3px;color:#cdbf9a}
+
+.info .eyebrow{margin-bottom:14px}
+.info h1{font-size:60px}
+.info .sub{font-family:"Roboto Slab",serif;font-weight:300;font-size:17px;color:#cfcfd0;margin:14px 0 22px}
+.specrow{display:flex;flex-wrap:wrap;gap:8px 10px;margin-bottom:30px}
+.spec{border:1px solid var(--line);border-radius:2px;padding:7px 13px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#d7d7d8;font-family:"Akrobat",sans-serif;font-weight:600}
+
+/* the gate where price would be (#1 + #2) */
+.gate{border:1px solid var(--line);border-radius:6px;background:
+  linear-gradient(180deg,rgba(175,0,97,.10),rgba(255,255,255,.02));padding:26px 28px}
+.gate .row1{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.gate .price{font-family:"Akrobat",sans-serif;font-weight:700;font-size:30px;color:#fff;display:flex;align-items:center;gap:12px}
+.gate .price svg{width:22px;height:22px;fill:var(--gold)}
+.gate .tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-family:"Akrobat",sans-serif;font-weight:700}
+.gate .scarce{margin:16px 0 4px;font-size:14px;color:#d3d3d4}
+.gate .scarce b{color:#fff;font-weight:500}
+.bar{height:6px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden;margin:12px 0 6px}
+.bar i{display:block;height:100%;width:4%;background:linear-gradient(90deg,var(--magenta),var(--magenta-soft))}
+.gate .barlabel{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cta{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:var(--magenta);color:#fff;text-decoration:none;
+  font-family:"Akrobat",sans-serif;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:14px;
+  padding:15px 30px;border-radius:3px;border:0;cursor:pointer;transition:.2s}
+.cta:hover{background:#c60f74;transform:translateY(-1px)}
+.cta svg{width:15px;height:15px;fill:#fff}
+.gate .fine{margin-top:14px;font-size:12.5px;color:var(--muted)}
+.gate .fine a{color:var(--magenta-soft);text-decoration:none}
+
+/* countdown (#7) */
+.countdown{margin-top:18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  border-top:1px solid var(--line);padding-top:18px}
+.countdown .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-family:"Akrobat",sans-serif;font-weight:700}
+.clock{display:flex;gap:10px}
+.clock div{min-width:52px;text-align:center;border:1px solid var(--line);border-radius:3px;padding:7px 4px}
+.clock .num{font-family:"Akrobat",sans-serif;font-weight:700;font-size:22px;color:#fff;line-height:1}
+.clock .u{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* sections */
+section.band{border-top:1px solid var(--line);padding:64px 0}
+.kicker{margin-bottom:26px}
+.kicker h2{font-size:34px}
+.kicker .eyebrow{display:block;margin-bottom:10px}
+.notes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.notes div{background:var(--ink);padding:24px 22px}
+.notes h3{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--magenta-soft);margin-bottom:10px}
+.notes p{margin:0;font-size:15px;color:#d6d6d7}
+.story{display:grid;grid-template-columns:1.4fr .8fr;gap:48px;align-items:center}
+.story p{font-family:"Roboto Slab",serif;font-weight:300;font-size:17px;color:#d9d9da;margin:0 0 18px}
+.story .sig{border-left:2px solid var(--magenta);padding-left:20px}
+.story .sig img{height:60px;filter:invert(1) brightness(1.6);opacity:.9}
+.story .sig .name{font-family:"Akrobat",sans-serif;font-weight:700;letter-spacing:.04em;margin-top:8px}
+.story .sig .role{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* reserve note (#3) */
+.reserve{display:flex;gap:18px;align-items:center;border:1px dashed var(--line);border-radius:6px;padding:22px 26px;background:rgba(255,255,255,.015)}
+.reserve .ic{width:40px;height:40px;flex:none;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center}
+.reserve .ic svg{width:18px;height:18px;fill:var(--gold)}
+.reserve b{color:#fff;font-weight:500}
+.reserve p{margin:0;font-size:14px;color:#c7c7c8}
+
+/* application gate (#6) */
+.apply{max-width:740px;margin:0 auto;text-align:center}
+.apply .eyebrow{display:block;margin-bottom:12px}
+.apply h2{font-size:38px}
+.apply .lead{color:#c4c4c5;font-size:16px;max-width:560px;margin:14px auto 6px}
+form{margin-top:34px;text-align:left;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+form .full{grid-column:1/-1}
+label{display:block;font-family:"Akrobat",sans-serif;font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:var(--muted);margin-bottom:8px}
+input,select,textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:3px;color:#fff;
+  font-family:"Roboto",sans-serif;font-size:15px;padding:13px 14px;outline:none;transition:.2s}
+input:focus,select:focus,textarea:focus{border-color:var(--magenta);background:rgba(175,0,97,.06)}
+textarea{min-height:96px;resize:vertical}
+.consent{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--muted)}
+.consent input{width:auto;margin-top:3px}
+.submitwrap{grid-column:1/-1;text-align:center;margin-top:6px}
+.note-priv{grid-column:1/-1;text-align:center;font-size:12px;color:var(--muted);margin-top:-2px}
+
+/* confirmation */
+.confirm{display:none;border:1px solid var(--magenta);border-radius:8px;padding:40px 34px;text-align:center;
+  background:linear-gradient(180deg,rgba(175,0,97,.12),transparent)}
+.confirm.show{display:block;animation:fade .5s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.confirm .pos{font-family:"Akrobat",sans-serif;font-weight:700;font-size:60px;color:#fff;line-height:1}
+.confirm .pos span{color:var(--magenta-soft)}
+.confirm h3{font-size:24px;margin:10px 0 8px}
+.confirm p{color:#c8c8c9;max-width:520px;margin:0 auto}
+
+footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;color:var(--muted);font-size:12px;letter-spacing:.1em}
+footer img{height:30px;opacity:.7;margin-bottom:14px;display:block;margin-left:auto;margin-right:auto}
+
+@media(max-width:880px){
+  .hero{grid-template-columns:1fr;gap:30px}
+  .bottle img{max-height:420px}
+  .notes{grid-template-columns:1fr 1fr}
+  .story{grid-template-columns:1fr}
+  form{grid-template-columns:1fr}
+  .info h1{font-size:46px}
+  header.site nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="mock">Internal mockup — concept for <b>By-Allocation Only</b> exclusivity gate · ideas #1 #2 #3 #5 #6 #7 · not linked or indexed</div>
+
+<!-- #1 allocation status + #5 archive framing -->
+<div class="statusbar">
+  <div class="wrap">
+    <div class="lock">
+      <svg viewBox="0 0 24 24"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm3 8H9V6a3 3 0 0 1 6 0v3z"/></svg>
+      Not for sale · Released by allocation
+    </div>
+    <div class="archived">The Chulele Vault · <em>2022 Release · Closed Batch</em></div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <img src="assets/mockup/chulele-crest-white.png" alt="Chulele">
+    <nav>
+      <a href="#">The Vault</a>
+      <a href="#">Process</a>
+      <a href="#">Agave</a>
+      <a href="#apply">Request Allocation</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO: #2 show the bottle, lock the price -->
+<div class="wrap">
+  <div class="hero">
+    <div class="bottle">
+      <div class="halo"></div>
+      <div class="seal">
+        <div class="n">002</div>
+        <div class="l">Single<br>Batch</div>
+      </div>
+      <img src="assets/2024/05/bottle-joven-002-dio-de-los-muertos-front-view-light.png" alt="Día de los Muertos 2022 bottle">
+    </div>
+
+    <div class="info">
+      <span class="eyebrow">Chulele Single-Batch Release · No. 002</span>
+      <h1>Día de los&nbsp;Muertos<br>2022</h1>
+      <p class="sub">Espadín Joven, harvested and distilled in Santiago Matatlán, Oaxaca to honour the 2022 Day of the Dead — the year the dead were finally welcomed home.</p>
+
+      <div class="specrow">
+        <span class="spec">Espadín Joven</span>
+        <span class="spec">51.3% ABV</span>
+        <span class="spec">100% Agave</span>
+        <span class="spec">Maestro Tomás Mendéz</span>
+      </div>
+
+      <!-- the gate (#2): where price would sit -->
+      <div class="gate">
+        <div class="row1">
+          <div class="price">
+            <svg viewBox="0 0 24 24"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm3 8H9V6a3 3 0 0 1 6 0v3z"/></svg>
+            Reserved
+          </div>
+          <span class="tag">By Allocation Only</span>
+        </div>
+
+        <p class="scarce">1,250 bottles were ever crafted. They are not sold from this page — they are <b>allocated, by name</b>, to the Chulele Circle.</p>
+
+        <div class="bar"><i></i></div>
+        <div class="barlabel"><span>48 of 1,250 remaining</span><span>Allocated across 11 countries</span></div>
+
+        <button class="cta" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24"><path d="M2 12l19-9-9 19-2-8-8-2z"/></svg>
+          Request an Allocation
+        </button>
+        <p class="fine">Every request is reviewed personally. Not all are accepted. &nbsp;·&nbsp; <a href="#">How allocation works</a></p>
+
+        <!-- #7 next window countdown -->
+        <div class="countdown">
+          <span class="label">Next allocation window opens in</span>
+          <div class="clock" id="clock">
+            <div><div class="num" data-d>—</div><div class="u">Days</div></div>
+            <div><div class="num" data-h>—</div><div class="u">Hrs</div></div>
+            <div><div class="num" data-m>—</div><div class="u">Min</div></div>
+            <div><div class="num" data-s>—</div><div class="u">Sec</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TASTING NOTES -->
+<section class="band">
+  <div class="wrap">
+    <div class="kicker">
+      <span class="eyebrow">From the 2022 distillation</span>
+      <h2>Tasting Notes</h2>
+    </div>
+    <div class="notes">
+      <div><h3>Aspect</h3><p>Colorless. Served at 20°C in a flute glass.</p></div>
+      <div><h3>Aroma</h3><p>Ripe fruit, cinnamon, and a gentle smokiness.</p></div>
+      <div><h3>Palate</h3><p>Balanced, slightly dry and astringent, with soft citrus — mandarin and orange peel.</p></div>
+      <div><h3>Finish</h3><p>A warm aftertaste of roasted plantain.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY + #3 reserve -->
+<section class="band">
+  <div class="wrap">
+    <div class="story">
+      <div>
+        <span class="eyebrow" style="display:block;margin-bottom:14px">The story in the bottle</span>
+        <p>The harvest began on the morning of October 25th, 2022, in the fields of Benito Ruiz and his son — roughly 150 espadín plants cut by hand before the afternoon heat, enough for 1,000 litres. Roasted in an earthen oven, distilled twice in copper stills sealed with <em>barro</em> clay, and rested into 1,250 numbered bottles.</p>
+        <p>This was the year Oaxaca emerged from lockdown and welcomed its dead home after three long years. That spirit is what you are asking to hold.</p>
+        <div class="sig">
+          <img src="assets/2023/10/Signature.png" alt="">
+          <div class="name">Tomás Mendéz Hernández</div>
+          <div class="role">Maestro Mezcalero</div>
+        </div>
+      </div>
+      <div class="reserve">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2-6.3-4.6L5.7 21l2.3-7.2-6-4.4h7.6z"/></svg></div>
+        <p><b>The Chulele Circle.</b> Día de los Muertos and Guelaguetza live in the Vault, kept for members. Acceptance is how you cross from the public site into the Reserve — and how you are offered each future release first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- #6 APPLICATION GATE -->
+<section class="band" id="apply">
+  <div class="wrap apply">
+    <span class="eyebrow">Request an allocation</span>
+    <h2>We release to people, not to carts.</h2>
+    <p class="lead">There is no checkout. Tell us who you are and how you came to Chulele. If a bottle is right for you, we will reach out personally with your allocation.</p>
+
+    <form id="allocForm" onsubmit="return submitAlloc(event)">
+      <div>
+        <label>Full name</label>
+        <input required placeholder="Your name">
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" required placeholder="you@email.com">
+      </div>
+      <div>
+        <label>Where are you</label>
+        <input required placeholder="City, Country">
+      </div>
+      <div>
+        <label>How did you discover Chulele?</label>
+        <select required>
+          <option value="">Select…</option>
+          <option>A friend / word of mouth</option>
+          <option>A Chulele Circle member referred me</option>
+          <option>Tasted it somewhere</option>
+          <option>Press / awards</option>
+          <option>Social</option>
+        </select>
+      </div>
+      <div class="full">
+        <label>Tell us about your relationship with mezcal</label>
+        <textarea required placeholder="Your favourite expressions, what you're looking for, the occasion this bottle is for…"></textarea>
+      </div>
+      <label class="consent full"><input type="checkbox" required> I confirm I am of legal drinking age and understand allocations are limited and reviewed individually.</label>
+      <div class="submitwrap">
+        <button class="cta" type="submit">
+          <svg viewBox="0 0 24 24"><path d="M2 12l19-9-9 19-2-8-8-2z"/></svg>
+          Submit my request
+        </button>
+      </div>
+      <p class="note-priv">Joining the list places you in the allocation queue — it is not a purchase or a commitment to sell.</p>
+    </form>
+
+    <div class="confirm" id="confirm">
+      <div class="pos">#<span id="posNum">287</span></div>
+      <h3>You're on the list.</h3>
+      <p>Your request for <strong>Día de los Muertos 2022</strong> has been received and placed in the allocation queue. We review requests by hand before each release window — if a bottle is right for you, you'll hear from us by email. Welcome toward the Chulele Circle.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/mockup/chulele-crest-white.png" alt="Chulele">
+    CHULELE® ARTISANAL MEZCAL · SANTIAGO MATATLÁN, OAXACA · BY ALLOCATION ONLY
+  </div>
+</footer>
+
+<script>
+// #7 countdown — next window: Oct 25 (harvest anniversary). Roll to next year if passed.
+(function(){
+  var now=new Date();
+  var target=new Date(now.getFullYear(),9,25,9,0,0); // Oct=9
+  if(target<now) target=new Date(now.getFullYear()+1,9,25,9,0,0);
+  var c=document.getElementById('clock');
+  function tick(){
+    var d=target-new Date();
+    if(d<0)d=0;
+    var dd=Math.floor(d/864e5),hh=Math.floor(d%864e5/36e5),mm=Math.floor(d%36e5/6e4),ss=Math.floor(d%6e4/1e3);
+    c.querySelector('[data-d]').textContent=dd;
+    c.querySelector('[data-h]').textContent=String(hh).padStart(2,'0');
+    c.querySelector('[data-m]').textContent=String(mm).padStart(2,'0');
+    c.querySelector('[data-s]').textContent=String(ss).padStart(2,'0');
+  }
+  tick();setInterval(tick,1000);
+})();
+
+// #6 fake submit -> queue position confirmation
+function submitAlloc(e){
+  e.preventDefault();
+  var pos=247+Math.floor(Math.random()*120);
+  document.getElementById('posNum').textContent=pos;
+  document.getElementById('allocForm').style.display='none';
+  var ok=document.getElementById('confirm');
+  ok.classList.add('show');
+  ok.scrollIntoView({behavior:'smooth',block:'center'});
+  return false;
+}
+</script>
+</body>
+</html>

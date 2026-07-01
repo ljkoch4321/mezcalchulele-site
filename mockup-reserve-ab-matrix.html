@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>HELD IN RESERVE — A/B variant matrix</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-bold-webfont.woff") format("woff");font-weight:700;font-display:swap}
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-semibold-webfont.woff") format("woff");font-weight:600;font-display:swap}
+:root{--ink:#0b0b0c;--bone:#e9e4da;--dim:#8c8881;--faint:#56534e;--wine:#AF0061;--line:rgba(233,228,218,.14)}
+*{box-sizing:border-box}
+body{margin:0;background:#161618;color:var(--bone);font-family:"Roboto",sans-serif;font-weight:300;line-height:1.6}
+.serif{font-family:"Akrobat",sans-serif}
+.page{max-width:1280px;margin:0 auto;padding:54px 28px 100px}
+.intro .mini{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--wine);margin-bottom:14px}
+.intro h1{font-family:"Akrobat",sans-serif;font-weight:400;font-size:36px;margin:0 0 10px}
+.intro p{color:var(--dim);max-width:760px;font-size:15px;margin:0 0 6px}
+.legend{display:flex;gap:30px;margin:22px 0 8px;flex-wrap:wrap;font-size:13px;color:var(--dim)}
+.legend b{color:var(--bone);font-weight:400}
+
+.tgroup{margin-top:48px}
+.tgroup>h2{font-family:"Akrobat",sans-serif;font-weight:400;font-size:24px;margin:0 0 4px;color:var(--bone)}
+.tgroup>.gd{font-size:13px;color:var(--dim);margin:0 0 18px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+.cell{border:1px solid var(--line);border-radius:4px;overflow:hidden;background:#0e0e10}
+.cell .code{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line);background:#121214}
+.cell .code .id{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--wine);font-weight:500}
+.cell .code .cp{font-size:12px;color:var(--dim)}
+.right{position:relative;background:var(--ink);height:330px;overflow:hidden}
+.right .bottle{position:absolute;right:24px;bottom:0;height:300px;width:auto;filter:drop-shadow(0 20px 36px rgba(0,0,0,.6))}
+
+/* SEAL */
+.seal{position:absolute;top:50%;left:40px;transform:translateY(-50%);width:138px;height:138px;border-radius:50%;
+  border:1px solid rgba(233,228,218,.42);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.seal::before{content:"";position:absolute;inset:8px;border-radius:50%;border:1px solid rgba(233,228,218,.16)}
+.seal .star{color:var(--wine);font-size:11px;margin-bottom:7px;letter-spacing:.3em}
+.seal .s1{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--dim);line-height:1.8}
+.seal .s2{font-family:"Akrobat",sans-serif;font-size:19px;color:var(--bone);margin:2px 0 7px}
+.seal .s3{font-size:7.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--faint)}
+
+/* PLAQUE */
+.plaque{position:absolute;top:50%;left:40px;transform:translateY(-50%);width:198px;
+  border:1px solid var(--line);padding:22px 20px;background:rgba(11,11,12,.55);text-align:center}
+.plaque .p0{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--wine)}
+.plaque .p1{font-family:"Akrobat",sans-serif;font-size:21px;line-height:1.05;margin:11px 0 5px;color:var(--bone)}
+.plaque .p1 small{display:block;font-size:12px;color:var(--bone)}
+.plaque .pr{height:1px;background:var(--line);margin:13px 0}
+.plaque .p2{font-family:"Akrobat",sans-serif;font-size:14px;color:var(--bone);font-style:italic}
+.plaque .p2 .ar{font-family:"Roboto";font-style:normal;font-size:11px;color:var(--wine);margin-left:5px}
+
+/* SPINE */
+.spine{position:absolute;top:0;left:48px;bottom:0;display:flex;align-items:center}
+.spine .rule{width:1px;height:58%;background:linear-gradient(180deg,transparent,rgba(233,228,218,.35),transparent)}
+.spine .vtxt{writing-mode:vertical-rl;transform:rotate(180deg);margin-left:13px;
+  font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--bone);white-space:nowrap}
+.spine .vtxt b{color:var(--wine);font-weight:400}
+
+/* LOCKUP */
+.lockup{position:absolute;top:50%;left:40px;transform:translateY(-50%);max-width:210px}
+.lockup .l1{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
+.lockup .l2{font-family:"Akrobat",sans-serif;font-size:24px;line-height:1.18;margin:12px 0 0;color:var(--bone)}
+.lockup .l3{display:inline-block;margin-top:16px;font-family:"Akrobat",sans-serif;font-size:16px;color:var(--bone);
+  text-decoration:none;border-bottom:1px solid var(--wine);padding-bottom:3px}
+.lockup .l3 .ar{font-family:"Roboto";font-size:11px;color:var(--wine);margin-left:7px}
+
+.prodbanner{text-align:center;margin:64px 0 26px;padding-top:42px;border-top:1px solid var(--line)}
+.prodbanner.first{border-top:0;padding-top:8px;margin-top:26px}
+.vlogo{height:88px;width:auto;display:inline-block;opacity:.92;margin-bottom:16px}
+.prodbanner .pname{font-family:"Akrobat",sans-serif;font-weight:400;font-size:32px;letter-spacing:.12em;text-transform:uppercase;margin:0;color:var(--bone)}
+.prodbanner .pspec{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);margin-top:10px}
+@media(max-width:820px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="intro">
+    <div class="mini">Homepage product panel · A/B matrix</div>
+    <h1 class="serif">HELD IN RESERVE — variant matrix</h1>
+    <p>Four visual treatments × two copy directions = eight testable variants. All replace the BUY NOW graphic; none says “sold out.” Clean medal-free bottle. Each cell is coded for tracking. Día de los Muertos shown; Guelaguetza row at the bottom confirms the treatment travels.</p>
+    <div class="legend">
+      <span><b>Copy A —</b> “Held in Reserve” (status, calm, statement)</span>
+      <span><b>Copy B —</b> “Reserved for a future release” (forward-looking, hints a next drop)</span>
+    </div>
+  </div>
+
+  <div class="prodbanner first">
+    <img class="vlogo" src="assets/2023/10/chulele.png" alt="Chulele">
+    <h2 class="pname">Día de los Muertos</h2>
+    <div class="pspec">2022 · Espadín Joven · 51.3% ABV · 1,250 bottles</div>
+  </div>
+
+  <!-- SEAL -->
+  <div class="tgroup">
+    <h2 class="serif">Treatment 1 · Reserve Seal</h2>
+    <p class="gd">A vault stamp. Most iconic, least wordy. Best when you want a pure status mark.</p>
+    <div class="row">
+      <div class="cell">
+        <div class="code"><span class="id">SEAL · A</span><span class="cp">“Held in Reserve”</span></div>
+        <div class="right">
+          <div class="seal"><div class="star">✦</div><div class="s1">Held in</div><div class="s2 serif">Reserve</div><div class="s3">Est. 2022</div></div>
+          <img class="bottle" src="assets/mockup/bottle-ddlm-dark-nomedal.png" alt="">
+        </div>
+      </div>
+      <div class="cell">
+        <div class="code"><span class="id">SEAL · B</span><span class="cp">“Reserved for a future release”</span></div>
+        <div class="right">
+          <div class="seal"><div class="star">✦</div><div class="s1">Reserved for a</div><div class="s2 serif">Future release</div><div class="s3">No. 002 · 2022</div></div>
+          <img class="bottle" src="assets/mockup/bottle-ddlm-dark-nomedal.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAQUE -->
+  <div class="tgroup">
+    <h2 class="serif">Treatment 2 · Plaque</h2>
+    <p class="gd">A museum label. Frames the bottle as an artifact and ends in a soft ask — captures the waitlist.</p>
+    <div class="row">
+      <div class="cell">
+        <div class="code"><span class="id">PLAQUE · A</span><span class="cp">“Held in Reserve”</span></div>
+        <div class="right">
+          <div class="plaque"><div class="p0">Día de los Muertos · 2022</div><div class="p1 serif">Held in<small>Reserve</small></div><div class="pr"></div><div class="p2 serif">Request an invitation <span class="ar">→</span></div></div>
+          <img class="bottle" src="assets/mockup/bottle-ddlm-dark-nomedal.png" alt="">
+        </div>
+      </div>
+      <div class="cell">
+        <div class="code"><span class="id">PLAQUE · B</span><span class="cp">“Reserved for a future release”</span></div>
+        <div class="right">
+          <div class="plaque"><div class="p0">Día de los Muertos · 2022</div><div class="p1 serif">Reserved for a<small>future release</small></div><div class="pr"></div><div class="p2 serif">Join the reserve list <span class="ar">→</span></div></div>
+          <img class="bottle" src="assets/mockup/bottle-ddlm-dark-nomedal.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPINE -->
+  <div class="tgroup">
+    <h2 class="serif">Treatment 3 · Vertical Spine</h2>
+    <p class="gd">Occupies the tall footprint the old button left behind. Editorial and architectural.</p>
+    <div class="row">
+      <div class="cell">
+        <div class="code"><span class="id">SPINE · A</span><span class="cp">“Held in Reserve”</span></div>
+        <div class="right">
+          <div class="spine"><div class="rule"></div><div class="vtxt">Held in <b>Reserve</b></div></div>
+          <img class="bottle" src="assets/mockup/bottle-ddlm-dark-nomedal.png" alt="">
+        </div>
+      </div>
+      <div class="cell">
+        <div class="code"><span class="id">SPINE · B</span><span class="cp">“Reserved for a future release”</span></div>
+        <div class="right">
+          <div class="spine"><div class="rule"></div><div class="vtxt"><b>Reserved</b> · A future release</div></div>
+          <img class="bottle" src="assets/mockup/bottle-ddlm-dark-nomedal.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCKUP -->
+  <div class="tgroup">
+    <h2 class="serif">Treatment 4 · Minimal Lockup</h2>
+    <p class="gd">The most subtle — no button, just a line and a thread. Quietest, and it still captures interest.</p>
+    <div class="row">
+      <div class="cell">
+        <div class="code"><span class="id">LOCKUP · A</span><span class="cp">“Held in Reserve”</span></div>
+        <div class="right">
+          <div class="lockup"><div class="l1">Held in reserve</div><div class="l2 serif">Kept back for a future release.</div><a class="l3 serif" href="#">Join the reserve list <span class="ar">→</span></a></div>
+          <img class="bottle" src="assets/mockup/bottle-ddlm-dark-nomedal.png" alt="">
+        </div>
+      </div>
+      <div class="cell">
+        <div class="code"><span class="id">LOCKUP · B</span><span class="cp">“Reserved for a future release”</span></div>
+        <div class="right">
+          <div class="lockup"><div class="l1">Not currently released</div><div class="l2 serif">Reserved for a future release.</div><a class="l3 serif" href="#">Request an invitation <span class="ar">→</span></a></div>
+          <img class="bottle" src="assets/mockup/bottle-ddlm-dark-nomedal.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUELAGUETZA travels -->
+  <div class="prodbanner">
+    <img class="vlogo" src="assets/2023/10/chulele.png" alt="Chulele">
+    <h2 class="pname">Guelaguetza</h2>
+    <div class="pspec">2022 · Espadín Joven · 50.4% ABV · Single batch</div>
+  </div>
+
+  <div class="tgroup">
+    <p class="gd" style="text-align:center">Confirming the system travels to the second release (Seal-A and Plaque-A shown, 50.4% ABV batch).</p>
+    <div class="row">
+      <div class="cell">
+        <div class="code"><span class="id">GUELA · SEAL-A</span><span class="cp">“Held in Reserve”</span></div>
+        <div class="right">
+          <div class="seal"><div class="star">✦</div><div class="s1">Held in</div><div class="s2 serif">Reserve</div><div class="s3">Est. 2022</div></div>
+          <img class="bottle" src="assets/mockup/bottle-guela-dark-nomedal.png" alt="">
+        </div>
+      </div>
+      <div class="cell">
+        <div class="code"><span class="id">GUELA · PLAQUE-A</span><span class="cp">“Held in Reserve”</span></div>
+        <div class="right">
+          <div class="plaque"><div class="p0">Guelaguetza · 2022</div><div class="p1 serif">Held in<small>Reserve</small></div><div class="pr"></div><div class="p2 serif">Request an invitation <span class="ar">→</span></div></div>
+          <img class="bottle" src="assets/mockup/bottle-guela-dark-nomedal.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

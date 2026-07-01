@@ -13,6 +13,22 @@
 
 html.chulele-lock, html.chulele-lock body { overflow: hidden !important; }
 
+/* Guelaguetza landing page (page-id 4721): show only the first Guelaguetza
+   panel. The remaining stacked panels are Dia-de-Muertos cross-sells / dupes.
+   Scoped to this page because 1a0be5b is also the home hero's id. */
+body.elementor-page-4721 [data-elementor-type="wp-page"] > .elementor-element-406f235,
+body.elementor-page-4721 [data-elementor-type="wp-page"] > .elementor-element-1a0be5b,
+body.elementor-page-4721 [data-elementor-type="wp-page"] > .elementor-element-15a50b7,
+body.elementor-page-4721 [data-elementor-type="wp-page"] > .elementor-element-5980382,
+body.elementor-page-4721 [data-elementor-type="wp-page"] > .elementor-element-8f6a0dd {
+  display: none !important;
+}
+
+/* PhotoSwipe lightbox placeholder must not occupy layout space until opened
+   (it was adding ~54px at the bottom of every page, making the single-screen
+   home page scroll into empty white space). */
+.pswp:not(.pswp--open) { display: none !important; }
+
 /* ---------- Age gate ------------------------------------------------------ */
 .chulele-agegate {
   position: fixed; inset: 0; z-index: 100000;
@@ -88,9 +104,173 @@ html.chulele-lock, html.chulele-lock body { overflow: hidden !important; }
 /* ---------- Form status message ------------------------------------------ */
 .chulele-formmsg { margin: 10px 0 0; font-size: 14px; font-weight: 600; }
 
+/* ==========================================================================
+   STATIC-REBUILD FIXES
+   The mirrored Elementor runtime (frontend.min.js / popup module) is present
+   but non-functional in a static context, and the core frontend.min.css that
+   normally carries column-stacking + popup handling is not loaded. These rules
+   restore the intended behaviour with plain CSS/JS.
+   ========================================================================== */
+
+/* --- Home header: lock the resting logo to the 129px Logo.png so the white
+       box matches every other page. The jQuery hover-flip still overrides this
+       inline (.show()) when it runs; this only fixes the default/at-rest state
+       and removes the pre-jQuery flash of the larger 145px logo-flip.png. --- */
+#flip-logo2 { display: none; }
+
+/* --- Keep the header (CHULELE logo + hamburger) pinned to the top on scroll on
+       every page, matching the live site's Elementor sticky. Done in plain CSS
+       so it works even when the mirrored Elementor sticky JS does not run. --- */
+header.elementor-location-header { position: sticky; top: 0; z-index: 9999; }
+
+/* --- Home hero, mobile only: lift BUY NOW + the DÍA DE LOS MUERTOS heading up
+       so the LEARN MORE button is visible, and drop the descriptive paragraph.
+       (Desktop is unchanged.) --- */
+@media (max-width: 767px) {
+  /* The hero content block is absolutely positioned at top:263px on mobile,
+     which pushes LEARN MORE below the fold. Lift it just under the header. */
+  .elementor-element-f6a804e { top: 120px !important; }
+  /* Drop the descriptive paragraph on mobile only. */
+  .elementor-element-cb8d6f1 p:nth-of-type(2) { display: none !important; }
+}
+
+/* --- Mobile: stack all Elementor columns (Elementor's default, normally
+       provided by the omitted frontend.min.css). Two-class selector beats
+       .elementor-col-XX (single class) so it wins the specificity tie. --- */
+@media (max-width: 767px) {
+  .elementor-column.elementor-col-10, .elementor-column.elementor-col-12,
+  .elementor-column.elementor-col-14, .elementor-column.elementor-col-16,
+  .elementor-column.elementor-col-20, .elementor-column.elementor-col-25,
+  .elementor-column.elementor-col-30, .elementor-column.elementor-col-33,
+  .elementor-column.elementor-col-40, .elementor-column.elementor-col-50,
+  .elementor-column.elementor-col-60, .elementor-column.elementor-col-66,
+  .elementor-column.elementor-col-70, .elementor-column.elementor-col-75,
+  .elementor-column.elementor-col-80, .elementor-column.elementor-col-83,
+  .elementor-column.elementor-col-90 { width: 100%; }
+}
+
+/* Other Elementor popups (newsletter / exit-intent) are managed/removed by the
+   Elementor runtime; hide them defensively so they can never dump inline if that
+   runtime fails to load. The nav menu (#chulele-menu) is intentionally exempt. */
+.elementor-location-popup { display: none; }
+
+/* --- Navigation menu overlay (replaces the broken Elementor popup #165).
+       The wrapper keeps its `elementor-165` class so the mirrored inline CSS
+       still styles every menu item; we only own show/hide + the shell. --- */
+#chulele-menu { display: none; }
+#chulele-menu.is-open {
+  display: flex; position: fixed; inset: 0; z-index: 99999;
+  background: #000000eb;            /* dark backdrop, matches Elementor modal */
+  justify-content: flex-start; align-items: stretch;
+}
+#chulele-menu.is-open > .elementor-section {   /* the white sliding panel */
+  position: relative; background: #fff;
+  width: 30vw; min-height: 100%; max-height: 100%;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 1366px) { #chulele-menu.is-open > .elementor-section { width: 53vw; } }
+@media (max-width: 1024px) { #chulele-menu.is-open > .elementor-section { width: 61vw; } }
+@media (max-width: 767px)  { #chulele-menu.is-open > .elementor-section { width: 86vw; } }
+.chulele-menu__close {
+  position: fixed; top: 12px; z-index: 5;
+  left: calc(30vw - 52px); right: auto;   /* top-right corner of the white panel */
+  width: 44px; height: 44px; padding: 0; border: 0; cursor: pointer;
+  background: transparent; color: #000; font-size: 40px; line-height: 1;
+}
+.chulele-menu__close:hover { color: var(--chulele-magenta); }
+@media (max-width: 1366px) { .chulele-menu__close { left: calc(53vw - 52px); } }
+@media (max-width: 1024px) { .chulele-menu__close { left: calc(61vw - 52px); } }
+@media (max-width: 767px)  { .chulele-menu__close { left: calc(86vw - 52px); } }
+
+/* --- Home hero BUY NOW on mobile only: smaller, left-aligned, above the
+       "DÍA DE LOS MUERTOS SINGLE-BATCH RELEASE" text (the widget is moved into
+       the left column in markup; it is hidden on desktop/laptop/tablet). --- */
+@media (max-width: 767px) {
+  .elementor-element-4474c4e { text-align: left !important; margin: 0 0 12px !important; }
+  .elementor-element-4474c4e .elementor-widget-container { text-align: left !important; }
+  .elementor-element-4474c4e img { width: 120px !important; height: auto !important; }
+}
+
+/* ==========================================================================
+   PRODUCT PAGES (Dia de Muertos / Guelaguetza) — restore the dynamic effects
+   that the inert Elementor/Swiper runtime no longer powers:
+     • left column freezes while the right scrolls (Elementor sticky_parent)
+     • image + weather carousels scroll continuously right-to-left (marquee)
+   ========================================================================== */
+
+/* Left column freezes on scroll (Elementor "sticky_parent" sections). */
+.chulele-sticky { position: -webkit-sticky !important; position: sticky !important; top: 0 !important; align-self: flex-start; }
+
+/* Divider: the live site's own side-image.svg element. It lives inside the
+   FROZEN sticky left column (img height:101vh, right:-6px) so it stays fixed to
+   the left while the right scrolls, straddling the boundary — the left half of
+   each diamond blends into the gray panel, the right half overlaps the content.
+   We only lift the left column above the scrolling right side so the frozen
+   panel (and its divider) read as a layer on top. Generic across both product
+   pages (Dia uses side-image.svg, Guelaguetza uses repeat-grid-black.svg). */
+[data-elementor-type="product"] .elementor-column:has(img[src*="side-image.svg"]),
+[data-elementor-type="product"] .elementor-column:has(img[src*="repeat-grid-black.svg"]) {
+  position: relative; z-index: 10;
+}
+
+/* --- Carousels (image + production-history): robust horizontal scroll with a
+       click-and-drag handle. Elementor's Swiper is destroyed at runtime (it does
+       not reliably drag in the static context) and replaced by a native
+       overflow-x scroller. The page's own inline CSS still styles the track, the
+       magenta/white drag handle and the "SCROLL" label (scroll.svg). --- */
+.slider .swiper-container { position: relative; overflow: hidden; padding-bottom: 48px; }
+/* The carousel's Elementor HTML widget has a fixed height (e.g. 634px) baked in
+   from the original Swiper layout; with the shorter static slides that leaves a
+   big empty gap between the SCROLL control and the following text. Let it fit
+   its content. */
+.elementor-widget-container:has(.slider) { height: auto !important; padding-bottom: 8px !important; }
+/* Also trim the slider section's bottom padding and the following section's top
+   padding (originally 30px + 20px) so the text follows closely under SCROLL. */
+.elementor-inner-section:has(.slider), .elementor-section:has(.slider) { padding-bottom: 6px !important; }
+.elementor-inner-section:has(.slider) + .elementor-inner-section,
+.elementor-section:has(.slider) + .elementor-section { padding-top: 6px !important; }
+.slider .swiper-wrapper {
+  display: flex !important; flex-wrap: nowrap !important;
+  overflow-x: auto; overflow-y: hidden;
+  transform: none !important;
+  scrollbar-width: none; -ms-overflow-style: none;
+  cursor: grab; touch-action: pan-x;
+}
+.slider .swiper-wrapper::-webkit-scrollbar { display: none; }
+.slider .swiper-wrapper.is-grabbing { cursor: grabbing; user-select: none; }
+.slider .swiper-slide { flex: 0 0 auto !important; transform: none !important; }
+.slider:not(.text-slider) .swiper-slide img { height: 460px; width: auto; display: block; object-fit: cover; }
+/* Restore the track geometry independent of Swiper's classes (destroy() strips
+   .swiper-scrollbar-horizontal, which carried the width). Colours/handle/label
+   still come from the page's inline CSS. */
+.slider .swiper-scrollbar {
+  position: absolute !important; display: block !important;
+  left: 50% !important; transform: translateX(-50%) !important;
+  bottom: 34px !important; width: 80% !important; height: 3px !important;
+}
+.slider .swiper-scrollbar-drag { position: absolute !important; left: 0; top: 50%; margin-top: -2.5px !important; width: 64px !important; height: 5px !important; transform: none !important; cursor: grab; }
+.slider .swiper-button-prev, .slider .swiper-button-next, .slider .swiper-pagination { display: none !important; }
+
+/* "Read more" / "Read less" toggles — make them read as clickable links. */
+.readmore-btn, .readless-btn { cursor: pointer; color: var(--chulele-magenta); font-weight: bold; }
+.readmore-btn:hover, .readless-btn:hover { text-decoration: underline; }
+
+/* Map (self-hosted static OpenStreetMap render replacing the WP Google Maps
+   widget), centred on Oaxaca City. Grayscale to match the original styling,
+   with the city name overlaid in large bold letters. */
+#wpgmza_map_1 { position: relative; }
+#wpgmza_map_1 img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
+.chulele-map-label {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  font-family: "Akrobat", "Oswald", Arial, sans-serif; font-weight: 800;
+  font-size: clamp(34px, 5vw, 64px); color: #3a3a3a; letter-spacing: 1px;
+  text-shadow: 0 2px 12px rgba(255,255,255,.95), 0 0 4px rgba(255,255,255,.95);
+  pointer-events: none; white-space: nowrap;
+}
+
 /* ---------- Print --------------------------------------------------------- */
 @media print {
-  .chulele-agegate, .chulele-consent, .chulele-vmodal,
+  .chulele-agegate, .chulele-consent, .chulele-vmodal, #chulele-menu,
   header, nav, .elementor-location-header,
   .elementor-menu-toggle, [data-elementor-type="header"] { display: none !important; }
   html.chulele-lock, html.chulele-lock body { overflow: visible !important; }

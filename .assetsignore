@@ -1,0 +1,9 @@
+# Excluded from the Cloudflare Pages upload (source + local tooling, not web content)
+_tools
+_capture
+Chulele Añejo 2022
+.claude
+.git
+node_modules
+*.psd
+*.jpf

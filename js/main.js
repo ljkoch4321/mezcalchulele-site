@@ -254,6 +254,160 @@
     function val(f, n) { var el = f.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; }
   }
 
+  /* ---------- Navigation menu overlay (popup #165 replacement) ---------- */
+  function wireMenu() {
+    var menu = document.getElementById('chulele-menu');
+    if (!menu) return;
+    menu.setAttribute('role', 'dialog');
+    menu.setAttribute('aria-modal', 'true');
+    menu.setAttribute('aria-label', 'Site menu');
+    var panel = menu.querySelector('.elementor-section');
+    // Inject a close button (Elementor would normally provide the dialog close).
+    var closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'chulele-menu__close';
+    closeBtn.setAttribute('aria-label', 'Close menu');
+    closeBtn.innerHTML = '&times;';
+    menu.appendChild(closeBtn);
+    var release = null, lastFocus = null;
+    function openMenu(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      lastFocus = document.activeElement;
+      menu.classList.add('is-open');
+      document.documentElement.classList.add('chulele-lock');
+      release = trapFocus(menu);
+      closeBtn.focus();
+    }
+    function closeMenu() {
+      menu.classList.remove('is-open');
+      document.documentElement.classList.remove('chulele-lock');
+      if (release) { release(); release = null; }
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    // Hamburger triggers: the original Elementor popup-open links.
+    document.querySelectorAll('a[href*="elementor-action"]').forEach(function (t) {
+      var href = t.getAttribute('href') || '';
+      if (!/popup(%3A|:)open/i.test(href)) return; // only popup-open links
+      t.addEventListener('click', openMenu, true);
+    });
+    closeBtn.addEventListener('click', closeMenu);
+    // Click on the dark backdrop (outside the white panel) closes.
+    menu.addEventListener('click', function (e) { if (e.target === menu) closeMenu(); });
+    // Following any real nav link closes the overlay before navigating.
+    menu.addEventListener('click', function (e) {
+      var a = e.target.closest('a');
+      if (a && a.getAttribute('href') && a.getAttribute('href').charAt(0) !== '#') closeMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
+    });
+  }
+
+  /* ---------- Product-page effects (sticky column + RTL marquees) ------- */
+  function wireProductEffects() {
+    // Elementor "sticky_parent" sections: freeze the left column while the
+    // right column scrolls. Driven by plain CSS position:sticky.
+    document.querySelectorAll('[data-settings]').forEach(function (el) {
+      var s = el.getAttribute('data-settings') || '';
+      if (s.indexOf('"sticky":"top"') >= 0 && s.indexOf('sticky_parent') >= 0) {
+        el.classList.add('chulele-sticky');
+      }
+    });
+    // Carousels are wired on window 'load' (below), once Swiper has initialised
+    // so we can cleanly destroy it before taking over.
+  }
+
+  /* ---------- Robust carousels (replace Swiper with native drag-scroll) -- */
+  function wireCarousels() {
+    document.querySelectorAll('.slider .swiper-container').forEach(function (cont) {
+      if (cont.getAttribute('data-cc')) return;
+      var wrap = cont.querySelector('.swiper-wrapper');
+      if (!wrap) return;
+      cont.setAttribute('data-cc', '1');
+      // Tear down Swiper if it grabbed this container.
+      try { if (cont.swiper && cont.swiper.destroy) cont.swiper.destroy(true, true); } catch (e) {}
+      // Strip any inline transforms Swiper left on the wrapper/slides.
+      wrap.style.transform = '';
+      [].forEach.call(wrap.querySelectorAll('.swiper-slide'), function (s) { s.style.transform = ''; s.style.width = ''; });
+
+      var bar = cont.querySelector('.swiper-scrollbar');
+      var drag = bar ? bar.querySelector('.swiper-scrollbar-drag') : null;
+      if (bar && !drag) { drag = document.createElement('div'); drag.className = 'swiper-scrollbar-drag'; bar.appendChild(drag); }
+
+      function maxScroll() { return Math.max(0, wrap.scrollWidth - wrap.clientWidth); }
+      function travel() { return bar && drag ? Math.max(0, bar.clientWidth - drag.offsetWidth) : 0; }
+      function sync() {
+        if (!bar || !drag) return;
+        var ms = maxScroll();
+        var ratio = ms > 0 ? wrap.scrollLeft / ms : 0;
+        drag.style.left = (ratio * travel()) + 'px';
+      }
+      wrap.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      sync();
+
+      // Drag the slides directly.
+      var down = false, sx = 0, sl = 0, moved = false;
+      wrap.addEventListener('pointerdown', function (e) {
+        down = true; moved = false; sx = e.clientX; sl = wrap.scrollLeft;
+        wrap.classList.add('is-grabbing');
+      });
+      window.addEventListener('pointermove', function (e) {
+        if (!down) return;
+        var dx = e.clientX - sx;
+        if (Math.abs(dx) > 3) moved = true;
+        wrap.scrollLeft = sl - dx;
+      });
+      window.addEventListener('pointerup', function () { down = false; wrap.classList.remove('is-grabbing'); });
+      // Swallow the click that ends a drag so slide links don't fire.
+      wrap.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+
+      // Drag the scroll handle (and click the track to jump).
+      if (bar && drag) {
+        var dd = false, dsx = 0, dsl = 0;
+        drag.addEventListener('pointerdown', function (e) {
+          dd = true; dsx = e.clientX; dsl = parseFloat(drag.style.left) || 0;
+          e.preventDefault(); e.stopPropagation();
+        });
+        window.addEventListener('pointermove', function (e) {
+          if (!dd) return;
+          var t = travel();
+          var nl = Math.max(0, Math.min(t, dsl + (e.clientX - dsx)));
+          wrap.scrollLeft = (t > 0 ? nl / t : 0) * maxScroll();
+        });
+        window.addEventListener('pointerup', function () { dd = false; });
+        bar.addEventListener('pointerdown', function (e) {
+          if (e.target === drag) return;
+          var rect = bar.getBoundingClientRect();
+          var t = travel();
+          var nl = Math.max(0, Math.min(t, e.clientX - rect.left - drag.offsetWidth / 2));
+          wrap.scrollLeft = (t > 0 ? nl / t : 0) * maxScroll();
+        });
+      }
+    });
+  }
+
+  /* ---------- "Read more" expandable text (replaces inline jQuery) ------ */
+  function wireReadMore() {
+    function scopeOf(el) { return el.closest('.elementor-widget-container') || document; }
+    document.querySelectorAll('.readmore-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var more = scopeOf(btn).querySelector('.read-more-text');
+        if (more) more.style.display = 'block';
+        btn.style.display = 'none';
+      });
+    });
+    document.querySelectorAll('.readless-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var scope = scopeOf(btn);
+        var more = scope.querySelector('.read-more-text');
+        if (more) more.style.display = 'none';
+        var rmb = scope.querySelector('.readmore-btn');
+        if (rmb) rmb.style.display = '';
+      });
+    });
+  }
+
   /* ---------- footer year ---------------------------------------------- */
   function setYear() {
     var el = document.getElementById('year');
@@ -265,6 +419,15 @@
     setYear();
     buildVideoModal();
     wireForms();
+    wireMenu();
+    wireProductEffects();
+    wireReadMore();
+    if (document.querySelector('.slider .swiper-container')) {
+      if (document.readyState === 'complete') wireCarousels();
+      else window.addEventListener('load', wireCarousels);
+      // Safety re-run in case Swiper initialises slightly after window load.
+      setTimeout(wireCarousels, 1200);
+    }
     if (getCookie(AGE_COOKIE)) { maybeConsent(); }
     else { buildAgeGate(); }
   }
