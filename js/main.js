@@ -78,50 +78,34 @@
     ov.setAttribute('role', 'dialog');
     ov.setAttribute('aria-modal', 'true');
     ov.setAttribute('aria-labelledby', 'agegate-title');
-    var mOpts = '<option value="">Month</option>';
-    months().forEach(function (m, i) { mOpts += '<option value="' + (i + 1) + '">' + m + '</option>'; });
-    var dOpts = '<option value="">Day</option>';
-    for (var d = 1; d <= 31; d++) dOpts += '<option value="' + d + '">' + d + '</option>';
-    var thisYear = new Date().getFullYear();
-    var yOpts = '<option value="">Year</option>';
-    for (var y = thisYear; y >= thisYear - 100; y--) yOpts += '<option value="' + y + '">' + y + '</option>';
     ov.innerHTML =
       '<div class="chulele-agegate__box">' +
         '<img class="chulele-agegate__logo" src="/assets/2023/10/Logo.png" alt="Chulele Artisanal Mezcal" width="129" height="129">' +
         '<h2 id="agegate-title">Are you 21 or older?</h2>' +
         '<p>You must be of legal drinking age to enter Chulele Artisanal Mezcal.</p>' +
-        '<form class="chulele-agegate__form" novalidate>' +
-          '<div class="chulele-agegate__selects">' +
-            '<select aria-label="Birth month" name="m" required>' + mOpts + '</select>' +
-            '<select aria-label="Birth day" name="d" required>' + dOpts + '</select>' +
-            '<select aria-label="Birth year" name="y" required>' + yOpts + '</select>' +
-          '</div>' +
-          '<img class="chulele-agegate__flag" src="' + USA_FLAG + '" alt="United States" width="40" height="26">' +
-          '<p class="chulele-agegate__error" role="alert" hidden></p>' +
-          '<button type="submit" class="chulele-agegate__btn">ENTER</button>' +
-        '</form>' +
+        '<div class="chulele-agegate__yesno">' +
+          '<button type="button" class="chulele-agegate__btn chulele-agegate__btn--yes">Yes</button>' +
+          '<button type="button" class="chulele-agegate__btn chulele-agegate__btn--no">No</button>' +
+        '</div>' +
+        '<p class="chulele-agegate__deny" role="alert" hidden>Sorry — you must be of legal drinking age to enter.</p>' +
       '</div>';
     document.body.appendChild(ov);
     document.documentElement.classList.add('chulele-lock');
     var release = trapFocus(ov);
-    var form = ov.querySelector('form');
-    var err = ov.querySelector('.chulele-agegate__error');
-    setTimeout(function () { ov.querySelector('select').focus(); }, 50);
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var m = +form.m.value, d = +form.d.value, y = +form.y.value;
-      if (!m || !d || !y) { return showErr('Please enter your full date of birth.'); }
-      var dob = new Date(y, m - 1, d);
-      if (dob.getMonth() !== m - 1 || dob.getDate() !== d) { return showErr('Please enter a valid date.'); }
-      var age = ageFrom(dob);
-      if (age < 21) { return showErr('You must be 21 or older to enter.'); }
+    var yes = ov.querySelector('.chulele-agegate__btn--yes');
+    var no = ov.querySelector('.chulele-agegate__btn--no');
+    setTimeout(function () { yes.focus(); }, 50);
+    yes.addEventListener('click', function () {
       setCookie(AGE_COOKIE, '1', 365);
       release();
       ov.parentNode.removeChild(ov);
       document.documentElement.classList.remove('chulele-lock');
       maybeConsent();
     });
-    function showErr(t) { err.textContent = t; err.hidden = false; }
+    no.addEventListener('click', function () {
+      ov.querySelector('.chulele-agegate__yesno').hidden = true;
+      ov.querySelector('.chulele-agegate__deny').hidden = false;
+    });
   }
   function ageFrom(dob) {
     var t = new Date(), a = t.getFullYear() - dob.getFullYear();
@@ -408,6 +392,59 @@
     });
   }
 
+  /* ---------- Timed release-signup popup (first visit) ----------------- */
+  var SIGNUP_COOKIE = 'chulele_signup_seen';
+  function maybeSignupPopup() {
+    if (getCookie(SIGNUP_COOKIE)) return;
+    var tries = 0;
+    (function waitGate() {
+      if (!document.querySelector('.chulele-agegate')) { setTimeout(showSignupPopup, 6000); }
+      else if (tries++ < 240) { setTimeout(waitGate, 500); }
+    })();
+  }
+  function showSignupPopup() {
+    if (getCookie(SIGNUP_COOKIE) || document.querySelector('.chulele-signup')) return;
+    setCookie(SIGNUP_COOKIE, '1', 180);
+    var ov = document.createElement('div');
+    ov.className = 'chulele-signup';
+    ov.setAttribute('role', 'dialog');
+    ov.setAttribute('aria-modal', 'true');
+    ov.setAttribute('aria-label', 'Chulele release announcements');
+    ov.innerHTML =
+      '<div class="chulele-signup__backdrop" data-close></div>' +
+      '<div class="chulele-signup__box">' +
+        '<button type="button" class="chulele-signup__close" aria-label="Close" data-close>&times;</button>' +
+        '<div class="chulele-signup__ey">Chulele&reg; Release Announcements</div>' +
+        '<h2 class="chulele-signup__h">Sign up today</h2>' +
+        '<p class="chulele-signup__p">We are working on our next exciting Chulele&reg; single-batch release. Be the first to know when these rare bottles are available.</p>' +
+        '<form class="chulele-signup__form" novalidate>' +
+          '<input type="email" class="chulele-signup__email" placeholder="Type your email" aria-label="Email" required>' +
+          '<button type="submit" class="chulele-signup__submit">Submit</button>' +
+        '</form>' +
+        '<p class="chulele-signup__msg" role="status" hidden></p>' +
+      '</div>';
+    document.body.appendChild(ov);
+    requestAnimationFrame(function () { ov.classList.add('is-open'); });
+    var release = trapFocus(ov);
+    function close() {
+      ov.classList.remove('is-open');
+      if (release) release();
+      setTimeout(function () { if (ov.parentNode) ov.parentNode.removeChild(ov); }, 300);
+    }
+    ov.addEventListener('click', function (e) { if (e.target.hasAttribute('data-close')) close(); });
+    document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); } });
+    var form = ov.querySelector('form'), email = ov.querySelector('.chulele-signup__email'), msg = ov.querySelector('.chulele-signup__msg');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!email.value || email.value.indexOf('@') < 0) { msg.hidden = false; msg.style.color = '#ffd9ec'; msg.textContent = 'Please enter a valid email.'; return; }
+      msg.hidden = false; msg.style.color = '#fff'; msg.textContent = 'Submitting…';
+      postJSON('/api/subscribe', { email: email.value, source: 'popup' }).then(function (res) {
+        msg.textContent = res.ok ? 'Thank you! You are on the list.' : (res.body.message || 'Something went wrong.');
+        if (res.ok) { form.reset(); setTimeout(close, 1600); }
+      }).catch(function () { msg.textContent = 'Network error. Please try again.'; });
+    });
+  }
+
   /* ---------- footer year ---------------------------------------------- */
   function setYear() {
     var el = document.getElementById('year');
@@ -430,6 +467,7 @@
     }
     if (getCookie(AGE_COOKIE)) { maybeConsent(); }
     else { buildAgeGate(); }
+    maybeSignupPopup();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();

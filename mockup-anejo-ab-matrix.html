@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Chulele Añejo — A/B variant matrix</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-bold-webfont.woff") format("woff");font-weight:700;font-display:swap}
+@font-face{font-family:"Akrobat";src:url("assets/2023/10/akrobat-semibold-webfont.woff") format("woff");font-weight:600;font-display:swap}
+:root{--ink:#0a0a0b;--ink2:#0f0f11;--bone:#ece7dd;--dim:#8f8b83;--faint:#56534e;--wine:#AF0061;--gold:#b8915a;--line:rgba(236,231,221,.13)}
+*{box-sizing:border-box}
+body{margin:0;background:#161618;color:var(--bone);font-family:"Roboto",sans-serif;font-weight:300;line-height:1.6}
+.ak{font-family:"Akrobat",sans-serif;font-weight:700}
+.page{max-width:1280px;margin:0 auto;padding:54px 28px 100px}
+.mini{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-family:"Akrobat";font-weight:700;font-size:40px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em}
+.intro p{color:var(--dim);max-width:780px;font-size:15px;margin:0 0 6px}
+.legend{display:flex;gap:30px;margin:22px 0 8px;flex-wrap:wrap;font-size:13px;color:var(--dim)}
+.legend b{color:var(--bone);font-weight:400}
+.prodbanner{text-align:center;margin:40px 0 26px;padding-top:36px;border-top:1px solid var(--line)}
+.vstamp{width:104px;height:104px;border-radius:50%;background:var(--ink2);box-shadow:0 0 0 1px rgba(184,145,90,.5),0 16px 34px rgba(0,0,0,.6);display:inline-block}
+.vstamp img{width:100%;height:100%;border-radius:50%;display:block}
+.prodbanner .pname{font-family:"Akrobat";font-weight:700;font-size:34px;letter-spacing:.06em;text-transform:uppercase;margin:16px 0 0}
+.prodbanner .pspec{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);margin-top:10px}
+.tgroup{margin-top:44px}
+.tgroup>h2{font-family:"Akrobat";font-weight:700;font-size:22px;margin:0 0 4px;text-transform:uppercase;letter-spacing:.03em}
+.tgroup>.gd{font-size:13px;color:var(--dim);margin:0 0 18px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cell{border:1px solid var(--line);border-radius:4px;overflow:hidden;background:#0e0e10}
+.cell .code{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line);background:#121214}
+.cell .code .id{font-family:"Akrobat";font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.cell .code .cp{font-size:12px;color:var(--dim)}
+.right{position:relative;background:var(--ink);height:360px;overflow:hidden}
+.right .bottle{position:absolute;right:20px;bottom:-6px;height:340px;width:auto;filter:drop-shadow(0 20px 36px rgba(0,0,0,.6))}
+/* seal */
+.seal{position:absolute;top:50%;left:36px;transform:translateY(-50%);width:140px;height:140px;border-radius:50%;
+  border:1px solid rgba(236,231,221,.42);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.seal::before{content:"";position:absolute;inset:8px;border-radius:50%;border:1px solid rgba(236,231,221,.16)}
+.seal .star{color:var(--gold);font-size:11px;margin-bottom:7px}
+.seal .s1{font-family:"Akrobat";font-weight:600;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);line-height:1.8}
+.seal .s2{font-family:"Akrobat";font-weight:700;font-size:18px;color:var(--bone);margin:2px 0 7px;text-transform:uppercase}
+.seal .s3{font-size:7.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint)}
+/* plaque */
+.plaque{position:absolute;top:50%;left:36px;transform:translateY(-50%);width:206px;border:1px solid var(--line);padding:22px 20px;background:rgba(10,10,11,.55);text-align:center}
+.plaque .p0{font-family:"Akrobat";font-weight:600;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.plaque .p1{font-family:"Akrobat";font-weight:700;font-size:21px;line-height:1.05;margin:11px 0 6px;color:var(--bone);text-transform:uppercase}
+.plaque .p1 small{display:block;font-size:12px}
+.plaque .pr{height:1px;background:var(--line);margin:13px 0}
+.plaque .p2{font-family:"Akrobat";font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone)}
+.plaque .p2 .ar{color:var(--gold);margin-left:5px}
+/* medallion-forward */
+.medhero{position:absolute;top:50%;left:34px;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;max-width:210px}
+.medhero .coin{width:120px;height:120px;border-radius:50%;background:var(--ink2);box-shadow:0 0 0 1px rgba(184,145,90,.5),0 18px 36px rgba(0,0,0,.6)}
+.medhero .coin img{width:100%;height:100%;border-radius:50%;display:block}
+.medhero .l1{font-family:"Akrobat";font-weight:700;font-size:20px;text-transform:uppercase;line-height:1.05;color:var(--bone)}
+.medhero .l2{font-family:"Akrobat";font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+@media(max-width:820px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="intro">
+    <div class="mini">Homepage / reserve panel · A/B matrix</div>
+    <h1>Añejo — variant matrix</h1>
+    <p>Three visual treatments × two copy directions for the <b>still-aging</b> Añejo. The challenge is different from the jovenes: this bottle is not finished, so the message is anticipation, not availability. Real medal-free bottle + the Añejo 5 Años batch stamp. Each cell is coded for tracking.</p>
+    <div class="legend">
+      <span><b>Copy A —</b> "Held in Reserve" (in step with the joven reserves)</span>
+      <span><b>Copy B —</b> "Still Aging" (leans into the wait / the barrel)</span>
+    </div>
+  </div>
+
+  <div class="prodbanner">
+    <span class="vstamp"><img src="assets/mockup/stamp-anejo.png" alt="Añejo 5 Años batch stamp"></span>
+    <div class="pname">Añejo</div>
+    <div class="pspec">Día de los Muertos · 2022 Batch · Añejo 5 Años · Aging since Nov 2022</div>
+  </div>
+
+  <!-- SEAL -->
+  <div class="tgroup">
+    <h2>Treatment 1 · Reserve Seal</h2>
+    <p class="gd">A struck seal. Reads like the joven reserves, quietly noting the barrel.</p>
+    <div class="row">
+      <div class="cell">
+        <div class="code"><span class="id">ANEJO · SEAL-A</span><span class="cp">"Held in Reserve"</span></div>
+        <div class="right">
+          <div class="seal"><div class="star">✦</div><div class="s1">Held in</div><div class="s2">Reserve</div><div class="s3">Añejo · Est. 2022</div></div>
+          <img class="bottle" src="assets/mockup/bottle-anejo-dark-nomedal.png" alt="">
+        </div>
+      </div>
+      <div class="cell">
+        <div class="code"><span class="id">ANEJO · SEAL-B</span><span class="cp">"Still Aging"</span></div>
+        <div class="right">
+          <div class="seal"><div class="star">✦</div><div class="s1">Still</div><div class="s2">Aging</div><div class="s3">In oak since Nov 2022</div></div>
+          <img class="bottle" src="assets/mockup/bottle-anejo-dark-nomedal.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAQUE -->
+  <div class="tgroup">
+    <h2>Treatment 2 · Plaque</h2>
+    <p class="gd">Museum label, ends in a soft ask — captures the waitlist for a release that could be years out.</p>
+    <div class="row">
+      <div class="cell">
+        <div class="code"><span class="id">ANEJO · PLAQUE-A</span><span class="cp">"Held in Reserve"</span></div>
+        <div class="right">
+          <div class="plaque"><div class="p0">Añejo · 2022 Batch</div><div class="p1">Held in<small>Reserve</small></div><div class="pr"></div><div class="p2">Request an invitation <span class="ar">→</span></div></div>
+          <img class="bottle" src="assets/mockup/bottle-anejo-dark-nomedal.png" alt="">
+        </div>
+      </div>
+      <div class="cell">
+        <div class="code"><span class="id">ANEJO · PLAQUE-B</span><span class="cp">"Still Aging"</span></div>
+        <div class="right">
+          <div class="plaque"><div class="p0">Añejo 5 Años · Resting</div><div class="p1">Aging in<small>Oak</small></div><div class="pr"></div><div class="p2">Join the reserve list <span class="ar">→</span></div></div>
+          <img class="bottle" src="assets/mockup/bottle-anejo-dark-nomedal.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEDALLION-FORWARD -->
+  <div class="tgroup">
+    <h2>Treatment 3 · Medallion-forward</h2>
+    <p class="gd">Leads with the batch stamp as a struck coin — treats the añejo like a collector's edition.</p>
+    <div class="row">
+      <div class="cell">
+        <div class="code"><span class="id">ANEJO · MED-A</span><span class="cp">"Held in Reserve"</span></div>
+        <div class="right">
+          <div class="medhero"><span class="coin"><img src="assets/mockup/stamp-anejo.png" alt=""></span><div class="l1">Held in Reserve</div><div class="l2">No. 003 · Añejo</div></div>
+          <img class="bottle" src="assets/mockup/bottle-anejo-dark-nomedal.png" alt="">
+        </div>
+      </div>
+      <div class="cell">
+        <div class="code"><span class="id">ANEJO · MED-B</span><span class="cp">"Still Aging"</span></div>
+        <div class="right">
+          <div class="medhero"><span class="coin"><img src="assets/mockup/stamp-anejo.png" alt=""></span><div class="l1">Still Aging</div><div class="l2">Released when the cask is ready</div></div>
+          <img class="bottle" src="assets/mockup/bottle-anejo-dark-nomedal.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
