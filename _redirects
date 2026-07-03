@@ -54,6 +54,12 @@
 /discover-your-chulele/   /reserve/   301
 /discover-your-chulele    /reserve/   301
 
+# --- 301: joven product dupes -> canonical -2022 URLs (reserve-style) ---
+/product/dia-de-muertos-joven/   /product/dia-de-muertos-2022/   301
+/product/dia-de-muertos-joven    /product/dia-de-muertos-2022/   301
+/product/guelaguetza-joven/      /product/guelaguetza-2022/      301
+/product/guelaguetza-joven       /product/guelaguetza-2022/      301
+
 # --- Block direct access to internal download store + legacy folders ------
 /assets/downloads/*    /404.html   404
 /assets/downloads      /404.html   404
@@ -66,29 +72,29 @@
 /tag/*               /mezcal-memoirs/   301
 /author/*            /mezcal-memoirs/   301
 /product-slider/*    /                  301
-/product-category/*  https://www.etsy.com/shop/ChuleleMezcal   301
-/product-tag/*       https://www.etsy.com/shop/ChuleleMezcal   301
+/product-category/*  https://chulele.printify.me/   301
+/product-tag/*       https://chulele.printify.me/   301
 
-# --- Removed WooCommerce / merch pages -> Etsy shop (accessories sold there) --
-/shop                  https://www.etsy.com/shop/ChuleleMezcal   301
-/shop/*                https://www.etsy.com/shop/ChuleleMezcal   301
-/chulele-merchandise/  https://www.etsy.com/shop/ChuleleMezcal   301
-/cart                  https://www.etsy.com/shop/ChuleleMezcal   301
-/cart/*                https://www.etsy.com/shop/ChuleleMezcal   301
-/checkout              https://www.etsy.com/shop/ChuleleMezcal   301
-/checkout/*            https://www.etsy.com/shop/ChuleleMezcal   301
-/my-account            https://www.etsy.com/shop/ChuleleMezcal   301
-/my-account/*          https://www.etsy.com/shop/ChuleleMezcal   301
-/product/chulele-mezcal-trucker-cap/                                https://www.etsy.com/shop/ChuleleMezcal  301
-/product/hardcover-bound-notebook/                                  https://www.etsy.com/shop/ChuleleMezcal  301
-/product/mens-windbreaker/                                          https://www.etsy.com/shop/ChuleleMezcal  301
-/product/official-t-shirt-chulele-dia-de-los-muertos-22/            https://www.etsy.com/shop/ChuleleMezcal  301
-/product/official-t-shirt-chulele-guelaguetza-22/                   https://www.etsy.com/shop/ChuleleMezcal  301
-/product/trucker-cap/                                               https://www.etsy.com/shop/ChuleleMezcal  301
-/product/womens-short-sleeve-t-shirt-chulele-dia-de-los-muertos-22/ https://www.etsy.com/shop/ChuleleMezcal  301
-/product/womens-short-sleeve-t-shirt-chulele-guelaguetza-22-2/      https://www.etsy.com/shop/ChuleleMezcal  301
-/product/womens-short-sleeve-t-shirt-chulele-guelaguetza-22/        https://www.etsy.com/shop/ChuleleMezcal  301
-/product/womens-short-sleeve-t-shirt/                               https://www.etsy.com/shop/ChuleleMezcal  301
+# --- Removed WooCommerce / merch pages -> Printify store (accessories sold there) --
+/shop                  https://chulele.printify.me/   301
+/shop/*                https://chulele.printify.me/   301
+/chulele-merchandise/  https://chulele.printify.me/   301
+/cart                  https://chulele.printify.me/   301
+/cart/*                https://chulele.printify.me/   301
+/checkout              https://chulele.printify.me/   301
+/checkout/*            https://chulele.printify.me/   301
+/my-account            https://chulele.printify.me/   301
+/my-account/*          https://chulele.printify.me/   301
+/product/chulele-mezcal-trucker-cap/                                https://chulele.printify.me/  301
+/product/hardcover-bound-notebook/                                  https://chulele.printify.me/  301
+/product/mens-windbreaker/                                          https://chulele.printify.me/  301
+/product/official-t-shirt-chulele-dia-de-los-muertos-22/            https://chulele.printify.me/  301
+/product/official-t-shirt-chulele-guelaguetza-22/                   https://chulele.printify.me/  301
+/product/trucker-cap/                                               https://chulele.printify.me/  301
+/product/womens-short-sleeve-t-shirt-chulele-dia-de-los-muertos-22/ https://chulele.printify.me/  301
+/product/womens-short-sleeve-t-shirt-chulele-guelaguetza-22-2/      https://chulele.printify.me/  301
+/product/womens-short-sleeve-t-shirt-chulele-guelaguetza-22/        https://chulele.printify.me/  301
+/product/womens-short-sleeve-t-shirt/                               https://chulele.printify.me/  301
 
 # --- Duplicate-content copy -> canonical original --------------------------
 /honoring-ancestry-and-celebrating-life-the-enchanting-day-of-the-dead-in-oaxaca-mexico-copy/  /honoring-ancestry-and-celebrating-life-the-enchanting-day-of-the-dead-in-oaxaca-mexico/  301

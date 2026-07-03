@@ -445,6 +445,40 @@
     });
   }
 
+  /* ---------- "Shop Chulele Merch" button (menu + footer) -------------- */
+  function wireMerch() {
+    var URL = 'https://chulele.printify.me/';
+    function makeBtn() {
+      var a = document.createElement('a');
+      a.className = 'chulele-merch-link';
+      a.href = URL; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = 'SHOP CHULELE MERCH';
+      return a;
+    }
+    // Menu: after the last nav link, before the social row.
+    var menu = document.getElementById('chulele-menu');
+    if (menu && !menu.querySelector('.chulele-merch-link')) {
+      var wrap = document.createElement('div');
+      wrap.className = 'chulele-merch-menu';
+      wrap.appendChild(makeBtn());
+      var linkHeadings = [].filter.call(menu.querySelectorAll('.elementor-widget-heading'),
+        function (h) { return h.querySelector('a[href^="/"]'); });
+      var anchor = linkHeadings[linkHeadings.length - 1];
+      if (anchor) anchor.parentNode.insertBefore(wrap, anchor.nextSibling);
+      else (menu.querySelector('.elementor-section') || menu).appendChild(wrap);
+    }
+    // Footer: a centred button banner at the top of the footer. Only the main
+    // content footer (5940) — NOT the empty home footer (6124), which would add
+    // height and make the single-screen home page scroll.
+    var footer = document.querySelector('.elementor-location-footer.elementor-5940');
+    if (footer && !footer.querySelector('.chulele-merch-link')) {
+      var fwrap = document.createElement('div');
+      fwrap.className = 'chulele-merch-footer';
+      fwrap.appendChild(makeBtn());
+      footer.insertBefore(fwrap, footer.firstChild);
+    }
+  }
+
   /* ---------- footer year ---------------------------------------------- */
   function setYear() {
     var el = document.getElementById('year');
@@ -459,6 +493,7 @@
     wireMenu();
     wireProductEffects();
     wireReadMore();
+    wireMerch();
     if (document.querySelector('.slider .swiper-container')) {
       if (document.readyState === 'complete') wireCarousels();
       else window.addEventListener('load', wireCarousels);
