@@ -53,6 +53,39 @@
 /downloads/*           /404.html   404
 /downloads             /404.html   404
 
+# --- Legacy WP taxonomy / author archives -> most relevant surviving page ---
+#     (these were indexed by Google/Bing; 301 preserves equity, avoids 404s)
+/category/*          /mezcal-memoirs/   301
+/tag/*               /mezcal-memoirs/   301
+/author/*            /mezcal-memoirs/   301
+/product-slider/*    /                  301
+/product-category/*  /buy-chulele/      301
+/product-tag/*       /buy-chulele/      301
+
+# --- Removed WooCommerce / merch pages (merch lives on Etsy/Printify only) --
+/shop                /buy-chulele/      301
+/shop/*              /buy-chulele/      301
+/chulele-merchandise/  /buy-chulele/    301
+/cart                /                  301
+/cart/*              /                  301
+/checkout            /                  301
+/checkout/*          /                  301
+/my-account          /                  301
+/my-account/*        /                  301
+/product/chulele-mezcal-trucker-cap/                                /buy-chulele/  301
+/product/hardcover-bound-notebook/                                  /buy-chulele/  301
+/product/mens-windbreaker/                                          /buy-chulele/  301
+/product/official-t-shirt-chulele-dia-de-los-muertos-22/            /buy-chulele/  301
+/product/official-t-shirt-chulele-guelaguetza-22/                   /buy-chulele/  301
+/product/trucker-cap/                                               /buy-chulele/  301
+/product/womens-short-sleeve-t-shirt-chulele-dia-de-los-muertos-22/ /buy-chulele/  301
+/product/womens-short-sleeve-t-shirt-chulele-guelaguetza-22-2/      /buy-chulele/  301
+/product/womens-short-sleeve-t-shirt-chulele-guelaguetza-22/        /buy-chulele/  301
+/product/womens-short-sleeve-t-shirt/                               /buy-chulele/  301
+
+# --- Duplicate-content copy -> canonical original --------------------------
+/honoring-ancestry-and-celebrating-life-the-enchanting-day-of-the-dead-in-oaxaca-mexico-copy/  /honoring-ancestry-and-celebrating-life-the-enchanting-day-of-the-dead-in-oaxaca-mexico/  301
+
 # --- Malware spam paths: 410 Gone (signals permanent removal to Google) ----
 /css/*         /404.html   410
 /shopdetail/*  /404.html   410
