@@ -47,6 +47,11 @@
 /downloads/Photos/D%c3%ada%20de%20los%20Muertos%202022%20Photos/  /media/photos/dia-de-muertos-2022/  301
 /downloads/Photos/Chulele%20Production%20Process/                 /media/photos/production-process/   301
 
+# --- 301: "Discover Your Chulele" repurposed into the reserve funnel ------
+#     Indexed orphan page; 301 consolidates its SEO equity into /reserve/.
+/your-chulele/   /reserve/   301
+/your-chulele    /reserve/   301
+
 # --- Block direct access to internal download store + legacy folders ------
 /assets/downloads/*    /404.html   404
 /assets/downloads      /404.html   404
