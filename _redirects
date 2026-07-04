@@ -103,6 +103,13 @@
 /css/*         /404.html   410
 /shopdetail/*  /404.html   410
 
+# --- Legacy home pagination (old WP /page/N/) -> home ----------------------
+/page/*        /                 301
+
+# --- Old media URLs moved /wp-content/uploads/ -> /assets/ (preserve image
+#     search + any deep-linked assets). Specific PDF routes above win first. ---
+/wp-content/uploads/*  /assets/:splat  301
+
 # --- Legacy WordPress paths: 404 (no real files exist here anymore) --------
 /wp-content/*  /404.html   404
 
