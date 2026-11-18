@@ -1,29 +1,29 @@
-// POST /api/register — Chulele community registration (Step 5) -> Mailchimp.
-// Separate integration from the footer signup; same audience, richer fields.
-import { handleSubscribe } from './subscribe.js';
+// POST /api/register — Chulele community registration -> Google Sheet
+// ("Registrations" tab). Posts { firstName, lastName, email, phone, reason }.
+import { toSheet, json, readJson, badOrigin } from './_sheet.js';
 
 export async function onRequestPost({ request, env }) {
-  let data;
-  try { data = await request.json(); } catch {
-    return new Response(JSON.stringify({ ok: false, message: 'Invalid request.' }), {
-      status: 400, headers: { 'Content-Type': 'application/json' },
-    });
+  if (badOrigin(request)) return json({ ok: false, message: 'Forbidden.' }, 403);
+  const data = await readJson(request);
+
+  // Honeypot: bots fill the hidden "company" field -> silently accept, don't save.
+  if ((data.company || '').toString().trim()) return json({ ok: true, message: 'Welcome to the Chulele community!' }, 200);
+
+  const email = (data.email || '').toString().trim().slice(0, 254);
+  if (!email || email.indexOf('@') < 1) {
+    return json({ ok: false, message: 'Please enter a valid email address.' }, 400);
   }
 
-  const merge_fields = {};
-  if (data.firstName) merge_fields.FNAME = String(data.firstName).slice(0, 80);
-  if (data.lastName) merge_fields.LNAME = String(data.lastName).slice(0, 80);
-  if (data.phone) merge_fields.PHONE = String(data.phone).slice(0, 40);
-
-  const tags = ['Community Registration'];
-  if (/media/i.test(data.reason || '')) tags.push('Member of the Media');
-  else if (data.reason) tags.push('Upcoming Batches');
-
-  // Re-wrap the request so handleSubscribe sees the email + extra fields.
-  const proxy = new Request(request.url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: data.email }),
-  });
-  return handleSubscribe(proxy, env, { merge_fields, tags });
+  return toSheet(
+    env,
+    {
+      type: 'registration',
+      firstName: (data.firstName || '').toString().slice(0, 80),
+      lastName: (data.lastName || '').toString().slice(0, 80),
+      email,
+      phone: (data.phone || '').toString().slice(0, 40),
+      reason: (data.reason || '').toString().slice(0, 200),
+    },
+    'Welcome to the Chulele community!'
+  );
 }

@@ -17,7 +17,7 @@
  "brand":{"@type":"Brand","name":"Chulele Artisanal Mezcal"},
  "category":"Añejo Mezcal","material":"100% Espadín Agave",
  "description":"A five-year añejo drawn from the 2022 Día de los Muertos harvest, aging in oak in Oaxaca since November 2022. Held in reserve until release.",
- "offers":{"@type":"Offer","availability":"https://schema.org/PreOrder","priceCurrency":"USD","price":"0","url":"https://mezcalchulele.com/reserve/","availabilityStarts":"2027-11-01"}
+ "offers":{"@type":"Offer","availability":"https://schema.org/PreOrder","priceCurrency":"USD","price":"249","url":"https://mezcalchulele.com/reserve/","availabilityStarts":"2027-11-01"}
 }
 </script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
 <style>
 @font-face{font-family:"Akrobat";src:url("/assets/2023/10/akrobat-bold-webfont.woff") format("woff");font-weight:700;font-display:swap}
 @font-face{font-family:"Akrobat";src:url("/assets/2023/10/akrobat-semibold-webfont.woff") format("woff");font-weight:600;font-display:swap}
-:root{--ink:#0a0a0b;--ink2:#0f0f11;--bone:#ece7dd;--dim:#8f8b83;--faint:#56534e;--wine:#AF0061;--gold:#b8915a;--line:rgba(236,231,221,.12)}
+:root{--ink:#0a0a0b;--ink2:#0f0f11;--bone:#ece7dd;--dim:#8f8b83;--faint:#8a857b;--wine:#AF0061;--gold:#b8915a;--line:rgba(236,231,221,.12)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--ink);color:var(--bone);font-family:"Roboto",sans-serif;font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
@@ -35,11 +35,16 @@ body{margin:0;background:var(--ink);color:var(--bone);font-family:"Roboto",sans-
 
 header{position:absolute;top:0;left:0;right:0;z-index:4}
 header .wrap{display:flex;justify-content:center;padding:32px 44px}
-header img{height:42px;opacity:.92}
+header img{width:118px;height:auto;opacity:.94}
+@media(max-width:767px){header img{width:92px}}
 
 /* hero */
-.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 70px}
-.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 0 70px;overflow:hidden}
+/* brand flore texture + wine glow, weighted to the left behind the bottle */
+.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("/assets/2023/10/flore-bg-background-black.jpg") center/cover no-repeat;opacity:.2;mix-blend-mode:screen;
+  -webkit-mask-image:radial-gradient(62% 66% at 32% 50%,#000 18%,transparent 78%);mask-image:radial-gradient(62% 66% at 32% 50%,#000 18%,transparent 78%)}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(48% 52% at 33% 50%,rgba(175,0,97,.16),transparent 60%)}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
 .hero .art{position:relative;display:flex;align-items:center;justify-content:center;min-height:600px}
 .hero .art .bottle{height:640px;width:auto;filter:drop-shadow(0 40px 66px rgba(0,0,0,.7));position:relative;z-index:2}
 .hero .art .stamp{position:absolute;top:30px;left:0;z-index:3;width:168px;height:168px;border-radius:50%;background:var(--ink2);
@@ -52,9 +57,12 @@ header img{height:42px;opacity:.92}
 .hero .status{margin-top:34px;padding-top:26px;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px}
 .hero .status .pin{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(184,145,90,.15)}
 .hero .status .st{font-family:"Akrobat";font-weight:700;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone)}
+.hero .price{font-family:"Akrobat",sans-serif;font-weight:700;font-size:clamp(46px,5vw,56px);letter-spacing:.03em;color:var(--gold);margin-top:22px;line-height:1}
+.hero .price .srp{display:block;font-family:"Akrobat";font-weight:600;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.hero .price small{display:block;margin-top:6px;font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
 .hero .cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;font-family:"Akrobat";font-weight:600;
-  font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--bone);text-decoration:none;border:1px solid var(--line);padding:16px 32px;transition:.3s}
-.hero .cta:hover{border-color:var(--gold);color:#fff}
+  font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:#fff;text-decoration:none;background:var(--wine);border:0;padding:17px 40px;transition:.25s;box-shadow:0 16px 40px rgba(175,0,97,.32)}
+.hero .cta:hover{background:#c70057;gap:16px}
 
 section.band{border-top:1px solid var(--line);padding:130px 0}
 .band .ey{display:block;text-align:center;margin-bottom:20px;color:var(--gold)}
@@ -69,6 +77,7 @@ section.band{border-top:1px solid var(--line);padding:130px 0}
 .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);max-width:940px;margin:0 auto}
 .timeline .t{background:var(--ink);padding:30px 24px;text-align:center}
 .timeline .t .yr{font-family:"Akrobat";font-weight:700;font-size:26px;color:var(--gold)}
+.timeline .t.now{background:linear-gradient(180deg,rgba(175,0,97,.10),var(--ink))}
 .timeline .t.now .yr{color:var(--wine)}
 .timeline .t .lb{font-size:12px;letter-spacing:.12em;color:var(--dim);margin-top:10px;line-height:1.5}
 .timeline .t .lb b{color:var(--bone);font-weight:400;display:block;font-family:"Akrobat";letter-spacing:.16em;text-transform:uppercase;font-size:11px;margin-bottom:5px}
@@ -86,26 +95,39 @@ section.band{border-top:1px solid var(--line);padding:130px 0}
 .join .ey{display:block;color:var(--gold);margin-bottom:24px}
 .join h2{font-family:"Akrobat",sans-serif;font-weight:700;font-size:56px;margin:0;text-transform:uppercase;line-height:1;letter-spacing:.02em}
 .join p{color:#bdb8ae;font-size:16px;margin:24px auto 0;max-width:500px}
-.join .cta{display:inline-block;margin-top:40px;font-family:"Akrobat";font-weight:600;font-size:12px;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--bone);text-decoration:none;border:1px solid var(--line);padding:18px 46px;transition:.3s}
-.join .cta:hover{border-color:var(--gold);color:#fff}
+.join .cta{display:inline-flex;align-items:center;gap:10px;margin-top:40px;font-family:"Akrobat";font-weight:600;font-size:12px;letter-spacing:.3em;text-transform:uppercase;
+  color:#fff;text-decoration:none;background:var(--wine);border:0;padding:18px 46px;transition:.25s;box-shadow:0 16px 40px rgba(175,0,97,.32)}
+.join .cta:hover{background:#c70057;gap:16px}
 
 footer{padding:54px 0;text-align:center;border-top:1px solid var(--line)}
-footer img{height:30px;opacity:.6;margin-bottom:16px}
+footer img{height:26px;opacity:.62;margin-bottom:16px}
 footer .ey{font-size:10px;letter-spacing:.34em;display:block}
 
+/* focus + one authored reveal (below-fold bands rise in) */
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+@media(prefers-reduced-motion:no-preference){
+  html.js .reveal{opacity:0;transform:translateY(26px);filter:blur(5px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1)}
+  html.js .reveal.in{opacity:1;transform:none;filter:none}
+}
+
 @media(max-width:860px){
-  .hero{grid-template-columns:1fr;gap:30px;padding-top:130px}
-  .hero .art{min-height:460px}.hero .art .bottle{height:430px}
+  .hero{padding-top:130px}
+  /* Collapse to one column on mobile (the grid lives on .hero .wrap, not .hero). */
+  .hero .wrap{grid-template-columns:1fr;gap:30px}
+  /* Bottle sits at the bottom of its box; stamp lifted fully ABOVE it so the
+     bottle is completely visible on mobile (desktop keeps its overlapping stamp). */
+  .hero .art{min-height:590px;align-items:flex-end}.hero .art .bottle{height:430px}
+  .hero .art .stamp{top:6px;left:6px;width:128px;height:128px}
   .hero .info h1{font-size:60px}
   .timeline,.specs{grid-template-columns:1fr 1fr}
   .band h2{font-size:34px}.join h2{font-size:38px}
 }
 </style>
+<link rel="stylesheet" href="/css/style.css?v=48">
 </head>
 <body>
 
-<header><div class="wrap"><img src="/assets/mockup/chulele-crest-white.png" alt="Chulele Artisanal Mezcal"></div></header>
+<header><div class="wrap"><img src="/assets/logo/chulele-stacked-white.png" alt="Chulele Artisanal Mezcal"></div></header>
 
 <!-- HERO -->
 <section class="hero">
@@ -120,13 +142,14 @@ footer .ey{font-size:10px;letter-spacing:.34em;display:block}
       <div class="sp">Día de los Muertos · 2022 Batch · Espadín</div>
       <p class="lead">The same harvest that became our Día de los Muertos joven — set apart, sealed in oak, and left to time. A five-year añejo, still resting in Oaxaca.</p>
       <div class="status"><span class="pin"></span><span class="st">Still aging · Held in reserve</span></div>
+      <div class="price"><span class="srp">Suggested Retail Price</span>$249<small>Held in reserve</small></div>
       <a class="cta" href="/reserve/#reserve-list">Join the reserve list →</a>
     </div>
   </div>
 </section>
 
 <!-- CASK STORY -->
-<section class="band">
+<section class="band reveal">
   <div class="wrap">
     <span class="ey">The Cask</span>
     <h2>Some things<br>cannot be hurried</h2>
@@ -139,7 +162,7 @@ footer .ey{font-size:10px;letter-spacing:.34em;display:block}
 </section>
 
 <!-- TIMELINE (limited-window / aging) -->
-<section class="band">
+<section class="band reveal">
   <div class="wrap">
     <span class="ey">The Long Rest</span>
     <h2>From harvest<br>to release</h2>
@@ -153,7 +176,7 @@ footer .ey{font-size:10px;letter-spacing:.34em;display:block}
 </section>
 
 <!-- SPECS -->
-<section class="band">
+<section class="band reveal">
   <div class="wrap">
     <span class="ey">The Spirit</span>
     <h2>What is resting</h2>
@@ -167,7 +190,7 @@ footer .ey{font-size:10px;letter-spacing:.34em;display:block}
 </section>
 
 <!-- JOIN -->
-<section class="join">
+<section class="join reveal">
   <div class="wrap">
     <span class="ey">The Reserve List</span>
     <h2>Be there when<br>the cask opens</h2>
@@ -178,11 +201,183 @@ footer .ey{font-size:10px;letter-spacing:.34em;display:block}
 
 <footer>
   <div class="wrap">
-    <img src="/assets/mockup/chulele-crest-white.png" alt="Chulele"><br>
+    <img src="/assets/logo/chulele-horizontal-white.png" alt="Chulele"><br>
     <span class="ey">Chulele Artisanal Mezcal · Santiago Matatlán, Oaxaca · Held in Reserve</span>
   </div>
 </footer>
 
+<script src="/js/reveal.js?v=1" defer></script>
 
+<div style="position:fixed;top:20px;left:20px;z-index:9000;width:44px" class="chulele-added-menu-trigger"><a class="elementor-icon" href="#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjE2NSIsInRvZ2dsZSI6ZmFsc2V9">
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" x="0px" y="0px" viewBox="0 0 30 28" style="enable-background:new 0 0 30 28;" xml:space="preserve"><style type="text/css">	.st0{fill:none;stroke:#AF0061;stroke-width:4;}</style><g id="Group_4076" transform="translate(-1249.5 -38.5)">	<line id="Line_274" class="st0" x1="1249.5" y1="40.5" x2="1273.5" y2="40.5"></line>	<line id="Line_275" class="st0" x1="1249.5" y1="52.5" x2="1279.5" y2="52.5"></line>	<line id="Line_276" class="st0" x1="1249.5" y1="64.5" x2="1268.5" y2="64.5"></line></g></svg>			</a></div>
+<div id="chulele-menu" data-chulele-menu="" class="elementor elementor-165 chulele-menu chulele-menu--standalone">
+					<section class="elementor-section elementor-top-section elementor-element elementor-element-5d9ebdd elementor-section-full_width elementor-section-height-full elementor-section-height-default elementor-section-items-middle" data-id="5d9ebdd" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-d5dac6c" data-id="d5dac6c" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						
+				<div class="elementor-element elementor-element-5de7db7 elementor-widget elementor-widget-heading" data-id="5de7db7" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default">CHULELE AÑEJO</h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-bdfef10 elementor-widget elementor-widget-heading" data-id="bdfef10" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default"><a href="/process/">Espadín Añejo <span style="color: var( --e-global-color-4593fc1 )">Artisanal Mezcal</span><br><span style="color: var( --e-global-color-4593fc1 )">5 Años Aged - 100% Agave</span></a></h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-da32fba elementor-widget elementor-widget-button" data-id="da32fba" data-element_type="widget" data-e-type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="/product/dia-de-muertos-anejo/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">DISCOVER THIS BATCH</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				<div class="elementor-element elementor-element-643989f elementor-hidden-desktop elementor-hidden-laptop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-shortcode" data-id="643989f" data-element_type="widget" data-e-type="widget" data-widget_type="shortcode.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-shortcode"></div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-37c6185 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="37c6185" data-element_type="widget" data-e-type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-5de7db7 elementor-widget elementor-widget-heading" data-id="5de7db7" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default">DÍA DE LOS MUERTOS</h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-bdfef10 elementor-widget elementor-widget-heading" data-id="bdfef10" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default"><a href="/process/">Espadín Joven <span style="color: var( --e-global-color-4593fc1 )">Artisanal Mezcal</span><br><span style="color: var( --e-global-color-4593fc1 )">51.3% ABV - 100% Agave</span></a></h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-da32fba elementor-widget elementor-widget-button" data-id="da32fba" data-element_type="widget" data-e-type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="/product/dia-de-muertos-2022/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">DISCOVER THIS BATCH</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				<div class="elementor-element elementor-element-643989f elementor-hidden-desktop elementor-hidden-laptop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-shortcode" data-id="643989f" data-element_type="widget" data-e-type="widget" data-widget_type="shortcode.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-shortcode"></div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-37c6185 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="37c6185" data-element_type="widget" data-e-type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-aca5ab5 elementor-widget elementor-widget-heading" data-id="aca5ab5" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">GUELAGUETZA </h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-9f9b666 elementor-widget elementor-widget-heading" data-id="9f9b666" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default"><a href="/process/">Espadín Joven Artisanal Mezcal<br><span style="color: var( --e-global-color-4593fc1 )">50.4% ABV - 100% Agave</span></a></h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-0c77e30 elementor-hidden-desktop elementor-hidden-laptop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-shortcode" data-id="0c77e30" data-element_type="widget" data-e-type="widget" data-widget_type="shortcode.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-shortcode"></div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-4d6fd7b elementor-widget elementor-widget-button" data-id="4d6fd7b" data-element_type="widget" data-e-type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="/product/guelaguetza-2022/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">DISCOVER THIS BATCH</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				<div class="elementor-element elementor-element-b9d7b7f elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="b9d7b7f" data-element_type="widget" data-e-type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+						</div>
+				</div>
+				
+				<div class="elementor-element elementor-element-7c014b1 elementor-widget elementor-widget-heading" data-id="7c014b1" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default"><a href="/process/">ARTISANAL PROCESS</a></h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-794cd61 elementor-widget elementor-widget-heading" data-id="794cd61" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default"><a href="/agaves/">TYPES OF AGAVE</a></h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-765bc51 elementor-widget elementor-widget-heading" data-id="765bc51" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default"><a href="/archive-landing/">SINGLE-BATCH RELEASES</a></h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-f931e62 elementor-widget elementor-widget-heading" data-id="f931e62" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default"><a href="/buy-chulele/">WHERE TO BUY CHULELE</a></h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-dcc0296 elementor-widget elementor-widget-heading" data-id="dcc0296" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default"><a href="/distributors/">CHULELE DISTRIBUTORS</a></h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-402ad22 elementor-widget elementor-widget-heading" data-id="402ad22" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default"><a href="/mezcal-memoirs/">MEZCAL MEMOIRS</a></h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-14bb219 elementor-widget elementor-widget-heading" data-id="14bb219" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default"><a href="/media-materials/">CHULELE MEDIA</a></h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-6b34f87 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="6b34f87" data-element_type="widget" data-e-type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-00e0136 elementor-widget__width-auto elementor-view-default elementor-widget elementor-widget-icon" data-id="00e0136" data-element_type="widget" data-e-type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="https://www.facebook.com/mezcalchulele" target="_blank" rel="nofollow">
+			<i aria-hidden="true" class="fab fa-facebook-square"></i>			</a>
+		</div><div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="https://x.com/mezcalchulele" target="_blank" rel="nofollow" aria-label="X (Twitter)">
+			<i aria-hidden="true" class="fab fa-twitter-square"></i>			</a>
+		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-97f9c40 elementor-widget__width-auto elementor-view-default elementor-widget elementor-widget-icon" data-id="97f9c40" data-element_type="widget" data-e-type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="https://www.instagram.com/mezcalchulele/" target="_blank" rel="nofollow">
+			<i aria-hidden="true" class="fab fa-instagram"></i>			</a>
+		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-daac975 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="daac975" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default">FOLLOW TO BE FIRST TO KNOW!
+</h3>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+<script src="/js/main.js?v=43" defer></script>
 </body>
 </html>

@@ -198,17 +198,39 @@ header.elementor-location-header { position: sticky; top: 0; z-index: 9999; }
 }
 #chulele-menu.is-open > .elementor-section {   /* the white sliding panel */
   position: relative; background: #fff;
-  width: 30vw; min-height: 100%; max-height: 100%;
+  width: 30vw; height: 100vh; min-height: 100vh; max-height: 100vh;
   overflow-y: auto; -webkit-overflow-scrolling: touch;
 }
+/* Top-align menu content so a tall menu (all batches) isn't clipped at the top. */
+#chulele-menu.is-open .elementor-container { align-items: flex-start !important; }
+
+/* Self-contained menu styling for pages WITHOUT the Elementor page CSS (the
+   custom Reserve / Añejo pages). Scoped to --standalone so it never touches the
+   Elementor-styled menu on standard pages. Matches the standard look. */
+/* Left/right inset the Elementor column padding would normally provide. */
+.chulele-menu--standalone .elementor-widget-wrap { padding-left: 26px; padding-right: 22px; box-sizing: border-box; }
+.chulele-menu--standalone .chulele-merch-menu { margin-left: 0; text-align: left; }
+.chulele-menu--standalone .elementor-button-wrapper { text-align: left; }
+.chulele-menu--standalone .elementor-heading-title { color: #000; font-family: "Akrobat","Oswald",Arial,sans-serif; margin: 0; }
+.chulele-menu--standalone .elementor-heading-title:not(:has(a)) { font-size: 30px; font-weight: 600; margin: 16px 0 4px; }
+.chulele-menu--standalone .elementor-heading-title a { color: #000; text-decoration: none; font-weight: 400; font-size: 19px; line-height: 1.45; }
+.chulele-menu--standalone .elementor-heading-title a span { color: #000 !important; }
+.chulele-menu--standalone .elementor-button {
+  background: var(--chulele-magenta); color: #fff; text-decoration: none;
+  font-family: "Akrobat","Oswald",Arial,sans-serif; font-weight: 700; font-size: 16px;
+  padding: 15px 45px; display: inline-block; border: 0; margin-top: 6px; line-height: 1.2;
+  clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+}
+.chulele-menu--standalone .elementor-button:hover { background: var(--chulele-pink); }
 @media (max-width: 1366px) { #chulele-menu.is-open > .elementor-section { width: 53vw; } }
 @media (max-width: 1024px) { #chulele-menu.is-open > .elementor-section { width: 61vw; } }
 @media (max-width: 767px)  { #chulele-menu.is-open > .elementor-section { width: 86vw; } }
 .chulele-menu__close {
-  position: fixed; top: 12px; z-index: 5;
+  position: fixed; top: 12px; z-index: 100000;
   left: calc(30vw - 52px); right: auto;   /* top-right corner of the white panel */
   width: 44px; height: 44px; padding: 0; border: 0; cursor: pointer;
-  background: transparent; color: #000; font-size: 40px; line-height: 1;
+  background: rgba(255, 255, 255, .92); border-radius: 50%;
+  color: #000; font-size: 34px; line-height: 44px; text-align: center;
 }
 .chulele-menu__close:hover { color: var(--chulele-magenta); }
 @media (max-width: 1366px) { .chulele-menu__close { left: calc(53vw - 52px); } }
@@ -301,6 +323,239 @@ header.elementor-location-header { position: sticky; top: 0; z-index: 9999; }
   pointer-events: none; white-space: nowrap;
 }
 
+/* "Held in Reserve" seal — the single reserve badge used everywhere (homepage
+   hero + both product pages), replacing the old "BUY NOW" buttons. A circular
+   vault stamp linking to /reserve/. Self-sized (fixed badge, no max-width) so it
+   never collapses inside Elementor's flex / image containers. Type is sized to
+   fill the ring. Default colours suit dark panels (homepage, Guelaguetza); the
+   --ink modifier flips it to black-on-transparent for the light Día panel.
+   --seal-shift nudges it vertically per page to line up with the bottle label. */
+.chulele-seal {
+  display: inline-block; text-decoration: none; text-align: center;
+  font-family: "Akrobat", "Oswald", Arial, sans-serif; line-height: 1; vertical-align: middle;
+  transform: translateY(var(--seal-shift, 0px));
+}
+.chulele-seal__badge {
+  position: relative; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  width: 168px; height: 168px; margin: 0 auto; border-radius: 50%;   /* same diameter as the batch stamp (168 px) */
+  padding: 16px; box-sizing: border-box;
+  border: 1.5px solid #ece7dd; background: transparent;
+  text-align: center; transition: border-color .2s ease;
+}
+.chulele-seal__badge::before {
+  content: ""; position: absolute; inset: 9px; border-radius: 50%;
+  border: 1px solid rgba(236, 231, 221, .5);
+}
+.chulele-seal:hover .chulele-seal__badge { border-color: var(--chulele-magenta); }
+.chulele-seal__star { color: var(--chulele-magenta); font-size: 18px; letter-spacing: .2em; margin-bottom: 3px; line-height: 1; }
+.chulele-seal__k { font-size: 15px; letter-spacing: .22em; text-transform: uppercase; color: #ece7dd; line-height: 1.4; }
+.chulele-seal__t { font-size: 38px; color: #ece7dd; margin: 1px 0 3px; letter-spacing: .01em; line-height: 1; }
+.chulele-seal__e { font-size: 13px; letter-spacing: .24em; text-transform: uppercase; color: #ece7dd; }
+.chulele-seal__note { display: block; margin-top: 14px; font-size: 15px; letter-spacing: .2em; text-transform: uppercase; color: #ece7dd; }
+/* Ink variant — black on transparent, for the light-gray Día product panel. */
+.chulele-seal--ink .chulele-seal__badge { border-color: #111; }
+.chulele-seal--ink .chulele-seal__badge::before { border-color: rgba(0, 0, 0, .45); }
+.chulele-seal--ink .chulele-seal__k,
+.chulele-seal--ink .chulele-seal__t,
+.chulele-seal--ink .chulele-seal__e,
+.chulele-seal--ink .chulele-seal__note { color: #111; }
+/* Desktop split-hero alignment: nudge the product-page seal down (Día) / up
+   (Guelaguetza) to line up with the bottle label. Only applied at the wide
+   breakpoint where the split hero shows; narrower widths keep the natural
+   position. Values tuned for ~1900px desktop — fine-tune per review. */
+/* Guelaguetza seal keeps its confirmed-correct nudge. */
+@media (min-width: 1600px) {
+  .chulele-seal--guela { --seal-shift: -300px; }
+}
+/* Día seal: match Guela's placement by pinning it absolutely to the lower-right
+   of the bottle column — Guela's seal widget is absolute at bottom:12%; right:4%.
+   Percentage-absolute positioning is robust at every width (unlike the old
+   normal-flow position that drifted to the top on wide screens). */
+.chulele-seal--dia { position: static; transform: none; }
+[data-elementor-type="product"] .elementor-element:has(> .elementor-widget-container > .chulele-seal--dia) {
+  bottom: 4% !important; right: 4% !important; left: auto !important; top: auto !important; z-index: 12;
+}
+
+/* Día de los Muertos hero — match the Guelaguetza dark panel: same dark
+   "flore" texture behind the bottle (Elementor column 31d01bd on page 676),
+   so the dark-lit bottle render reads correctly instead of a light-gray panel. */
+body.elementor-page-676 .elementor-element-31d01bd > .elementor-widget-wrap {
+  background-color: #EDEDED;
+  background-image: url("/assets/2023/10/flore-bg-background-black.jpg");
+  background-position: center center; background-repeat: no-repeat; background-size: cover;
+}
+
+/* Guelaguetza landing (/chulele-mezcal-guelaguetza/) — add the reserve seal to
+   the right dark bottle panel (column 5c7aabc), positioned over the bottle like
+   the homepage seal. Percentage-absolute so it holds across widths. */
+.elementor-element-5c7aabc > .elementor-widget-wrap { position: relative; }
+.chulele-seal-gl-widget { position: absolute; top: 50%; left: 11%; z-index: 12; width: fit-content; }
+
+/* Archive-landing — clean single-batch cards (Guelaguetza · Día · Añejo),
+   replacing the old WooCommerce loop grid. Self-contained, dark cards. */
+.chulele-batches { background: #0e0f10; padding: 72px 20px 88px; }
+.chulele-batches__wrap { max-width: 1160px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; align-items: stretch; }
+.chulele-batch-card {
+  flex: 1 1 320px; max-width: 360px; box-sizing: border-box;
+  background: linear-gradient(180deg, #17181a, #0d0e0f);
+  border: 1px solid rgba(236, 231, 221, .12);
+  text-align: center; padding: 34px 24px 40px;
+  display: flex; flex-direction: column; align-items: center;
+  font-family: "Akrobat", "Oswald", Arial, sans-serif;
+}
+.chulele-batch-card__bottle { height: 320px !important; width: auto !important; max-width: 100%; display: block; margin: 0 auto 18px; object-fit: contain; }
+.chulele-batch-card__eyebrow { color: var(--chulele-magenta); font-size: 10.5px; letter-spacing: .32em; text-transform: uppercase; margin-bottom: 9px; }
+.chulele-batch-card__name { font-family: "Akrobat", sans-serif; font-weight: 700; font-size: 25px; line-height: 1.05; color: #ece7dd; margin: 0 0 8px; text-transform: uppercase; letter-spacing: .03em; }
+.chulele-batch-card__info { color: #8c8881; font-size: 13px; letter-spacing: .02em; margin-bottom: 22px; }
+.chulele-batch-card .chulele-seal--al { margin: 0 auto; }
+.chulele-batch-card__more { margin-top: 22px; color: #ece7dd; font-size: 10.5px; letter-spacing: .26em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(236, 231, 221, .3); padding-bottom: 3px; }
+.chulele-batch-card__more:hover { color: var(--chulele-magenta); border-color: var(--chulele-magenta); }
+@media (max-width: 767px) { .chulele-batch-card { flex: 1 1 100%; max-width: 420px; } .chulele-batch-card__bottle { height: 300px; } }
+
+/* Archive-landing product cards — the reserve seal replacing the old SOLD OUT
+   button + retailer link. Cards vary (Guelaguetza on a dark image, Día on light
+   gray), so the seal uses light text on a dark translucent medallion backing,
+   which reads on both. Centred in the card. */
+.chulele-seal--al { display: block; margin: 6px auto 0; }
+.chulele-seal--al .chulele-seal__badge { background: rgba(11, 11, 12, .72); }
+
+/* "Reserve" category badge on Mezcal Memoirs post cards — groups the former
+   "Reserve Journal" posts within the main blog listing. */
+.uc_post_grid_style_one_item { position: relative; }
+.chulele-cat {
+  position: absolute; top: 10px; left: 10px; z-index: 5;
+  background: var(--chulele-magenta); color: #fff;
+  font-family: "Akrobat", "Oswald", Arial, sans-serif; font-weight: bold;
+  text-transform: uppercase; font-size: 11px; letter-spacing: .14em;
+  padding: 5px 12px; border-radius: 2px; line-height: 1;
+}
+
+/* ---------- Mobile: keep the reserve seal clear of the bottle ---------------
+   The seal belongs to the medallion / social column, not the
+   bottle column. The old rules pulled it left with a transform so it sat ON the
+   bottle — overlapping and unreadable. Here we leave the page design untouched
+   and only change the seal: sit it in normal flow below the hashtag (its own
+   column), at a reduced size that fits a phone column with breathing room. */
+@media (max-width: 767px) {
+  /* Smaller seal (product pages only — homepage seal is unchanged). */
+  [data-elementor-type="product"] .chulele-seal__badge { width: 124px; height: 124px; padding: 11px; }   /* = the batch stamp on a phone (124 px) */
+  [data-elementor-type="product"] .chulele-seal__badge::before { inset: 7px; }
+  [data-elementor-type="product"] .chulele-seal__star { font-size: 14px; }
+  [data-elementor-type="product"] .chulele-seal__k { font-size: 11px; letter-spacing: .18em; }
+  [data-elementor-type="product"] .chulele-seal__t { font-size: 27px; }
+  [data-elementor-type="product"] .chulele-seal__e { font-size: 10px; letter-spacing: .2em; }
+  [data-elementor-type="product"] .chulele-seal__note { font-size: 11px; margin-top: 8px; letter-spacing: .16em; }
+
+  /* Día MOBILE hero (section 1e7dc6e) is a SEPARATE section shown only on phones
+     — the desktop hero (dark flore panel) is a different section (hidden-mobile).
+     On phones that mobile section renders white, so the cream seal has nowhere
+     legible to go off the bottle. Give this phone-only section the same dark
+     flore background the desktop hero + Guelaguetza already use, so the seal can
+     move off the bottle and stay cream/legible. Desktop cannot render this
+     section, so it is untouched. */
+  .elementor-element-1e7dc6e {
+    background-color: #0d0d0f !important;
+    background-image: url("/assets/2023/10/flore-bg-background-black.jpg") !important;
+    background-position: center center !important; background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+  /* Social block text in that section → light on the now-dark panel. */
+  .elementor-element-1e7dc6e p { color: #ece7dd !important; }
+  /* Fill the header area above the black hero so the top matches Guelaguetza
+     (no white strip behind the logo). A pseudo-element sits behind the header
+     and above the page, so nothing shifts and the logo/menu stay on top. */
+  .elementor-element-1e7dc6e { position: relative !important; }
+  .elementor-element-1e7dc6e::before {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 100%;
+    height: 300px; background: #0d0d0f; z-index: -1; pointer-events: none;
+  }
+  /* Zig-zag divider between the hero and the magenta section was hard-set white
+     (invisible on the old white hero). Recolour it to the dark hero so the
+     black hero meets the magenta cleanly. */
+  .elementor-element-9e1adc5 > .elementor-shape-top .elementor-shape-fill { fill: #0d0d0f !important; }
+
+  /* Día seal — flow it in below the hashtag, off the bottle. Now on the dark
+     panel, so it stays cream (no colour change). */
+  [data-elementor-type="product"] .elementor-element:has(> .elementor-widget-container > .chulele-seal--dia) {
+    position: relative !important; text-align: center !important;
+    left: auto !important; right: auto !important; top: auto !important; bottom: auto !important;
+    transform: none !important; margin-top: 14px !important;
+  }
+  /* Guelaguetza seal — drop the shift that pulled it over the bottle. */
+  .chulele-seal--guela { transform: none !important; }
+  /* Guelaguetza landing seal — pull it in so it isn't cut off the right edge. */
+  .chulele-seal-gl-widget { left: -2% !important; }
+}
+
+/* ---------- Homepage hero (page 15) — MOBILE ONLY, homepage only ----------
+   The reserve seal was rendering at full desktop size, crowding the narrow
+   split-hero and pushing "LEARN MORE ABOUT THIS BATCH" out of view. Shrink the
+   seal so the whole left-column stack (seal → eyebrow → heading → button) fits
+   on screen. Scoped to body.elementor-page-15 so no other page is affected. */
+@media (max-width: 767px) {
+  body.elementor-page-15 .chulele-seal__badge { width: 116px !important; height: 116px !important; padding: 10px !important; }
+  body.elementor-page-15 .chulele-seal__badge::before { inset: 6px; }
+  body.elementor-page-15 .chulele-seal__star { font-size: 12px; }
+  body.elementor-page-15 .chulele-seal__k { font-size: 9.5px; letter-spacing: .16em; }
+  body.elementor-page-15 .chulele-seal__t { font-size: 23px; }
+  body.elementor-page-15 .chulele-seal__e { font-size: 8.5px; letter-spacing: .18em; }
+  body.elementor-page-15 .chulele-seal__note { font-size: 9.5px; margin-top: 6px; letter-spacing: .14em; }
+}
+
+/* ---------- Pricing ---------------------------------------------------------
+   Price display only — every batch stays allocation-only behind the reserve
+   seal (no checkout). Shown on product pages, the archive cards and /reserve/;
+   never on landing pages. Cream-on-dark to match the seals it sits beside. */
+.chulele-price{
+  display:block; margin-top:12px; text-align:center;
+  font-family:"Akrobat","Oswald",Arial,sans-serif; font-weight:700;
+  font-size:36px; letter-spacing:.05em; line-height:1; color:#ece7dd;
+}
+.chulele-price__srp{
+  display:block; margin-bottom:7px; font-size:9.5px; font-weight:600;
+  letter-spacing:.3em; text-transform:uppercase; color:#8c8881;
+}
+.chulele-price small{
+  display:block; margin-top:6px; font-size:9.5px; font-weight:600;
+  letter-spacing:.3em; text-transform:uppercase; color:#8c8881;
+}
+.chulele-batch-card__price{
+  font-family:"Akrobat","Oswald",Arial,sans-serif; font-weight:700;
+  font-size:33px; letter-spacing:.05em; color:#ece7dd; margin:-6px 0 16px;
+}
+/* Desktop product pages: keep the seal's text lines no wider than the seal
+   itself, so "Enter the reserve →" and "Suggested Retail Price" wrap onto two
+   lines instead of reaching left over the bottle. Mobile is untouched. */
+@media (min-width: 768px){
+  [data-elementor-type="product"] .chulele-seal--dia .chulele-seal__note,
+  [data-elementor-type="product"] .chulele-seal--guela .chulele-seal__note{
+    max-width: 132px; margin-left: auto; margin-right: auto; line-height: 1.6; white-space: normal;
+  }
+  [data-elementor-type="product"] .chulele-price{
+    max-width: 132px; margin-left: auto; margin-right: auto; white-space: normal;
+  }
+  [data-elementor-type="product"] .chulele-price__srp{ line-height: 1.7; }
+}
+
+/* Phone, homepage: no Held in Reserve seal (the narrow split hero has no room for it beside the headline and the
+   3D bottle), and the bottle's loading outline is the phone arrangement's: medal at the top right, render 1.25x and placed
+   22 % left of its box (same numbers as the preset's phone layout). !important because the page sets the desktop values inline on the box. */
+@media (max-width: 767px){
+  body.elementor-page-15 .chulele-seal{ display:none !important; }
+  [data-bottle3d="ddm-joven-medal"]{
+    --b3d-mark:url(/assets/mockup/bottle3d-shape-home-phone.png) !important;
+    --b3d-mark-w:177.5% !important; --b3d-mark-x:-22% !important; --b3d-m:1 !important;
+  }
+}
+
+/* Phone, batch pages: the price block sits between the batch stamp (above) and the Held in Reserve seal (below).
+   The markup keeps the seal first; only the order on screen changes, and only here. Desktop is untouched. */
+@media (max-width: 767px){
+  [data-elementor-type="product"] .elementor-widget-container:has(> .chulele-seal){ display:flex; flex-direction:column; align-items:center; }
+  [data-elementor-type="product"] .elementor-widget-container:has(> .chulele-seal) > .chulele-price{ order:-1; margin:0 0 14px; }
+}
+
 /* ---------- "Shop Chulele Merch" button (menu + footer) ------------------- */
 .chulele-merch-link {
   display: inline-block; background: var(--chulele-magenta); color: #fff !important;
@@ -310,7 +565,20 @@ header.elementor-location-header { position: sticky; top: 0; z-index: 9999; }
   transition: background .2s ease;
 }
 .chulele-merch-link:hover { background: var(--chulele-pink); color: #fff !important; }
-.chulele-merch-menu { margin: 18px 0 6px; }
+.chulele-merch-menu { margin: 14px 0 6px; text-align: center; }
+
+/* ---------- Menu overlay refinements ------------------------------------- */
+/* Condense the menu so nav links aren't so spaced out. */
+#chulele-menu .elementor-widget { margin-block-end: 6px !important; }
+/* SHOP CHULELE MERCH → same magenta hexagon as the DISCOVER THIS BATCH button. */
+.chulele-merch-link {
+  clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+  border-radius: 0 !important; padding: 15px 45px !important;
+  font-family: "Akrobat", "Oswald", Arial, sans-serif; font-weight: 700; font-size: 16px;
+}
+/* Social icons on one line — shrink to content and sit in a row. */
+#chulele-menu .elementor-widget-icon { flex: 0 0 auto !important; width: auto !important; margin: 0 10px 0 0 !important; }
+#chulele-menu .elementor-widget-icon .elementor-icon { font-size: 24px !important; }
 .chulele-merch-footer { text-align: center; padding: 22px 16px 6px; }
 
 /* ---------- Print --------------------------------------------------------- */
@@ -321,3 +589,4 @@ header.elementor-location-header { position: sticky; top: 0; z-index: 9999; }
   html.chulele-lock, html.chulele-lock body { overflow: visible !important; }
   body { color: #000; background: #fff; }
 }
+

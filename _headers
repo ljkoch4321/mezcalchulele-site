@@ -3,11 +3,12 @@
 # ============================================================================
 
 /*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://player.vimeo.com; frame-src https://player.vimeo.com https://www.youtube.com; connect-src 'self' https://api.mailchimp.com https://www.google-analytics.com
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://player.vimeo.com; frame-src https://player.vimeo.com https://www.youtube.com; connect-src 'self' https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
 
 # --- Secure download store: never index, force-download handled per-route ---
 /assets/downloads/*
@@ -15,6 +16,7 @@
 
 /assets/*
   X-Robots-Tag: noindex
+
 
 # --- Force browser download (attachment) on media documents ----------------
 /media/press-release-*
@@ -29,11 +31,16 @@
 # --- Cache policy ----------------------------------------------------------
 #  HTML: 1 hour. CSS/JS: 1 year immutable. Images & PDFs: 30 days.
 /*.html
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=0, must-revalidate
 /css/*
   Cache-Control: public, max-age=31536000, immutable
 /js/*
   Cache-Control: public, max-age=31536000, immutable
+# 3D bottle viewer (product pages): hashed script, art changes rarely
+/bottle3d/*.js
+  Cache-Control: public, max-age=31536000, immutable
+/bottle3d/art/*
+  Cache-Control: public, max-age=2592000
 /assets/*.jpg
   Cache-Control: public, max-age=2592000
 /assets/*.jpeg

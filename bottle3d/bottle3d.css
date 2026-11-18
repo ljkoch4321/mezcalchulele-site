@@ -1,0 +1,40 @@
+/* Web embed: what stands in the bottle's place until the 3D view is drawn (copied to the host site as /bottle3d/bottle3d.css
+   and linked in the page's <head>, so it applies from the first paint, before the script has loaded).
+   Instead of the still picture: the backlight's glow and the bottle's dark outline, which the render then replaces.
+   The host box sets two variables:  style="--b3d-glow:175,0,97; --b3d-mark:url(/path/outline.png)"
+   The still is hidden, not removed: it comes back by itself after 20 s if the viewer never starts (script blocked or
+   failed), and at once where the viewer decides not to run (no WebGL, Save-Data: class b3d-off). */
+/* The column the bottle stands in is dark by picture, not by colour: until that picture arrives its base colour shows
+   (a pale grey on the product pages, a white flash on load). The base is made black, so the first paint is already dark. */
+:is(.elementor-widget-wrap, .elementor-column, .elementor-section):has([data-bottle3d]) { background-color: #000 !important; }
+/* On a phone the viewer draws the bottle a fifth larger than the still's box (PHONE in main.tsx): the outline follows. */
+@media (max-width: 767px) { [data-bottle3d] { --b3d-m: 1.2; } }
+[data-bottle3d] { position: relative; }
+[data-bottle3d] > img { opacity: 0; animation: b3d-show 0s linear 20s forwards; }
+[data-bottle3d]::before, [data-bottle3d]::after { content: ""; position: absolute; left: 50%; pointer-events: none; transition: opacity 1.2s ease; }
+/* the same ellipse the viewer draws as the bottle's halo once it is up */
+[data-bottle3d]::before {
+  top: 50%; width: 230%; height: 112%; transform: translate(-50%, -48%);
+  background: radial-gradient(closest-side, rgba(var(--b3d-glow, 0,0,0), .6) 0%, rgba(var(--b3d-glow, 0,0,0), .28) 40%, rgba(var(--b3d-glow, 0,0,0), .09) 70%, transparent 100%);
+  animation: b3d-hide 0s linear 20s forwards;
+}
+/* The render's own outline, dark and flat, standing exactly where the bottle will appear. The picture is captured from the
+   viewer at its opening view (window.__b3dShape() on the dev page) on a canvas of known shape, so it is laid out by the
+   same rule the viewer frames by: a bottle alone fills the box's height (square picture, full height); a wider subject
+   (bottle and medal) is fitted to the viewer layer's width (--b3d-mark-w:142%; --b3d-mark-h:auto; --b3d-mark-ar: its shape).
+   Once the script is up it corrects these for a narrow screen (--b3d-mark-x and the size), where it shifts and shrinks the render. */
+[data-bottle3d]::after {
+  left: calc(50% + var(--b3d-mark-x, 0px)); top: 50%; width: var(--b3d-mark-w, auto); height: var(--b3d-mark-h, 100%); aspect-ratio: var(--b3d-mark-ar, 1); transform: translate(-50%, -50%);
+  background: var(--b3d-mark, none) center / 100% 100% no-repeat;
+  scale: var(--b3d-m, 1);
+  animation: b3d-hide 0s linear 20s forwards;
+}
+/* the viewer has started (class b3d-wait): it is on its way, so the 20 s return of the still is called off; the viewer
+   itself gives up after a minute and switches to b3d-off */
+[data-bottle3d].b3d-wait > img, [data-bottle3d].b3d-wait::before, [data-bottle3d].b3d-wait::after { animation: none; }
+/* drawn (b3d-on) or not running (b3d-off): the placeholder goes. These come last so they win over the rules above. */
+[data-bottle3d].b3d-on::before, [data-bottle3d].b3d-on::after,
+[data-bottle3d].b3d-off::before, [data-bottle3d].b3d-off::after { opacity: 0; animation: none; }
+[data-bottle3d].b3d-off > img { opacity: 1; animation: none; }
+@keyframes b3d-show { to { opacity: 1; } }
+@keyframes b3d-hide { to { opacity: 0; } }

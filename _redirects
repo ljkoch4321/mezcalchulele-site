@@ -4,6 +4,19 @@
 #  bearing: specific exemptions and 301s must precede the catch-all blocks.
 # ============================================================================
 
+# --- Security: never serve repo-metadata / env files -----------------------
+#  (.assetsignore excludes them from new uploads; these force a 404 even for
+#   already-cached assets, so nothing leaks file structure or env-var names.)
+/.gitignore            /404.html   404
+/.dev.vars             /404.html   404
+/.dev.vars.example     /404.html   404
+/.env                  /404.html   404
+
+# --- Google Search Console HTML-file verification --------------------------
+#  Pages 308-redirects *.html -> clean URL; Google needs a 200 at the exact
+#  .html path, so serve the file content directly (rewrite, status 200).
+/google33a8031a32707c98.html   /google33a8031a32707c98   200
+
 # --- RSS feed (Cloudflare won't auto-serve index.xml for a directory) -----
 /feed/             /feed/index.xml   200
 /feed              /feed/index.xml   200
@@ -13,6 +26,7 @@
 #  The malware spam lives under /css/?page=* so /css/* is 410'd below. Our
 #  real stylesheet also lives at /css/style.css, so exempt it FIRST.
 /css/style.css                                  /css/style.css            200
+
 
 # --- Named, secure media download routes (Step 7) -------------------------
 #  Files live internally at /assets/downloads/ and are served only via these

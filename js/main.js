@@ -194,7 +194,9 @@
     var n = form.querySelector('.chulele-formmsg');
     if (!n) { n = document.createElement('p'); n.className = 'chulele-formmsg'; form.appendChild(n); }
     n.textContent = msg; n.setAttribute('role', 'status');
-    n.style.color = ok ? '#2e7d32' : '#c70057';
+    n.style.cssText = 'display:inline-block;margin-top:14px;padding:11px 16px;border-radius:6px;' +
+      'font-weight:600;letter-spacing:.01em;color:#fff;' +
+      (ok ? 'background:#AF0061;' : 'background:#2b2226;border:1px solid #AF0061;');
   }
   function wireForms() {
     // Footer email signup (Elementor form containing an email field).
@@ -396,6 +398,7 @@
   var SIGNUP_COOKIE = 'chulele_signup_seen';
   function maybeSignupPopup() {
     if (getCookie(SIGNUP_COOKIE)) return;
+    if (location.pathname.indexOf('/reserve') === 0) return; // reserve page has its own form
     var tries = 0;
     (function waitGate() {
       if (!document.querySelector('.chulele-agegate')) { setTimeout(showSignupPopup, 6000); }
@@ -419,6 +422,7 @@
         '<p class="chulele-signup__p">We are working on our next exciting Chulele&reg; single-batch release. Be the first to know when these rare bottles are available.</p>' +
         '<form class="chulele-signup__form" novalidate>' +
           '<input type="email" class="chulele-signup__email" placeholder="Type your email" aria-label="Email" required>' +
+          '<input type="text" name="hp_contact" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore="true" data-lpignore="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">' +
           '<button type="submit" class="chulele-signup__submit">Submit</button>' +
         '</form>' +
         '<p class="chulele-signup__msg" role="status" hidden></p>' +
@@ -438,7 +442,7 @@
       e.preventDefault();
       if (!email.value || email.value.indexOf('@') < 0) { msg.hidden = false; msg.style.color = '#ffd9ec'; msg.textContent = 'Please enter a valid email.'; return; }
       msg.hidden = false; msg.style.color = '#fff'; msg.textContent = 'Submitting…';
-      postJSON('/api/subscribe', { email: email.value, source: 'popup' }).then(function (res) {
+      postJSON('/api/subscribe', { email: email.value, source: 'popup', company: (ov.querySelector('[name=hp_contact]') || {}).value || '' }).then(function (res) {
         msg.textContent = res.ok ? 'Thank you! You are on the list.' : (res.body.message || 'Something went wrong.');
         if (res.ok) { form.reset(); setTimeout(close, 1600); }
       }).catch(function () { msg.textContent = 'Network error. Please try again.'; });
@@ -485,6 +489,34 @@
     if (el) el.textContent = new Date().getFullYear();
   }
 
+  /* ---------- A/B test wiring (Held in Reserve) ------------------------ */
+  // Bucket is assigned at the edge (functions/_middleware.js) and stored in the
+  // `ab` cookie. Here we mirror it into GA4 and tag any signup form so the
+  // conversion carries its variant. GA events queue until consent + config, so
+  // this stays consent-safe.
+  function wireAB() {
+    var v = getCookie('ab');
+    if (!/^(seal|plaque)-[ab]$/.test(v || '')) return;
+    gtag('event', 'ab_impression', { ab_variant: v });
+    var badge = document.querySelector('.ab-reserve');
+    if (badge) badge.addEventListener('click', function () {
+      gtag('event', 'reserve_click', { ab_variant: v });
+    });
+    document.querySelectorAll('form').forEach(function (f) {
+      if (!f.querySelector('input[type="email"]')) return;
+      if (f.querySelector('input[name="variant"]')) return;
+      var h = document.createElement('input');
+      h.type = 'hidden'; h.name = 'variant'; h.value = v;
+      f.appendChild(h);
+    });
+    document.addEventListener('submit', function (e) {
+      var f = e.target;
+      if (f && f.querySelector && f.querySelector('input[name="variant"]')) {
+        gtag('event', 'reserve_signup', { ab_variant: v });
+      }
+    }, true);
+  }
+
   /* ---------- boot ----------------------------------------------------- */
   function boot() {
     setYear();
@@ -494,6 +526,7 @@
     wireProductEffects();
     wireReadMore();
     wireMerch();
+    wireAB();
     if (document.querySelector('.slider .swiper-container')) {
       if (document.readyState === 'complete') wireCarousels();
       else window.addEventListener('load', wireCarousels);
