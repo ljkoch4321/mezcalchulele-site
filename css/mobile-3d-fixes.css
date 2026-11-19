@@ -18,18 +18,22 @@ body.elementor-page-15, body.elementor-page-899, body.elementor-page-676 { backg
   /* ---- Día de los Muertos 2022: left and right of the hero match ----------------------------------
      The viewer paints its own column solid black (bottle3d.css) while the right column showed the
      section's floral background image, so the two halves differed. Both halves black. */
+  /* The black goes on the section; the columns stay see-through, because the render reaches sideways
+     past its own column and a painted neighbour column would cover that part of the bottle. */
   body.elementor-page-676 .elementor-element-1e7dc6e { background-image: none !important; background-color: #000 !important; }
-  body.elementor-page-676 .elementor-element-d6996a7,
-  body.elementor-page-676 .elementor-element-d6996a7 > .elementor-widget-wrap { background: #000 !important; }
 
   /* ---- Guelaguetza 2022 -------------------------------------------------------------------------- */
   /* The hero was pulled up 226px under the header, which put the stamp behind the logo. Start it below
      the header like the Día de los Muertos page. */
   body.elementor-page-899 .elementor-element-5e98f9af { margin-top: 0 !important; }
   body.elementor-page-899 .elementor-element-a8b1ec6 { padding-top: 10px !important; }
-  /* Same black on both halves (the columns carried the floral image, the viewer's column is forced black). */
-  body.elementor-page-899 .elementor-element-74c3bf6 > .elementor-widget-wrap,
-  body.elementor-page-899 .elementor-element-63a10da > .elementor-widget-wrap { background: #000 !important; box-shadow: none !important; }
+  /* Same black on both halves (the columns carried the floral image, the viewer's column was forced black). */
+  body.elementor-page-899 .elementor-element-a8b1ec6 { background-color: #000 !important; }
+  /* (.elementor-899 .elementor-element… prefix: the page's own mobile rule paints these black with !important) */
+  body.elementor-page-899 .elementor-899 .elementor-element.elementor-element-74c3bf6,
+  body.elementor-page-899 .elementor-899 .elementor-element.elementor-element-74c3bf6 .elementor-widget-wrap,
+  body.elementor-page-899 .elementor-899 .elementor-element.elementor-element-63a10da,
+  body.elementor-page-899 .elementor-899 .elementor-element.elementor-element-63a10da .elementor-widget-wrap { background: transparent !important; box-shadow: none !important; }
   /* Room under the bottle: the render reaches past its box and the "Drag to turn" controls sit below it,
      so the zigzag border and the next panel start after both instead of cutting across the bottle's base. */
   body.elementor-page-899 .elementor-element-20f8de1 { margin-bottom: 132px !important; }
