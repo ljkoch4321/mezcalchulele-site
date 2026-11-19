@@ -1,0 +1,37 @@
+/* Mobile fixes for the pages that carry the 3D bottle viewer (/bottle3d/).
+   Linked after bottle3d.css on: home (elementor-page-15), Guelaguetza 2022 (899), Día de los Muertos 2022 (676).
+   The viewer sizes and places its render from the host box ([data-bottle3d]) when it starts, so the boxes are
+   sized here, in the <head>, before the viewer script runs. */
+
+/* No white bands in iOS Safari: it tints the status-bar / toolbar areas and the overscroll area with the page
+   background, which was white. */
+html:has(body.elementor-page-15), html:has(body.elementor-page-899), html:has(body.elementor-page-676),
+body.elementor-page-15, body.elementor-page-899, body.elementor-page-676 { background-color: #000; }
+
+@media (max-width: 767px) {
+
+  /* ---- Homepage: smaller bottle, kept clear of the logo ------------------------------------------- */
+  body.elementor-page-15 .elementor-element-1ce57f8 img { width: 168px !important; }
+  /* lift it so the "Drag to turn" controls under the bottle stay on screen */
+  body.elementor-page-15 .elementor-element-6298ffe > .elementor-element-populated { padding-bottom: 135px !important; }
+
+  /* ---- Día de los Muertos 2022: left and right of the hero match ----------------------------------
+     The viewer paints its own column solid black (bottle3d.css) while the right column showed the
+     section's floral background image, so the two halves differed. Both halves black. */
+  body.elementor-page-676 .elementor-element-1e7dc6e { background-image: none !important; background-color: #000 !important; }
+  body.elementor-page-676 .elementor-element-d6996a7,
+  body.elementor-page-676 .elementor-element-d6996a7 > .elementor-widget-wrap { background: #000 !important; }
+
+  /* ---- Guelaguetza 2022 -------------------------------------------------------------------------- */
+  /* The hero was pulled up 226px under the header, which put the stamp behind the logo. Start it below
+     the header like the Día de los Muertos page. */
+  body.elementor-page-899 .elementor-element-5e98f9af { margin-top: 0 !important; }
+  body.elementor-page-899 .elementor-element-a8b1ec6 { padding-top: 10px !important; }
+  /* Same black on both halves (the columns carried the floral image, the viewer's column is forced black). */
+  body.elementor-page-899 .elementor-element-74c3bf6 > .elementor-widget-wrap,
+  body.elementor-page-899 .elementor-element-63a10da > .elementor-widget-wrap { background: #000 !important; box-shadow: none !important; }
+  /* Room under the bottle: the render reaches past its box and the "Drag to turn" controls sit below it,
+     so the zigzag border and the next panel start after both instead of cutting across the bottle's base. */
+  body.elementor-page-899 .elementor-element-20f8de1 { margin-bottom: 132px !important; }
+  body.elementor-page-899 .elementor-element-d9c17dc { margin-top: 0 !important; }
+}
