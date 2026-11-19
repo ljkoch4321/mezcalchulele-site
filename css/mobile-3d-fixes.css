@@ -21,6 +21,10 @@ body.elementor-page-15, body.elementor-page-899, body.elementor-page-676 { backg
   /* The black goes on the section; the columns stay see-through, because the render reaches sideways
      past its own column and a painted neighbour column would cover that part of the bottle. */
   body.elementor-page-676 .elementor-element-1e7dc6e { background-image: none !important; background-color: #000 !important; }
+  /* style.css fills the strip behind the header and the zigzag edge with #0d0d0f to match the old floral hero:
+     match them to the black hero so the header doesn't read as a grey band. */
+  body.elementor-page-676 .elementor-element-1e7dc6e::before { background: #000 !important; }
+  body.elementor-page-676 .elementor-element-9e1adc5 > .elementor-shape-top .elementor-shape-fill { fill: #000 !important; }
 
   /* ---- Guelaguetza 2022 -------------------------------------------------------------------------- */
   /* The hero was pulled up 226px under the header, which put the stamp behind the logo. Start it below
