@@ -10,10 +10,16 @@ body.elementor-page-15, body.elementor-page-899, body.elementor-page-676 { backg
 
 @media (max-width: 767px) {
 
-  /* ---- Homepage: smaller bottle, kept clear of the logo ------------------------------------------- */
-  body.elementor-page-15 .elementor-element-1ce57f8 img { width: 168px !important; }
+  /* ---- Homepage: bottle sized from the screen height, kept clear of the logo ------------------------
+     The hero is 100svh tall and the bottle stands on its bottom edge. On iOS 26 Safari 100svh is only ~600px,
+     so a fixed-width bottle rose into the logo. Size it from the height instead: the render reaches ~12.5% of
+     its box above and below the box, then 10px + ~67px of "Drag to turn" controls follow, and the stack must
+     fit between the logo (~110px) and the bottom. Box height = 2.07 x width (bottle picture is 386x800). */
+  body.elementor-page-15 .elementor-element-1ce57f8 img {
+    width: clamp(120px, calc((100svh - 215px) * 0.386), 168px) !important; height: auto !important;
+  }
   /* lift it so the "Drag to turn" controls under the bottle stay on screen */
-  body.elementor-page-15 .elementor-element-6298ffe > .elementor-element-populated { padding-bottom: 135px !important; }
+  body.elementor-page-15 .elementor-element-6298ffe > .elementor-element-populated { padding-bottom: 128px !important; }
 
   /* ---- Día de los Muertos 2022: left and right of the hero match ----------------------------------
      The viewer paints its own column solid black (bottle3d.css) while the right column showed the
@@ -25,11 +31,25 @@ body.elementor-page-15, body.elementor-page-899, body.elementor-page-676 { backg
      match them to the black hero so the header doesn't read as a grey band. */
   body.elementor-page-676 .elementor-element-1e7dc6e::before { background: #000 !important; }
   body.elementor-page-676 .elementor-element-9e1adc5 > .elementor-shape-top .elementor-shape-fill { fill: #000 !important; }
+  /* Less black above the bottle and stamp: the header box is 176px tall but the logo ends at ~102px, so the
+     hero slides up under the empty part of it; the stamp column stacks from the top instead of the bottom. */
+  body.elementor-page-676 .elementor-element-1e7dc6e { margin-top: -60px !important; }
+  body.elementor-page-676 .elementor-element-9f82be5 > .elementor-widget-wrap { padding-top: 20px !important; }
+  body.elementor-page-676 .elementor-element.elementor-element-d6996a7[data-element_type="column"] > .elementor-widget-wrap.elementor-element-populated {
+    align-content: flex-start !important; align-items: flex-start !important;
+  }
 
   /* ---- Guelaguetza 2022 -------------------------------------------------------------------------- */
-  /* The hero was pulled up 226px under the header, which put the stamp behind the logo. Start it below
-     the header like the Día de los Muertos page. */
-  body.elementor-page-899 .elementor-element-5e98f9af { margin-top: 0 !important; }
+  /* The hero was pulled up 226px under the header, which put the stamp behind the logo. Now it slides up
+     only under the empty lower part of the header (the logo ends at ~102px of its 176px), and both columns
+     stack from the top: they were bottom-aligned, so any extra height (iPhone text wrapping) became black
+     space above the bottle and stamp. */
+  body.elementor-page-899 .elementor-element-5e98f9af { margin-top: -60px !important; }
+  body.elementor-page-899 .elementor-element.elementor-element-74c3bf6[data-element_type="column"] > .elementor-widget-wrap.elementor-element-populated,
+  body.elementor-page-899 .elementor-element.elementor-element-63a10da[data-element_type="column"] > .elementor-widget-wrap.elementor-element-populated {
+    align-content: flex-start !important; align-items: flex-start !important;
+  }
+  body.elementor-page-899 .elementor-element-74c3bf6 > .elementor-widget-wrap { padding-top: 30px !important; }
   body.elementor-page-899 .elementor-element-a8b1ec6 { padding-top: 10px !important; }
   /* Same black on both halves (the columns carried the floral image, the viewer's column was forced black). */
   body.elementor-page-899 .elementor-element-a8b1ec6 { background-color: #000 !important; }
