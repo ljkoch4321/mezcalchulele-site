@@ -125,6 +125,76 @@ h1,h2{margin:0}
 .p-ofr .cover .big{-webkit-text-stroke:1px rgba(224,160,48,.7)}
 .p-sil{--gold:#a9a498;--wine:#AF0061}.p-sil .scene h2{font-weight:600;letter-spacing:.04em}
 .p-sil .cover .big{-webkit-text-stroke:1px rgba(236,231,221,.35)}
+
+/* ===== switcher, menu, about ===== */
+.sw .nm{background:var(--bone);color:var(--ink);max-width:46vw;overflow:hidden;text-overflow:ellipsis}.sw .ar{color:var(--dim);padding:7px 11px}
+.menu,.about{position:fixed;inset:0;z-index:110;background:#0a0a0bf7;overflow:auto;padding:calc(64px + env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) 40px max(18px,env(safe-area-inset-left,0px));display:none}
+.menu.on,.about.on{display:block}
+.menu h2,.about h2{margin:0 0 4px;font-size:30px;text-transform:uppercase;letter-spacing:.04em}
+.menu .st{margin:22px 0 8px;color:var(--gold);letter-spacing:.24em;text-transform:uppercase;font:600 12px var(--fd)}
+.menu .g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:960px}
+.menu button.it{text-align:left;border:1px solid var(--line);background:#121215;border-radius:6px;padding:12px 14px;cursor:pointer;display:flex;flex-direction:column;gap:2px;color:var(--bone)}
+.menu button.it b{font:600 17px var(--fd);text-transform:uppercase;letter-spacing:.04em}.menu button.it span{font-size:12.5px;color:var(--dim);line-height:1.35}
+.menu button.it[aria-current=true]{border-color:var(--gold)}
+.x{position:fixed;z-index:111;top:calc(12px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));background:var(--bone);color:var(--ink);border:0;border-radius:999px;padding:8px 14px;font:600 12px var(--fd);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:none}
+.menu.on~.x,.about.on~.x{display:block}
+.byline{font:600 11px var(--fd);letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.about .ab{max-width:62ch;color:#d9d3c7;font-size:17px}.about dl{max-width:720px;margin:14px 0 0;display:grid;gap:14px}.about dt{color:var(--gold);font:600 11.5px var(--fd);letter-spacing:.2em;text-transform:uppercase}.about dd{margin:2px 0 0;color:#d9d3c7}
+.lnk{background:none;border:0;padding:0;cursor:pointer;align-self:flex-start;font:600 11px var(--fd);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:underline;text-underline-offset:4px}
+/* ===== stage devices ===== */
+.ring,.ring2{position:absolute;z-index:1;border-radius:50%;aspect-ratio:1;display:none;pointer-events:none}
+.ring{width:min(78%,520px);border:1px solid rgba(184,145,90,.55);transform:rotate(var(--rot))}.ring2{width:min(92%,610px);border:1px dashed rgba(175,0,97,.6);transform:rotate(calc(var(--rot)*-.5))}
+.ring::after,.ring2::after{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--gold)}.ring2::after{background:var(--wine)}
+[data-kind=capsule] .ring,[data-kind=capsule] .ring2{display:block}
+.ct{position:absolute;z-index:31;left:max(24px,env(safe-area-inset-left,0px));bottom:28px;display:none;pointer-events:none}
+.ct .l{font:600 11px var(--fd);letter-spacing:.24em;color:var(--gold);text-transform:uppercase}.ct .v{font:600 clamp(40px,4.6vw,68px)/1 var(--fd)}.ct .v small{font-size:.3em;color:var(--gold);margin:0 .6em 0 .15em}
+.ct .t{height:2px;width:min(240px,60%);background:#2a2a30;margin-top:8px;position:relative}.ct .t i{position:absolute;left:0;top:0;height:2px;background:var(--gold);width:0}
+[data-kind=age] .ct{display:block}
+.map{position:absolute;z-index:31;left:max(22px,env(safe-area-inset-left,0px));right:22px;bottom:24px;display:none;pointer-events:none}.map svg{width:100%;height:auto;display:block;overflow:visible}
+.map .base{stroke:#3a3a40;stroke-width:1.5;fill:none;stroke-dasharray:3 5}.map .live{stroke:var(--gold);stroke-width:2;fill:none}.map .pin{fill:#0a0a0b;stroke:var(--wine);stroke-width:2}.map .pin.on{fill:var(--gold);stroke:var(--gold)}.map .me{fill:var(--bone)}.map .lbl{font:600 8.5px var(--fd);letter-spacing:.14em;fill:#9a958b;text-transform:uppercase}
+[data-kind=map] .map{display:block}[data-kind=map] .b3d{height:min(58vh,620px);margin-top:-9vh}
+.tick{position:fixed;z-index:70;left:calc(40% + 24px);right:max(24px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:none;pointer-events:none}
+.tick .tr{height:3px;background:#2a2a30;position:relative}.tick .tr i{position:absolute;left:0;top:0;height:3px;background:var(--gold);width:calc(var(--p)*100%)}
+.tick .lb{display:flex;justify-content:space-between;margin-top:6px;font:600 10px var(--fd);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}.tick .lb span.on{color:var(--gold)}
+[data-kind=ticker] .tick{display:block}
+.pp{position:fixed;z-index:50;left:40%;right:0;top:0;height:14px;display:none;background:repeating-linear-gradient(90deg,#e0a030 0 14px,transparent 14px 20px);opacity:.85;clip-path:polygon(0 0,100% 0,100% 40%,95% 100%,90% 40%,85% 100%,80% 40%,75% 100%,70% 40%,65% 100%,60% 40%,55% 100%,50% 40%,45% 100%,40% 40%,35% 100%,30% 40%,25% 100%,20% 40%,15% 100%,10% 40%,5% 100%,0 40%);animation:sway 6s ease-in-out infinite}
+@keyframes sway{50%{transform:translateX(3px)}}[data-kind=ofrenda]~.pp{display:block}
+.specs{display:none;border-collapse:collapse;width:100%;max-width:520px;font-size:14px}.specs td{border-bottom:1px solid var(--line);padding:7px 0}.specs td:first-child{color:var(--dim);font:600 11.5px var(--fd);letter-spacing:.16em;text-transform:uppercase;width:38%}
+.sig{display:none}
+/* ===== per-pitch art direction ===== */
+/* 1 ledger */
+[data-kind=ledger] .tx{border-top:1px solid var(--gold);padding-top:22px}[data-kind=ledger] .tx::before{content:attr(data-n);font:600 clamp(60px,6vw,96px)/.9 var(--fd);color:var(--gold);opacity:.9}
+[data-kind=ledger] .chart .tx::before,[data-kind=ledger] .gallery .tx::before{content:""}
+/* 2 lot */
+[data-kind=lot] .stats,[data-kind=lot] .chips{display:none}[data-kind=lot] .scene h2{font-size:clamp(46px,7.6vw,118px);text-transform:none;line-height:.96}[data-kind=lot] .body{color:var(--dim);font-size:15px}
+/* 3 letter */
+[data-kind=letter] .tx{background:#111113f2;border:1px solid var(--line);padding:clamp(22px,3vw,44px)}[data-kind=letter] .scene h2{font-family:Georgia,serif;font-weight:400;text-transform:none;font-size:clamp(30px,3.8vw,56px)}
+[data-kind=letter] .body{font-family:Georgia,serif;font-size:clamp(17px,1.5vw,21px);line-height:1.7;color:#e3ddd0}[data-kind=letter] .stats,[data-kind=letter] .chips{display:none}
+[data-kind=letter] .invite .tx::after{content:"— Chulele";font:italic 30px Georgia,serif;color:var(--gold)}
+/* 4 archive */
+[data-kind=archive] .tx{border:1px dashed #6a5f48;background:#101012ee;padding:clamp(20px,2.6vw,38px)}[data-kind=archive] .tx::before{content:attr(data-ref);font:600 11px var(--fd);letter-spacing:.24em;color:var(--gold)}
+[data-kind=archive] .scene h2{font-size:clamp(34px,4.6vw,70px)}
+/* 6 plate */
+[data-kind=plate] .tx{border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:6px;padding:clamp(22px,3vw,44px);background:rgba(10,10,11,.7);margin:8px}[data-kind=plate] .body{font-family:Georgia,serif;font-style:italic}[data-kind=plate] .stats{display:none}
+[data-kind=plate] .scene h2{font-size:clamp(34px,4.4vw,68px)}
+/* 7 ofrenda */
+[data-kind=ofrenda] .scene h2{text-transform:none}[data-kind=ofrenda] .cover .big{-webkit-text-stroke:1px rgba(224,160,48,.7)}
+/* 10 spec */
+[data-kind=spec] .specs{display:table}[data-kind=spec] .stats,[data-kind=spec] .chips{display:none}[data-kind=spec] .scene h2{font-size:clamp(34px,4.4vw,64px)}[data-kind=spec] .body{max-width:44ch}
+/* 12 gold */
+[data-kind=gold] .stats,[data-kind=gold] .chips,[data-kind=gold] .body.dim{display:none}[data-kind=gold] .tx::before,[data-kind=gold] .tx::after{content:"";display:block;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}[data-kind=gold] .tx{gap:14px;max-width:560px}
+[data-kind=gold] .scene h2{font-size:clamp(34px,4.4vw,66px);letter-spacing:.06em}
+/* 13 quiet */
+[data-kind=quiet]{--gold:#a9a498}[data-kind=quiet] .ph img{filter:grayscale(.9) contrast(1.05) brightness(.5)}[data-kind=quiet] .stats,[data-kind=quiet] .chips{display:none}[data-kind=quiet] .scene h2{text-transform:none;font-size:clamp(34px,4.6vw,66px)}[data-kind=quiet] .tx{max-width:520px}
+/* 14 age */
+[data-kind=age] .stats{display:none}
+/* 15 blackroom */
+[data-kind=blackroom]{--ink:#000}[data-kind=blackroom],[data-kind=blackroom] body{background:#000}[data-kind=blackroom] .ph img{filter:brightness(.3) contrast(1.25) saturate(.6)}[data-kind=blackroom] .stats,[data-kind=blackroom] .chips{display:none}
+[data-kind=blackroom] .stage{background:radial-gradient(circle at 50% 50%,rgba(var(--gr),var(--gg),var(--gb),var(--ga)),transparent 54%)}[data-kind=blackroom] .scene h2{text-transform:none}[data-kind=blackroom] .body{color:#a9a498}
+[data-kind=quiet] .cover .big,[data-kind=blackroom] .cover .big{-webkit-text-stroke:1px rgba(236,231,221,.3)}
+[data-kind] .cask .tx{max-width:400px}
+/* shared: photo scenes use their own grade; mono kinds */
+
 /* phone */
 @media(max-width:899px){
  .stage{width:100%;height:var(--top);bottom:auto;z-index:60;background:radial-gradient(ellipse 80% 72% at 50% 60%,rgba(var(--gr),var(--gg),var(--gb),var(--ga)),transparent 72%),var(--ink);box-shadow:0 18px 26px -12px var(--ink);padding-top:calc(46px + env(safe-area-inset-top,0px))}
@@ -157,18 +227,24 @@ h1,h2{margin:0}
  .num5{font-size:78vw;right:-8vw;top:30%}
  .film .tx{bottom:0}.play{width:96px}
  .notes{gap:14px 26px}.notes li{font-size:15px}
- .hd{padding-inline:12px}.sw button{padding:6px 8px;font-size:10px;letter-spacing:.08em}#studio{display:none}
+ .hd{padding-inline:12px}.sw button{padding:6px 8px;font-size:10px;letter-spacing:.08em}.sw .nm{max-width:40vw}#studio{display:none}
+ .menu .g{grid-template-columns:minmax(0,1fr)}.ring{width:62vw}.ring2{width:74vw}.ct{left:auto;right:14px;bottom:8px;text-align:right}.ct .v{font-size:28px}.ct .t{margin-left:auto;width:110px}
+ .map{left:auto;width:46%;right:10px;bottom:8px}[data-kind=map] .b3d{height:calc(var(--top) - 56px - env(safe-area-inset-top,0px));margin-top:0;margin-left:-30%}.tick{left:max(16px,env(safe-area-inset-left,0px))}.pp{left:0;top:calc(var(--top) + 46px)}
+ [data-kind=letter] .tx,[data-kind=archive] .tx,[data-kind=plate] .tx{padding:16px}[data-kind=ledger] .tx::before{font-size:34px}[data-kind=lot] .scene h2{font-size:clamp(34px,11vw,56px)}[data-kind=spec] .specs{font-size:12.5px}[data-kind=spec] .specs td{padding:4px 0}[data-kind=plate] .tx{margin:6px}
 }
 @media(prefers-reduced-motion:reduce){.grain,.cue::after,.play svg,.dial .spin{animation:none}.w>span{transform:none!important}}
 </style></head><body>
 <div id="pbar"></div><div class="grain"></div><canvas id="fx"></canvas><div class="cur" id="cur"></div>
-<header class="hd"><img src="/assets/mockup/chulele-crest-white.png" alt="Chulele"><span id="studio"></span><div class="sw" role="group" aria-label="Art direction"><button data-k="long" aria-pressed="true">The Long Rest</button><button data-k="ofrenda" aria-pressed="false">Ofrenda</button><button data-k="silence" aria-pressed="false">Silence in Oak</button></div></header>
+<header class="hd"><img src="/assets/mockup/chulele-crest-white.png" alt="Chulele"><span id="studio"></span><div class="sw" role="group" aria-label="Pitch"><button class="ar" id="prev" aria-label="Previous pitch">‹</button><button class="nm" id="nm" aria-haspopup="dialog">Pitches</button><button class="ar" id="next" aria-label="Next pitch">›</button></div></header>
+<div class="tick" id="tick" aria-hidden="true"><div class="tr"><i></i></div><div class="lb" id="tlb"></div></div><div class="pp" aria-hidden="true"></div>
 <div id="app" class="app">
- <div class="stage" id="stage"><div class="b3d" id="bottle" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="/assets/mockup/bottle-ddlm-dark-nomedal.png" width="352" height="898" alt="Chulele bottle (Día de los Muertos Joven 3D model, stand-in for the Añejo)"></div></div>
+ <div class="stage" id="stage"><div class="ring2"></div><div class="ring"></div><div class="b3d" id="bottle" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="/assets/mockup/bottle-ddlm-dark-nomedal.png" width="352" height="898" alt="Chulele bottle (Día de los Muertos Joven 3D model, stand-in for the Añejo)"></div><div class="ct" id="ct"><div class="l">Time in oak</div><div class="v" id="ctv">0<small>yr</small>0<small>mo</small></div><div class="t"><i id="ctb"></i></div></div>
+ <div class="map" id="map"><svg viewBox="0 0 220 120" aria-hidden="true"><path id="route" class="base" d="M10 104 C40 20 80 112 118 62 S178 24 210 14"/><path id="live" class="live" d="M10 104 C40 20 80 112 118 62 S178 24 210 14"/><g id="pins"></g><circle id="me" class="me" r="4.5"/><text class="lbl" x="10" y="118">Field</text><text class="lbl" x="100" y="80">Palenque</text><text class="lbl" x="172" y="8">Cellar</text></svg></div></div>
  <main id="scenes"></main>
 </div>
+<div class="menu" id="menu" role="dialog" aria-label="All 15 pitches"></div><div class="about" id="about" role="dialog" aria-label="About this pitch"></div><button class="x" id="x">Close</button>
 <div class="vm" id="vm" hidden role="dialog" aria-modal="true" aria-label="Documentary"><button data-close>Close</button><div class="fr"></div></div>
 <script src="/lab/anejo/vendor/gsap.min.js"></script><script src="/lab/anejo/vendor/ScrollTrigger.min.js"></script><script src="/lab/anejo/vendor/lenis.min.js"></script>
 <script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
-<script src="/lab/anejo/story.js?v=1" defer></script>
+<script src="/lab/anejo/concepts.js?v=3"></script><script src="/lab/anejo/story.js?v=3" defer></script>
 </body></html>
