@@ -20,6 +20,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 // time in oak (from 1 Dec 2022)
 const a0=new Date(2022,11,1),n0=new Date();let TM=(n0.getFullYear()-a0.getFullYear())*12+n0.getMonth()-a0.getMonth();if(n0.getDate()<a0.getDate())TM--;
 const TIO=Math.floor(TM/12)+" yr "+(TM%12)+" mo";
+CS.forEach(c=>{if(c.id==='plate')c.map=[0,1,2,2,3,4,5,7]});
 let C=CS[0],secs=[],dots=[],cur=-1,idx=0;
 // map
 const route=$('route'),live=$('live'),pins=$('pins'),me=$('me');
@@ -41,9 +42,9 @@ function glowFor(c,i){
 function build(){
  story.innerHTML='';rail.innerHTML='';
  C.frames.forEach((f,i)=>{
-  const sp=SPINE[i],s=document.createElement('section');s.className='ch';s.dataset.i=i;
+  const si=(C.map||[0,1,2,3,4,5,6,7])[i],sp=SPINE[si],s=document.createElement('section');s.className='ch';s.dataset.i=i;
   let h='<div class="in">';
-  h+=`<div class="num">${i===0?'No. 003':ROM[i]}</div><div class="ey">${i===0?esc(C.city)+' · Team '+C.team+' · '+esc(C.name):esc(LB[i])+' · '+esc(sp.d)}</div>`;
+  h+=`<div class="num">${i===0?'No. 003':esc(sp.d)}</div><div class="ey">${i===0?esc(C.city)+' · Team '+C.team+' · '+esc(C.name):esc(LB[si])+' · '+esc(sp.d)}</div>`;
   h+=`<h2>${esc(f.h)}</h2><p class="b">${esc(f.b)}</p>`;
   h+=`<div class="chips">${sp.chips.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`;
   h+=`<table class="specs">${sp.rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1]==='__TIO__'?TIO:r[1])}</td></tr>`).join('')}</table>`;
