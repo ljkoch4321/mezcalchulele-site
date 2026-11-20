@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0a0a0b">
+<title>Days · Chulele Añejo pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="/bottle3d/bottle3d.css?v=BQgvOZWf">
+<style>
+/* PITCH 14 · Days (Copenhagen). Idea: time is the headline. A giant day counter runs while photographs dissolve through a liquid shader. Then the counter races through the barrel years. */
+:root{--sw:30%}
+.stage{background:linear-gradient(90deg,#0a0a0b 60%,transparent)}
+.stage::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 52%,rgba(175,0,97,.28),transparent 70%)}
+.wrap{position:relative;height:1000vh}.pin{position:sticky;top:0;height:100vh;overflow:hidden}
+canvas#gl{position:absolute;left:var(--sw);top:0;width:calc(100% - var(--sw));height:100%;display:block}
+.shade{position:absolute;left:var(--sw);top:0;right:0;bottom:0;background:linear-gradient(90deg,#0a0a0b,rgba(10,10,11,.2) 25%,rgba(10,10,11,.1) 70%,rgba(10,10,11,.55)),linear-gradient(0deg,#0a0a0b,transparent 40%)}
+.num{position:absolute;left:calc(var(--sw) + 3vw);bottom:20vh;font:700 clamp(120px,20vw,340px)/.78 var(--fd);letter-spacing:-.01em;color:var(--bone);mix-blend-mode:difference;white-space:nowrap}
+.num small{font-size:.16em;letter-spacing:.3em;display:block;color:var(--gold);margin-bottom:.6em;mix-blend-mode:normal}
+.say{position:absolute;left:calc(var(--sw) + 3vw);bottom:7vh;max-width:min(540px,50vw)}
+.say .d{font:600 12px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}.say h2{font-size:clamp(30px,3.4vw,54px);line-height:.98;text-transform:uppercase;margin:4px 0 6px}.say p{margin:0;font-size:clamp(14px,1.2vw,17px);color:#d9d3c7}
+.bw{position:absolute;right:2vw;top:50%;width:min(44vh,26vw);aspect-ratio:1;transform:translateY(-50%);opacity:0;pointer-events:none}.bw canvas{width:100%;height:100%;display:block}
+.fin{position:absolute;right:max(28px,4vw);bottom:9vh;display:flex;flex-direction:column;gap:12px;align-items:flex-start;opacity:0;pointer-events:none}
+@media(max-width:899px){:root{--band:37svh}.pin{height:100svh}canvas#gl,.shade{left:0;top:var(--band);height:calc(100% - var(--band))}.num{left:14px;bottom:23vh;font-size:30vw}.say{left:14px;right:14px;bottom:2vh;max-width:none}.say h2{font-size:28px}.say p{font-size:13px}.bw{right:2vw;top:calc(var(--band) + 24%);width:44vw}.fin{right:14px;bottom:5vh}.wrap{height:900vh}}
+</style></head><body data-id="days">
+<div class="stage"><div class="b3d" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="../img/bottle.webp" width="352" height="898" alt="Chulele bottle (3D model stand-in)"></div></div>
+<div class="wrap" id="wrap"><div class="pin"><canvas id="gl"></canvas><div class="shade"></div>
+ <div class="num" id="num"><small id="ns">DAY</small><span id="nv">000</span></div>
+ <div class="say" id="say"></div>
+ <div class="bw" id="bw"><canvas id="bc"></canvas></div>
+ <div class="fin" id="fin"><div class="lux">Premium luxury spirit · Premium luxury brand</div><a class="cta" href="#" id="res">Join the reserve list →</a><a class="lux" style="text-decoration:underline" data-film href="https://vimeo.com/883190665" target="_blank" rel="noopener">Watch the documentary</a></div>
+</div></div>
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script><script src="../vendor/three.min.js"></script>
+<script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
+<script src="../common.js"></script><script src="../fx.js"></script>
+<script>
+document.getElementById('res').href=C.RES;
+// scenes: day number shown, photo, copy. Days count from the harvest, 25 Oct 2022.
+const SC=[{day:0,img:'harvest',d:'25 Oct 2022',h:'Day zero',p:'About 150 espadín agave, cut by hand in the fields of Benito Ruiz and his son Francisco.'},
+{day:3,img:'smoke',d:'28 Oct',h:'The fire is lit',p:'A pit oven, volcanic stone, four days of slow heat.'},
+{day:7,img:'fibre',d:'1 Nov',h:'The tahona',p:'Israel and Isabella the horse. About four hours.'},
+{day:15,img:'flowers',d:'9 Nov',h:'Fermentation done',p:'Seven wild days in the cold, with marigold on every altar nearby.'},
+{day:29,img:'juice',d:'23 Nov',h:'The second still',p:'Above 53% ABV off the still. The spirit is made.'},
+{day:37,img:'altar',d:'December 2022',h:'Into oak',p:'California oak, Santiago Matatlán. The counter keeps going.',barrel:1}];
+const TODAY=Math.floor((new Date()-new Date(2022,9,25))/864e5),FIVE=Math.round(5*365.25);
+const urls=SC.map(s=>`../img/${s.img}.webp`).concat(['../img/cemetery.webp']);
+const gl=FX.photoGL(document.getElementById('gl'),urls);
+const bar=FX.barrel(document.getElementById('bc'),{idle:true});
+const nv=document.getElementById('nv'),say=document.getElementById('say'),bw=document.getElementById('bw'),fin=document.getElementById('fin'),ns=document.getElementById('ns');
+let cur=-1;function copy(k){if(k===cur)return;cur=k;const s=k<SC.length?SC[k]:{d:'Today',h:'Still in the barrel',p:'Oak, vanilla, dried fruit, a whisper of smoke are what we expect. Release when the cask is ready, by invitation.'};say.style.opacity=0;setTimeout(()=>{say.innerHTML=`<div class="d">${s.d}</div><h2>${s.h}</h2><p>${s.p}</p>`;say.style.opacity=1},140);say.style.transition='opacity .25s'}
+function upd(p){const n=SC.length,seg=.62;                    // first 62% of scroll = the 37 days, then the long fast-forward
+ if(p<=seg){const k=p/seg*(n-1),i=Math.min(n-2,Math.floor(k)),t=k-i;gl&&gl.set(i,i+1,t,{dim:.95,shift:1});
+  const day=Math.round(SC[i].day+(SC[i+1].day-SC[i].day)*t);nv.textContent=String(day).padStart(3,'0');ns.textContent='DAY';copy(t>.5?i+1:i);bw.style.opacity=0;fin.style.opacity=0;fin.style.pointerEvents='none'}
+ else{const q=(p-seg)/(1-seg);gl&&gl.set(n-1,n,Math.min(1,q*1.4),{dim:Math.max(.35,.95-q*.5),shift:1});
+  const day=Math.round(37+(TODAY-37)*Math.pow(q,1.6));nv.textContent=String(day).replace(/\B(?=(\d{3})+(?!\d))/g,',');ns.textContent=q>.97?'DAYS SINCE THE HARVEST':'DAY';copy(q>.35?n:n-1);
+  bw.style.opacity=Math.min(1,q*2);bar&&(bar.age(q),bar.rot(q*6));const f=Math.max(0,(q-.8)*5);fin.style.opacity=f;fin.style.pointerEvents=f>.6?'auto':'none'}}
+if(C.RM){upd(.99)}else{ScrollTrigger.create({trigger:'#wrap',start:'top top',end:'bottom bottom',scrub:.4,onUpdate:s=>upd(s.progress)});upd(0)}
+</script></body></html>

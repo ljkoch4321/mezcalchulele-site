@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0a0a0b">
+<title>Contact Sheet · Chulele Añejo pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="/bottle3d/bottle3d.css?v=BQgvOZWf">
+<style>
+/* PITCH 4 · Contact Sheet (London). Idea: the batch is a photographer's roll. We edit it: frames are circled, noted, kept. The missing frame is the barrel. */
+:root{--sw:30%;--mono:'IBM Plex Mono',ui-monospace,monospace;--gp:#e0a030}
+.stage{background:radial-gradient(ellipse 70% 55% at 50% 52%,rgba(175,0,97,.25),transparent 70%)}
+.wrap{position:relative;height:720vh}
+.pin{position:sticky;top:0;height:100vh;margin-left:var(--sw);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2.4vw;padding:10vh 3vw 5vh 1.5vw;background:#0d0d0e}
+.strip{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-content:start;background:#050505;padding:26px 18px;border-radius:4px;border:1px solid #1d1d20}
+.strip::before,.strip::after{content:"";position:absolute;left:0;right:0;height:14px;background:repeating-linear-gradient(90deg,#0d0d0e 0 10px,transparent 10px 22px);opacity:.9}.strip::before{top:6px}.strip::after{bottom:6px}
+.fr{position:relative;aspect-ratio:3/2;overflow:hidden;background:#111}
+.fr img{width:100%;height:100%;object-fit:cover;filter:grayscale(.85) contrast(1.15) brightness(.7);transition:filter .5s,transform .5s}
+.fr b{position:absolute;left:6px;top:4px;font:500 10px var(--mono);color:#e8d9a8;letter-spacing:.1em;text-shadow:0 1px 3px #000}
+.fr.on img{filter:none;transform:scale(1.04)}
+.fr.miss{display:flex;align-items:center;justify-content:center;border:1px dashed #6a5a3a;background:repeating-linear-gradient(45deg,#101010 0 8px,#0b0b0b 8px 16px)}.fr.miss span{font:500 10px var(--mono);color:#a99560;text-align:center;padding:6px;letter-spacing:.06em}
+.mark{position:absolute;inset:0;pointer-events:none;z-index:3}.mark ellipse{fill:none;stroke:var(--gp);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(224,160,48,.5))}
+.notes{display:flex;flex-direction:column;justify-content:center;gap:16px;min-width:0}
+.loupe{position:relative;width:100%;aspect-ratio:3/2;border:6px solid #e8e2d4;box-shadow:0 20px 60px rgba(0,0,0,.7);overflow:hidden;background:#111}
+.loupe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s}
+.note{font-family:var(--mono);font-size:clamp(12px,1vw,14px);line-height:1.7;color:#d9d3c7}
+.note .no{color:var(--gp);font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:11px}
+.note h2{font:600 clamp(28px,3vw,46px)/1 var(--fd);text-transform:uppercase;margin:4px 0 8px;color:var(--bone);letter-spacing:.02em}
+.keep{display:inline-block;border:2px solid var(--gp);color:var(--gp);padding:2px 10px;font:500 11px var(--mono);letter-spacing:.2em;transform:rotate(-4deg);margin-top:6px}
+.tag{position:absolute;left:var(--sw);top:calc(8vh);padding-left:2vw;font:500 11px var(--mono);letter-spacing:.2em;color:#7a766a;z-index:5}
+.fin{display:flex;flex-direction:column;gap:12px;align-items:flex-start}.fin .cta{margin-top:4px}
+@media(max-width:899px){:root{--band:37svh}.pin{margin-left:0;grid-template-columns:1fr;gap:10px;padding:calc(var(--band) + 8px) 12px 10px;height:100svh}.strip{grid-template-columns:repeat(5,1fr);gap:5px;padding:20px 8px}.note{font-size:11.5px;line-height:1.5}.note h2{font-size:26px;margin:2px 0 4px}.loupe{display:none}.tag{display:none}.wrap{height:640vh}.fr b{font-size:8px}}
+</style></head><body data-id="sheet">
+<div class="stage"><div class="b3d" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="../img/bottle.webp" width="352" height="898" alt="Chulele bottle (3D model stand-in)"></div></div>
+<div class="tag">ROLL 003 · CHULELE · OAXACA · OCT–NOV 2022 · EDITING</div>
+<div class="wrap" id="wrap"><div class="pin">
+ <div class="strip" id="strip"><svg class="mark" id="mark" aria-hidden="true"><ellipse id="ell" rx="10" ry="10"/></svg></div>
+ <div class="notes"><div class="loupe"><img id="lp" src="../img/harvest.webp" alt=""><canvas id="bc" style="position:absolute;inset:0;width:100%;height:100%;display:none;background:radial-gradient(ellipse at 50% 55%,#2a1a10,#0a0a0b)"></canvas></div><div class="note" id="note"></div></div>
+</div></div>
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script>
+<script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
+<script src="../vendor/three.min.js"></script><script src="../common.js"></script><script src="../fx.js"></script>
+<script>(()=>{
+const F=[
+['harvest','Frame 01 · 25 Oct','The first cut','About 150 espadín agave, cut by hand in the fields of Benito Ruiz and his son Francisco, from just before 8 am. High 84°F.','KEEP'],
+['field','Frame 02 · 25 Oct','The field','Eighty-four degrees by afternoon. The crew finishes before the full heat.','KEEP'],
+['smoke','Frame 03 · 28–31 Oct','The oven','A pit oven lit around 6 am, covered in volcanic rock. Four days of cooking. Opened on the 31st at a night low of 46°F.','KEEP'],
+['pit','Frame 04 · 31 Oct','Soil off','The caramel-brown agave is revealed. Shovel, soil, steam.','KEEP'],
+['fibre','Frame 05 · 1 Nov','The tahona','Israel and Isabella the horse crush the cooked agave for about four hours.','KEEP'],
+['flowers','Frame 06 · 2–9 Nov','Marigold in the air','Seven days of wild fermentation. Cempasúchil and cockscomb on every altar nearby. The yeast takes it all in.','KEEP'],
+['juice','Frame 07 · 9 &amp; 23 Nov','Copper, twice','Clay-sealed stills, wood fire. Luis Jímenez tests the vats. Above 53% ABV off the second distillation.','KEEP'],
+['altar','Frame 08 · the week','The ofrenda','The dead are the guests of honor. This spirit is made in the middle of their return.','KEEP'],
+['cemetery','Frame 09 · the week','The panteón','Candles, all night. Oaxaca after three years of waiting.','KEEP'],
+['maestro','Frame 10 · the maker','Tomás Mendéz','Maestro Mezcalero. Santiago Matatlán, 10,175 residents, the center of the mezcal world.','KEEP'],
+[null,'Frame 11 · December 2022','The missing frame','California oak. Set apart and laid in the barrel in December 2022. There is no photograph yet, so this is a 3D stand-in. Barrel and cellar photography needed.','MISSING']];
+const strip=document.getElementById('strip'),frs=F.map((f,i)=>{const d=document.createElement('div');d.className='fr'+(f[0]?'':' miss');d.innerHTML=f[0]?`<img src="../img/${f[0]}.webp" alt=""><b>${String(i+1).padStart(2,'0')}</b>`:`<span>11<br>NO IMAGE<br>BARREL / CELLAR</span>`;strip.append(d);return d});
+// two final frames: reserve
+const end=document.createElement('div');end.className='fr miss';end.innerHTML='<span>12<br>RESERVED<br>YOU</span>';strip.append(end);
+const note=document.getElementById('note'),lp=document.getElementById('lp'),ell=document.getElementById('ell'),mark=document.getElementById('mark');
+const bar=FX.barrel(document.getElementById('bc'),{idle:true});const bcv=document.getElementById('bc');
+let cur=-1;
+function show(k){if(k===cur)return;cur=k;bcv.style.display=(k===10)?'block':'none';lp.style.visibility=(k===10)?'hidden':'visible';frs.forEach((f,i)=>f.classList.toggle('on',i===k));end.classList.toggle('on',k===F.length);
+ const sr=strip.getBoundingClientRect(),tgt=(k<F.length?frs[k]:end).getBoundingClientRect();
+ const cx=tgt.left-sr.left+tgt.width/2,cy=tgt.top-sr.top+tgt.height/2;
+ gsap.to(ell,{attr:{cx,cy,rx:tgt.width*.6,ry:tgt.height*.62},duration:.5,ease:'power3.out'});
+ if(k<F.length){const f=F[k];if(f[0]){lp.style.opacity=1;lp.src=`../img/${f[0]}.webp`}else{lp.style.opacity=1}
+  note.innerHTML=`<div class="no">${f[1]}</div><h2>${f[2]}</h2><div>${f[3]}</div><span class="keep" style="${f[4]==='MISSING'?'color:#e07070;border-color:#e07070':''}">${f[4]}</span>`}
+ else{lp.style.opacity=.15;note.innerHTML=`<div class="fin"><div class="no">Frame 12 · now</div><h2>Held in reserve</h2><div>Five years in oak. Release once, by invitation. Suggested retail $249.</div><a class="cta" href="${C.RES}">Join the reserve list →</a><a href="https://vimeo.com/883190665" data-film target="_blank" rel="noopener" class="lux" style="text-decoration:underline">Watch the documentary</a><div class="lux" style="margin-top:6px">Premium luxury spirit · Premium luxury brand</div></div>`}}
+ScrollTrigger.create({trigger:'#wrap',start:'top top',end:'bottom bottom',onUpdate:s=>show(Math.min(F.length,Math.floor(s.progress*(F.length+1)*.9999)))});
+addEventListener('load',()=>{mark.setAttribute('width',strip.clientWidth);mark.setAttribute('height',strip.clientHeight);show(0)});addEventListener('resize',()=>{cur=-1;show(0)});
+})();</script></body></html>

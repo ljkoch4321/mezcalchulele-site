@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0a0a0b">
+<title>Ofrenda Altar · Chulele Añejo pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="/bottle3d/bottle3d.css?v=BQgvOZWf">
+<style>
+/* PITCH 7 · Ofrenda Altar (Mexico City). Idea: build an ofrenda. Each production step is an offering placed on a tiered altar, and its candle is lit. */
+:root{--sw:28%}
+.stage{background:radial-gradient(ellipse 70% 55% at 50% 52%,rgba(175,0,97,.3),transparent 70%)}
+body{background:#0b0509}
+.wrap{position:relative;height:900vh}.pin{position:sticky;top:0;height:100vh;margin-left:var(--sw);overflow:hidden;background:radial-gradient(ellipse at 50% 70%,#2a0a1e 0%,#12060f 55%,#080307)}
+svg.sc{position:absolute;inset:0;width:100%;height:100%}
+.ban g{transform-origin:50% 0;animation:sw 4s ease-in-out infinite}.ban g:nth-child(odd){animation-delay:-1.3s}.ban g:nth-child(3n){animation-delay:-2.4s}@keyframes sw{50%{transform:rotate(3deg)}}
+.fl{animation:fk .18s ease-in-out infinite alternate;transform-origin:50% 100%}@keyframes fk{from{transform:scale(1,1) skewX(-2deg)}to{transform:scale(.92,1.1) skewX(2deg)}}
+.fr{opacity:0;transform-box:fill-box;transform-origin:50% 100%}
+.say{position:absolute;left:3vw;bottom:5vh;max-width:min(330px,30vw);z-index:5;background:linear-gradient(90deg,rgba(8,3,7,.85),rgba(8,3,7,.0));padding:10px 20px 10px 0}
+.say .d{font:600 12px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:#e0a030}.say h2{font-size:clamp(30px,3.8vw,60px);line-height:.95;text-transform:uppercase;margin:6px 0 8px}.say p{margin:0 0 10px;font-size:clamp(13px,1.15vw,17px);color:#e2d6cf}
+.ctas{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.fx{position:absolute;inset:0;pointer-events:none;z-index:4}
+@media(max-width:899px){:root{--band:37svh}.pin{margin-left:0;margin-top:var(--band);height:calc(100svh - var(--band))}.wrap{height:800vh}svg.sc{height:62%}.say{left:14px;right:14px;max-width:none;bottom:2vh;padding:0}.say h2{font-size:28px}.say p{font-size:12.5px;margin:0 0 6px}}
+</style></head><body data-id="altar">
+<div class="stage"><div class="b3d" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="../img/bottle.webp" width="352" height="898" alt="Chulele bottle (3D model stand-in)"></div></div>
+<div class="wrap" id="wrap"><div class="pin">
+ <svg class="sc" id="sc" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs><radialGradient id="gl"><stop offset="0" stop-color="#ffb347" stop-opacity=".9"/><stop offset=".4" stop-color="#ff7a1a" stop-opacity=".35"/><stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/></radialGradient>
+  <linearGradient id="cl" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7a0a4a"/><stop offset="1" stop-color="#3a0526"/></linearGradient>
+  <clipPath id="c1"><rect x="236" y="402" width="148" height="96"/></clipPath><clipPath id="c2"><rect x="616" y="402" width="148" height="96"/></clipPath><clipPath id="c3"><rect x="326" y="282" width="130" height="84"/></clipPath><clipPath id="c4"><rect x="544" y="282" width="130" height="84"/></clipPath><clipPath id="c5"><rect x="420" y="178" width="160" height="70"/></clipPath></defs>
+  <g class="ban" id="ban"></g>
+  <g id="scene" transform="translate(190,34) scale(.82)"><g id="tiers"><rect x="380" y="170" width="240" height="94" fill="url(#cl)"/><rect x="290" y="262" width="420" height="122" fill="url(#cl)"/><rect x="200" y="382" width="600" height="146" fill="url(#cl)"/>
+   <g stroke="#b8915a" stroke-width="1.5" fill="none"><rect x="380" y="170" width="240" height="94"/><rect x="290" y="262" width="420" height="122"/><rect x="200" y="382" width="600" height="146"/><path d="M200 392 H800 M290 272 H710 M380 180 H620" opacity=".6"/></g>
+   <rect x="170" y="528" width="660" height="14" fill="#1b0a14"/></g>
+  <g id="garl"></g><g id="floor"></g>
+  <g id="items"></g></g>
+ </svg><canvas class="fx" id="fx"></canvas>
+ <div class="say" id="say"></div>
+</div></div>
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script>
+<script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
+<script src="../common.js"></script>
+<script>(()=>{
+const NS='http://www.w3.org/2000/svg',$=id=>document.getElementById(id),rnd=(a,b)=>a+Math.random()*(b-a);
+// papel picado banner
+let h='';const cols=['#AF0061','#e0a030','#ece7dd','#c9651a','#7a0a4a'];for(let i=0;i<13;i++){const x=20+i*76,c=cols[i%5];h+=`<g><path d="M${x} 12 H${x+62} V92 L${x+52} 84 L${x+42} 94 L${x+31} 84 L${x+20} 94 L${x+10} 84 L${x} 92Z" fill="${c}" opacity=".92"/><circle cx="${x+31}" cy="38" r="9" fill="#12060f"/><path d="M${x+12} 62 l7 -9 l7 9 l-7 9z M${x+36} 62 l7 -9 l7 9 l-7 9z" fill="#12060f"/></g>`}
+$('ban').innerHTML=`<path d="M0 10 Q500 26 1000 10" stroke="#b8915a" fill="none" stroke-width="2"/>`+h;
+// marigold garlands: along tier edges and a swag
+const garl=$('garl'),mc=['#e0a030','#f0b84a','#d4801c','#c9651a','#ffcf5a'];function mari(x,y,r){const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',r);c.setAttribute('fill',mc[Math.random()*5|0]);c.setAttribute('opacity',rnd(.75,1));garl.append(c)}
+for(let i=0;i<46;i++){const t=i/45;mari(210+t*580,382+Math.sin(t*Math.PI*6)*3,rnd(5,8))}for(let i=0;i<34;i++){const t=i/33;mari(300+t*400,262+Math.sin(t*Math.PI*5)*3,rnd(5,7.5))}for(let i=0;i<20;i++){const t=i/19;mari(390+t*220,170+Math.sin(t*Math.PI*4)*3,rnd(5,7))}
+garl.style.opacity=0;
+const fl=$('floor');for(let i=0;i<70;i++){const e=document.createElementNS(NS,'ellipse');e.setAttribute('cx',rnd(150,850));e.setAttribute('cy',rnd(540,600));e.setAttribute('rx',rnd(4,7));e.setAttribute('ry',rnd(2,4));e.setAttribute('fill',mc[Math.random()*5|0]);e.setAttribute('opacity',rnd(.5,.95));fl.append(e)}fl.style.opacity=0;
+// offerings: photo + candle each
+const O=[{img:'harvest',cx:'c1',x:236,y:402,w:148,h:96,cd:[210,404],t:'25 October 2022',h2:'The field',p:'About 150 espadín agave, cut by hand in the fields of Benito Ruiz and his son Francisco, before the afternoon sun.'},
+{img:'smoke',cx:'c2',x:616,y:402,w:148,h:96,cd:[790,404],t:'28 – 31 October',h2:'The fire',p:'A pit oven under volcanic stone. Four days of slow heat, and a night low of 46°F when it was opened.'},
+{img:'fibre',cx:'c3',x:326,y:282,w:130,h:84,cd:[300,284],t:'1 – 9 November',h2:'The stone and the yeast',p:'Isabella the horse and the tahona, then seven days of wild fermentation among the marigolds.'},
+{img:'juice',cx:'c4',x:544,y:282,w:130,h:84,cd:[700,284],t:'9 & 23 November',h2:'The copper',p:'Clay-sealed stills over a wood fire. Above 53% ABV off the second distillation.'},
+{img:'flowers',cx:'c5',x:420,y:178,w:160,h:70,cd:[395,172],t:'The week it was made',h2:'The flowers',p:'Cempasúchil and cockscomb on every altar. The dead are the guests of honor.'}];
+const items=$('items');const nodes=O.map((o,i)=>{const g=document.createElementNS(NS,'g');g.setAttribute('class','fr');g.innerHTML=`<rect x="${o.x-6}" y="${o.y-6}" width="${o.w+12}" height="${o.h+12}" fill="#1b0a14" stroke="#b8915a" stroke-width="2"/><image href="../img/${o.img}.webp" x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${o.cx})"/>`;items.append(g);
+ const c=document.createElementNS(NS,'g');c.setAttribute('opacity',0);const [x,y]=o.cd;c.innerHTML=`<circle cx="${x}" cy="${y-26}" r="46" fill="url(#gl)"/><rect x="${x-6}" y="${y-30}" width="12" height="30" fill="#ece7dd"/><g class="fl"><path d="M${x} ${y-32} q-9 -12 0 -26 q9 14 0 26z" fill="#ffb347"/><path d="M${x} ${y-33} q-4 -6 0 -14 q4 8 0 14z" fill="#fff3c4"/></g>`;items.append(c);return{g,c}});
+// centre plaque (final)
+const pl=document.createElementNS(NS,'g');pl.setAttribute('opacity',0);pl.innerHTML=`<circle cx="500" cy="120" r="64" fill="url(#gl)" opacity=".5"/><rect x="450" y="86" width="100" height="70" fill="#12060f" stroke="#e0a030" stroke-width="2"/><text x="500" y="136" text-anchor="middle" font-family="Akrobat,Barlow Condensed,sans-serif" font-weight="700" font-size="58" fill="#e0a030">5</text><text x="500" y="150" text-anchor="middle" font-family="Arial Narrow,sans-serif" font-size="8" letter-spacing="3" fill="#ece7dd">AÑOS</text>`;items.append(pl);
+const say=$('say');let cur=-2;
+const IN={t:'Día de los Muertos · 2022',h2:'An ofrenda for the añejo',p:'Scroll to build the altar. Each step of this batch is an offering, and its candle is lit.'};
+const END={t:'Five years · held in reserve',h2:'Leave your name at the altar',p:'One release, by invitation. Suggested retail $249.',fin:1};
+function copy(k){if(k===cur)return;cur=k;const o=k<0?IN:k>=O.length?END:O[k];say.style.opacity=0;setTimeout(()=>{say.innerHTML=`<div class="d">${o.t}</div><h2>${o.h2}</h2><p>${o.p}</p>${o.fin?`<div class="ctas"><a class="cta" href="${C.RES}">Join the reserve list →</a><a class="lux" style="text-decoration:underline" data-film href="https://vimeo.com/883190665" target="_blank" rel="noopener">Watch the documentary</a><div class="lux">Premium luxury spirit · Premium luxury brand</div></div>`:''}`;say.style.opacity=1},140);say.style.transition='opacity .25s'}
+function upd(p){const n=O.length+1,q=p*n;nodes.forEach((o,i)=>{const t=Math.max(0,Math.min(1,q-i-.1));o.g.style.opacity=t;o.g.style.transform=`translateY(${(1-t)*-30}px) scale(${.85+.15*t})`;o.c.setAttribute('opacity',Math.min(1,t*1.5))});
+ garl.style.opacity=Math.max(0,Math.min(1,(q-3)/1.5));fl.style.opacity=Math.max(0,Math.min(1,(q-4)/1.2));pl.setAttribute('opacity',Math.max(0,Math.min(1,q-O.length)));
+ copy(q<.1?-1:q>=O.length?O.length:Math.floor(q-.1))}
+// ember canvas
+const cv=$('fx'),cx=cv.getContext('2d');let W=0,H=0,E=[];function rs(){W=cv.width=cv.clientWidth;H=cv.height=cv.clientHeight}rs();addEventListener('resize',rs);
+(function loop(){requestAnimationFrame(loop);cx.clearRect(0,0,W,H);if(E.length<60&&Math.random()<.4)E.push({x:Math.random()*W,y:H+5,v:.3+Math.random()*.8,r:1+Math.random()*2});E=E.filter(e=>e.y>-10);E.forEach(e=>{e.y-=e.v;e.x+=Math.sin(e.y*.02)*.4;cx.fillStyle=`rgba(255,${150+Math.random()*60|0},60,${.15+Math.random()*.4})`;cx.beginPath();cx.arc(e.x,e.y,e.r,0,7);cx.fill()})})();
+if(C.RM){upd(.99)}else{ScrollTrigger.create({trigger:'#wrap',start:'top top',end:'bottom bottom',scrub:.5,onUpdate:s=>upd(s.progress)});upd(0)}
+})();</script></body></html>

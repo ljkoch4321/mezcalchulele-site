@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0a0a0b">
+<title>The Dial · Chulele Añejo pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="/bottle3d/bottle3d.css?v=BQgvOZWf">
+<style>
+/* PITCH 13 · The Dial (Copenhagen). Idea: the whole page is one clock. Scroll turns a five-year dial around a live 3D oak barrel. */
+:root{--sw:32%}
+.stage{background:radial-gradient(ellipse 70% 55% at 50% 52%,rgba(175,0,97,.2),transparent 70%)}
+.wrap{position:relative;height:900vh}.pin{position:sticky;top:0;height:100vh;margin-left:var(--sw);overflow:hidden}
+.dialbox{position:absolute;right:1vw;top:50%;width:min(100vh,62vw);aspect-ratio:1;transform:translateY(-50%)}
+.dialbox svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.cv{position:absolute;left:23%;right:23%;top:23%;bottom:23%;border-radius:50%;overflow:hidden}.cv canvas{width:100%;height:100%;display:block}
+.cv::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 60px 10px #0a0a0b}
+.ringG{transform-origin:50% 50%}
+.t1{stroke:#6a6a72;stroke-width:1.2}.t5{stroke:#b8915a;stroke-width:2.4}.arc{fill:none;stroke:#d9983f;stroke-width:5;stroke-linecap:round;filter:drop-shadow(0 0 8px rgba(217,152,63,.7))}.rem{fill:none;stroke:rgba(184,145,90,.55);stroke-width:2;stroke-dasharray:3 8}
+.st text{font:600 13px var(--fd);letter-spacing:.2em;fill:#9a958b;text-transform:uppercase}.st.on text{fill:var(--bone)}.st circle{fill:#0a0a0b;stroke:#6f6a60;stroke-width:2}.st.on circle{fill:var(--gold);stroke:var(--gold)}
+.info{position:absolute;left:3vw;bottom:9vh;width:min(440px,34vw);z-index:6}
+.info .d{font:600 12px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}.info h2{font-size:clamp(34px,4.4vw,70px);line-height:.95;text-transform:uppercase;margin:8px 0 10px}.info p{margin:0 0 12px;font-size:clamp(14px,1.2vw,17px);color:#d9d3c7}
+.tio{position:absolute;left:3vw;top:12vh;z-index:6}.tio .l{font:600 11px var(--fd);letter-spacing:.26em;color:var(--dim);text-transform:uppercase}.tio .v{font:600 clamp(46px,5vw,84px)/1 var(--fd)}.tio .v small{font-size:.3em;color:var(--gold);margin:0 .6em 0 .15em}
+.ctas{display:flex;flex-direction:column;gap:10px;align-items:flex-start;margin-top:8px}
+@media(max-width:899px){:root{--band:37svh}.pin{margin-left:0;margin-top:var(--band);height:calc(100svh - var(--band))}.wrap{height:760vh}.dialbox{right:50%;transform:translate(50%,-62%);width:min(92vw,56vh);top:46%}.info{left:16px;right:16px;width:auto;bottom:14px}.info h2{font-size:30px;margin:4px 0}.info p{font-size:13px;margin:0 0 8px}.tio{display:none}}
+</style></head><body data-id="dial">
+<div class="stage"><div class="b3d" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="../img/bottle.webp" width="352" height="898" alt="Chulele bottle (3D model stand-in)"></div></div>
+<div class="wrap" id="wrap"><div class="pin">
+ <div class="tio"><div class="l">Time in oak</div><div class="v" id="tv">0<small>yr</small>0<small>mo</small></div></div>
+ <div class="dialbox"><svg id="svg" viewBox="-300 -300 600 600"></svg><div class="cv"><canvas id="bc"></canvas></div></div>
+ <div class="info" id="info"></div>
+</div></div>
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script><script src="../vendor/three.min.js"></script>
+<script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
+<script src="../common.js"></script><script src="../fx.js"></script>
+<script>(()=>{
+// dial: 360° = Oct 2022 → Dec 2027. First 40° holds the 29 production days (stretched), the remaining 320° holds the five years.
+const S=[{a:0,t:'25 Oct 2022',h:'Harvest',p:'About 150 espadín agave cut by hand in the fields of Benito Ruiz and his son Francisco.'},{a:12,t:'28 – 31 Oct',h:'The pit oven',p:'Volcanic stone and four days of slow heat. Opened at a night low of 46°F.'},{a:22,t:'1 – 9 Nov',h:'Stone and wild yeast',p:'The tahona, a horse named Isabella, then seven days of fermentation among the marigolds.'},{a:34,t:'9 & 23 Nov',h:'Copper, twice',p:'Clay-sealed stills, a wood fire. Above 53% ABV off the second distillation.'},{a:45,t:'December 2022',h:'Into California oak',p:'Part of the batch is laid in the barrel in Santiago Matatlán. The dial begins to turn slowly.'}];
+const f=Math.min(1,C.TM/60),nowA=45+315*f;
+S.push({a:nowA,t:'Today · '+C.TIO,h:'Still resting',p:'Oak, vanilla, dried fruit, a whisper of smoke are what we expect. The barrel decides.'});
+S.push({a:360,t:'5 Años · to confirm',h:'Held in reserve',p:'One release, by invitation. Suggested retail $249.',fin:1});
+const svg=document.getElementById('svg'),R=250,NS='http://www.w3.org/2000/svg';let h='';
+for(let i=0;i<120;i++){const a=(i/120)*2*Math.PI-Math.PI/2,L=i%24===0?16:i%4===0?9:5,r1=R+10;h+=`<line class="${i%24===0?'t5':'t1'}" x1="${(r1*Math.cos(a)).toFixed(1)}" y1="${(r1*Math.sin(a)).toFixed(1)}" x2="${((r1+L)*Math.cos(a)).toFixed(1)}" y2="${((r1+L)*Math.sin(a)).toFixed(1)}"/>`}
+const C2=2*Math.PI*R;h=`<g class="ringG" id="rg"><circle r="${R}" class="rem"/><circle id="arc" r="${R}" class="arc" stroke-dasharray="${C2}" stroke-dashoffset="${C2}" transform="rotate(-90)"/>${h}`+S.map((s,i)=>{const a=(s.a/360)*2*Math.PI-Math.PI/2,x=(R+44)*Math.cos(a),y=(R+44)*Math.sin(a);return `<g class="st" data-i="${i}"><circle cx="${(R*Math.cos(a)).toFixed(1)}" cy="${(R*Math.sin(a)).toFixed(1)}" r="7"/><text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" transform="rotate(${(s.a).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}) rotate(90 ${x.toFixed(1)} ${y.toFixed(1)})">${s.t.split('·')[0]}</text></g>`}).join('')+'</g>';
+svg.innerHTML=h+`<line x1="0" y1="-${R+6}" x2="0" y2="-${R+46}" stroke="#fff" stroke-width="2"/><polygon points="-6,-${R+48} 6,-${R+48} 0,-${R+36}" fill="#fff"/>`;
+const info=document.getElementById('info'),rg=document.getElementById('rg'),arc=document.getElementById('arc'),sts=[...svg.querySelectorAll('.st')];
+const bar=FX.barrel(document.getElementById('bc'),{idle:true});let cur=-1;
+function show(k){if(k===cur)return;cur=k;const s=S[k];sts.forEach((e,i)=>e.classList.toggle('on',i===k));info.style.opacity=0;setTimeout(()=>{info.innerHTML=`<div class="d">${s.t}</div><h2>${s.h}</h2><p>${s.p}</p>${s.fin?`<div class="ctas"><a class="cta" href="${C.RES}">Join the reserve list →</a><a class="lux" style="text-decoration:underline" data-film href="https://vimeo.com/883190665" target="_blank" rel="noopener">Watch the documentary</a><div class="lux">Premium luxury spirit · Premium luxury brand</div></div>`:''}`;info.style.opacity=1},150);info.style.transition='opacity .25s'}
+const tv=document.getElementById('tv');
+function upd(p){const ang=p*S[S.length-1].a;rg.setAttribute('transform',`rotate(${-ang})`);
+ // active stage = last whose angle <= current
+ let k=0;S.forEach((s,i)=>{if(ang>=s.a-2)k=i});show(k);
+ const oak=Math.max(0,Math.min(1,(ang-45)/315));arc.style.strokeDashoffset=C2*(1-Math.min(oak/f||0,1)*f*(ang>45?1:0));
+ const m=Math.round(C.TM*Math.min(1,oak/f||0));tv.innerHTML=Math.floor(m/12)+'<small>yr</small>'+(m%12)+'<small>mo</small>';
+ bar&&(bar.rot(p*Math.PI*4),bar.age(Math.min(1,oak*1.1)))}
+if(C.RM){upd(.8)}else{ScrollTrigger.create({trigger:'#wrap',start:'top top',end:'bottom bottom',scrub:true,onUpdate:s=>upd(s.progress)});upd(0)}
+
+})();</script></body></html>

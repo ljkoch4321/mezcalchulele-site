@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0a0a0b">
+<title>The Ruler · Chulele Añejo pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="/bottle3d/bottle3d.css?v=BQgvOZWf">
+<style>
+/* PITCH 5 · The Ruler (London). Idea: one horizontal line of time. 29 days stretched wide, then the zoom-out: five years in oak. */
+:root{--sw:28%}
+.stage{background:radial-gradient(ellipse 70% 55% at 50% 52%,rgba(175,0,97,.25),transparent 70%);border-right:1px solid #1d1d20;background-color:#0a0a0b}
+.wrap{position:relative;height:1000vh}
+.pin{position:sticky;top:0;height:100vh;overflow:hidden;margin-left:var(--sw)}
+.track{position:absolute;left:0;top:0;height:100%;width:1100vw;will-change:transform}
+.base{position:absolute;left:0;right:0;top:56vh;height:2px;background:#3a3a40}
+.ticks{position:absolute;left:0;right:0;top:56vh;height:22px;background:repeating-linear-gradient(90deg,#55555c 0 1px,transparent 1px 36px)}
+.ticks.y{background:repeating-linear-gradient(90deg,#55555c 0 1px,transparent 1px 28px)}
+.seg{position:absolute;top:0;bottom:0}
+.lbl{position:absolute;top:calc(56vh + 34px);font:600 11px var(--fd);letter-spacing:.22em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.ms{position:absolute;width:min(300px,26vw)}.ms.up{bottom:calc(44vh + 30px)}.ms.dn{top:calc(56vh + 70px)}
+.ms::before{content:"";position:absolute;left:0;width:1px;background:var(--gold)}.ms.up::before{top:100%;height:30px}.ms.dn::before{bottom:100%;height:70px}
+.ms .dt{font:600 12px var(--fd);letter-spacing:.26em;color:var(--gold);text-transform:uppercase}
+.ms h3{font-size:clamp(20px,2vw,30px);line-height:1;text-transform:uppercase;margin:4px 0 6px}.ms p{margin:0;font-size:clamp(12px,1vw,14.5px);color:#cfc9bd;line-height:1.5}
+.ms img{width:100%;aspect-ratio:16/10;object-fit:cover;margin-bottom:8px;filter:contrast(1.05) brightness(.85)}
+.dot{position:absolute;top:calc(56vh - 5px);width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px rgba(184,145,90,.8)}
+.zoom{position:absolute;top:calc(56vh - 90px);height:180px;display:flex;align-items:center;justify-content:center;width:26vw;font:700 clamp(40px,6vw,96px) var(--fd);color:transparent;-webkit-text-stroke:1px rgba(184,145,90,.6);text-transform:uppercase;white-space:nowrap;opacity:.8}
+.oakband{position:absolute;top:calc(56vh - 14px);height:28px;background:repeating-linear-gradient(90deg,#3a2614 0 14px,#2a1b0e 14px 28px);border-radius:2px;opacity:.9}
+.prog{position:absolute;top:calc(56vh - 14px);height:28px;background:linear-gradient(90deg,#9a6a2a,#d9983f);border-radius:2px 0 0 2px;box-shadow:0 0 24px rgba(217,152,63,.5)}
+.now{position:absolute;top:calc(56vh - 160px);height:160px;width:1px;background:#fff}.now b{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font:600 12px var(--fd);letter-spacing:.24em;text-transform:uppercase;background:#fff;color:#000;padding:3px 10px;margin-bottom:6px}
+.big{position:absolute;top:4vh;left:5vw;font:600 clamp(30px,3.6vw,60px)/.95 var(--fd);text-transform:uppercase;max-width:22ch}
+.cap29{position:absolute;top:calc(56vh - 160px);font:700 clamp(90px,14vw,220px)/.8 var(--fd);color:transparent;-webkit-text-stroke:1px rgba(236,231,221,.35)}
+.fin{position:absolute;display:flex;flex-direction:column;gap:14px;align-items:flex-start;top:12vh;width:min(560px,40vw)}.fin h2{font-size:clamp(40px,5vw,84px);line-height:.95;text-transform:uppercase}
+.fin p{margin:0;color:#d9d3c7;max-width:44ch}
+.pb{position:fixed;left:var(--sw);right:0;bottom:0;height:2px;background:#1b1b1f;z-index:40}.pb i{display:block;height:2px;background:var(--gold);width:0}
+@media(max-width:899px){:root{--band:37svh}.pin{margin-left:0;margin-top:var(--band);height:calc(100svh - var(--band))}.wrap{height:900vh}.pb{left:0}
+ .base,.ticks,.dot,.lbl,.zoom,.oakband,.prog{top:46%}.lbl{top:calc(46% + 30px)}.ms{width:62vw}.ms.up{bottom:calc(54% + 30px)}.ms.dn{top:calc(46% + 60px)}.now{top:calc(46% - 140px)}.cap29{top:calc(46% - 110px)}.ms img{aspect-ratio:16/9}.ms p{font-size:12px}.big{top:3vh;font-size:34px}.fin{width:84vw;top:4vh}}
+.yr{position:absolute;top:calc(56vh - 38vh);font:700 clamp(120px,17vw,260px)/.8 var(--fd);color:transparent;-webkit-text-stroke:1px rgba(184,145,90,.28);pointer-events:none}.bx{position:absolute;left:640vw;top:calc(56vh - 40vh);width:36vw;height:34vh}.bx canvas{width:100%;height:100%;display:block}.bx .bl{position:absolute;left:0;right:0;bottom:-4px;text-align:center;font:600 11px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}.tally{position:absolute;top:calc(56vh + 150px)}.tally small{display:block;font:600 11px var(--fd);letter-spacing:.28em;text-transform:uppercase;color:var(--dim)}.tally b{font:700 clamp(50px,6vw,100px)/.9 var(--fd);color:var(--bone)}
+@media(max-width:899px){.yr{top:calc(46% - 30vh);font-size:34vw}.bx{top:calc(46% - 34vh);width:70vw;height:30vh;left:640vw}.tally{top:calc(46% + 120px)}.ms.up[style*="514vw"]{width:62vw}}</style></head><body data-id="ruler">
+<div class="stage"><div class="b3d" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="../img/bottle.webp" width="352" height="898" alt="Chulele bottle (3D model stand-in)"></div></div>
+<div class="wrap" id="wrap"><div class="pin"><div class="track" id="track">
+ <div class="big">Twenty-nine days. Then five years.</div>
+ <!-- segment A: 29 days, stretched: 0 .. 330vw -->
+ <div class="base"></div><div class="ticks" style="left:6vw;width:330vw;background:repeating-linear-gradient(90deg,#55555c 0 1px,transparent 1px calc(330vw/29))"></div>
+ <div class="cap29" style="left:6vw">29 days</div>
+ <div class="dot" style="left:8vw"></div><div class="ms up" style="left:8vw"><img src="../img/harvest.webp" alt=""><div class="dt">25 Oct 2022 · Day 0</div><h3>Harvest</h3><p>About 150 espadín agave cut by hand in the fields of Benito Ruiz and son Francisco. High 84°F.</p></div>
+ <div class="dot" style="left:42vw"></div><div class="ms dn" style="left:42vw"><img src="../img/smoke.webp" alt=""><div class="dt">28 – 31 Oct · Day 3–6</div><h3>The pit oven</h3><p>Volcanic stone, four days. Opened at a night low of 46°F.</p></div>
+ <div class="dot" style="left:96vw"></div><div class="ms up" style="left:96vw"><img src="../img/fibre.webp" alt=""><div class="dt">1 Nov · Day 7</div><h3>The tahona</h3><p>Israel and Isabella the horse, about four hours.</p></div>
+ <div class="dot" style="left:130vw"></div><div class="ms dn" style="left:130vw"><img src="../img/flowers.webp" alt=""><div class="dt">2 – 9 Nov · Day 8–15</div><h3>Seven wild days</h3><p>Marigold and cockscomb on every altar. Nights 46–57°F.</p></div>
+ <div class="dot" style="left:200vw"></div><div class="ms up" style="left:200vw"><img src="../img/juice.webp" alt=""><div class="dt">9 Nov · Day 15</div><h3>First distillation</h3><p>Luis Jímenez tests the vats. Clay-sealed copper stills, wood fire.</p></div>
+ <div class="dot" style="left:330vw"></div><div class="ms dn" style="left:330vw"><img src="../img/cook.webp" alt=""><div class="dt">23 Nov · Day 29</div><h3>Second distillation</h3><p>Above 53% ABV off the still. The spirit is made.</p></div>
+ <!-- zoom-out -->
+ <div class="zoom" style="left:372vw">zoom out</div>
+ <!-- segment B: 5 years: 440vw .. 1020vw -->
+ <div class="oakband" style="left:440vw;width:580vw"></div><div class="prog" id="prog" style="left:440vw;width:458vw"></div>
+ <div class="ticks y" style="left:440vw;width:580vw;background:repeating-linear-gradient(90deg,#8a7a5a 0 1px,transparent 1px calc(580vw/5))"></div>
+ <div class="lbl" style="left:440vw">Dec 2022 · into oak</div><div class="lbl" style="left:556vw">2023</div><div class="lbl" style="left:672vw">2024</div><div class="lbl" style="left:788vw">2025</div><div class="lbl" style="left:904vw">2026</div><div class="lbl" style="left:1010vw">2027</div>
+ <div class="dot" style="left:441vw"></div><div class="ms up" style="left:441vw"><div class="dt">Dec 2022</div><h3>Laid in California oak</h3><p>Part of the batch is set apart in Santiago Matatlán. It has not left the barrel since.</p></div>
+
+ <div class="yr" style="left:556vw">2023</div><div class="yr" style="left:672vw">2024</div><div class="yr" style="left:788vw">2025</div><div class="yr" style="left:904vw">2026</div>
+ <div class="dot" style="left:514vw"></div><div class="ms up" style="left:514vw"><div class="dt">15 – 20 July 2023</div><h3>The joven is bottled</h3><p>The Día de los Muertos joven goes into glass. The añejo does not. It stays in the barrel.</p></div>
+ <div class="bx" id="bx"><canvas id="bc"></canvas><div class="bl">California oak · No. 003</div></div>
+ <div class="tally" style="left:790vw"><small>Days in oak</small><b id="dn">0</b></div>
+ <div class="now" id="now" style="left:898vw"><b id="nowb">Now</b></div>
+ <div class="ms dn" style="left:880vw;top:calc(56vh + 110px)"><div class="dt" id="nowd">Today</div><h3>Still resting</h3><p>Expected: oak, vanilla, dried fruit, a whisper of smoke. The barrel decides.</p></div>
+ <div class="ms up" style="left:980vw;width:34vw"><div class="dt">5 Años · target to confirm</div><h3>The release</h3><p>One window, by invitation.</p></div>
+ <div class="fin" style="left:1042vw"><div class="lux">Premium luxury spirit · Premium luxury brand</div><h2>Held in reserve</h2><p>Suggested retail $249. Join the reserve list to be told first.</p><a class="cta" href="#" id="res">Join the reserve list →</a><a href="https://vimeo.com/883190665" data-film target="_blank" rel="noopener" class="lux" style="text-decoration:underline">Watch the documentary</a></div>
+</div></div></div>
+<div class="pb"><i id="pbi"></i></div>
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script>
+<script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
+<script src="../vendor/three.min.js"></script><script src="../common.js"></script><script src="../fx.js"></script>
+<script>(()=>{
+document.getElementById('res').href=C.RES;
+// "now" marker position = 440vw + 580vw * (months in oak / 60)
+const f=Math.min(1,C.TM/60),nowLeft=440+580*f;document.getElementById('now').style.left=nowLeft+'vw';document.getElementById('prog').style.width=(580*f)+'vw';
+document.getElementById('nowb').textContent='Now · '+C.TIO;document.getElementById('nowd').textContent='Today · '+C.TIO+' in oak';
+document.getElementById('dn').textContent=C.DAYS.toLocaleString('en-US');const bar=FX.barrel(document.getElementById('bc'),{idle:true});const track=document.getElementById('track'),pbi=document.getElementById('pbi');
+const vw=()=>innerWidth/100,view=()=>innerWidth-(C.mob()?0:innerWidth*.28);
+if(C.RM){document.querySelector('.wrap').style.height='auto';document.querySelector('.pin').style.overflowX='auto'}else{
+ gsap.to(track,{x:()=>-(1100*vw()-view()-vw()*2),ease:'none',scrollTrigger:{trigger:'#wrap',start:'top top',end:'bottom bottom',scrub:.7,invalidateOnRefresh:true,onUpdate:s=>{pbi.style.width=(s.progress*100)+'%';bar&&(bar.rot(s.progress*Math.PI*8),bar.age(Math.max(0,(s.progress-.4)*1.6)))}}})}
+
+})();</script></body></html>

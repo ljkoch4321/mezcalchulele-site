@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0a0a0b">
+<title>Macro · Chulele Añejo pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<style>
+/* PITCH 11 · Macro (Milan). Idea: the bottle itself is the journey. A macro lens travels over the real Añejo render, and each part of the bottle tells one chapter of the batch. Uses the Añejo still; a 3D Añejo model would make this one extraordinary. */
+:root{--sw:56%}
+.stage{background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(175,0,97,.3),transparent 72%);pointer-events:none}
+.lens{position:relative;height:min(92vh,980px);aspect-ratio:644/1748;transform-origin:50% 50%;will-change:transform}
+.lens img{width:100%;height:100%;display:block;filter:drop-shadow(0 40px 60px rgba(0,0,0,.8))}
+.ret{position:absolute;left:0;top:0;width:60px;height:60px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:40;opacity:0;transform:translate(-50%,-50%)}
+.wrap{position:relative;height:850vh}.pin{position:sticky;top:0;height:100vh;margin-left:var(--sw);display:flex;align-items:center;padding:0 5vw 0 2vw}
+.txt{position:relative;max-width:480px}.n{font:700 clamp(120px,15vw,260px)/.75 var(--fd);color:transparent;-webkit-text-stroke:1px rgba(184,145,90,.45);position:absolute;left:-.04em;top:-.45em}
+.txt .k{font:600 12px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}.txt h2{font-size:clamp(36px,4.6vw,76px);line-height:.94;text-transform:uppercase;margin:8px 0 12px}.txt p{margin:0 0 14px;font-size:clamp(14px,1.25vw,18px);color:#d9d3c7}
+.ctas{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.lines{position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:35}.lines line{stroke:var(--gold);stroke-width:1;stroke-dasharray:4 4}
+@media(max-width:899px){:root{--band:48svh}.stage{height:var(--band);padding-top:calc(44px + env(safe-area-inset-top,0px))}.lens{height:calc(var(--band) - 52px - env(safe-area-inset-top,0px))}.pin{margin-left:0;align-items:flex-end;padding:0 18px calc(2vh + env(safe-area-inset-bottom,0px))}.wrap{height:780vh}.txt .n{display:none}.txt h2{font-size:32px;margin:4px 0 6px}.txt p{font-size:13.5px;margin:0 0 8px}.lines{display:none}}
+</style></head><body data-id="macro">
+<div class="stage"><div class="lens" id="lens"><img src="../img/anejo.webp" width="644" height="1748" alt="Chulele Añejo bottle render"><div class="ret" id="ret"></div></div></div>
+<div class="wrap" id="wrap"><div class="pin"><div class="txt" id="txt"></div></div></div>
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script>
+<script src="../common.js"></script>
+<script>(()=>{
+// each stop: where on the bottle image to zoom (x,y in % of the image), scale, story
+const Z=[{x:50,y:50,s:1,k:'The Reserve · No. 003',h:'Añejo',p:'Día de los Muertos, 2022. Five years in California oak. Held in reserve. A premium luxury spirit from a premium luxury brand.'},
+{x:50,y:13,s:3.4,k:'The seal · December 2022',h:'Laid in oak',p:'In December 2022 part of the batch was set apart and laid into California oak in Santiago Matatlán. It has not left the barrel since.'},
+{x:74,y:22,s:3.6,k:'The medallion · 2022',h:'The week it was made',p:'Día de los Muertos. Marigold and cockscomb on every altar, candles all night. The dead are the guests of honor, and this spirit was made in the middle of it.'},
+{x:50,y:50,s:2.6,k:'The label · Santiago Matatlán',h:'Espadín, by hand',p:'About 150 agave cut by hand in the fields of Benito Ruiz and his son Francisco. Four days in a pit oven. A horse named Isabella on the tahona.'},
+{x:50,y:68,s:2.4,k:'The skull · the long rest',h:'Seven wild days',p:'Fermented with wild yeast in cold nights, then two distillations in clay-sealed copper, above 53% ABV off the still.'},
+{x:50,y:90,s:2.6,k:'The glass · today',h:'Still resting',p:'Oak, vanilla, dried fruit and a whisper of smoke are what we expect. We do not release it on a schedule. The barrel decides.'},
+{x:50,y:50,s:1,k:'The reserve list',h:'Be there when the cask opens',p:'One release, by invitation. Suggested retail $249.',fin:1}];
+const lens=document.getElementById('lens'),txt=document.getElementById('txt');let cur=-1;
+function copy(k){if(k===cur)return;cur=k;const z=Z[k];txt.style.opacity=0;setTimeout(()=>{txt.innerHTML=`<div class="n">${String(k+1).padStart(2,'0')}</div><div class="k">${z.k}</div><h2>${z.h}</h2><p>${z.p}</p>${z.fin?`<div class="ctas"><a class="cta" href="${C.RES}">Join the reserve list →</a><a class="lux" style="text-decoration:underline" data-film href="https://vimeo.com/883190665" target="_blank" rel="noopener">Watch the documentary</a><div class="lux">Premium luxury spirit · Premium luxury brand</div></div>`:''}`;txt.style.opacity=1},140);txt.style.transition='opacity .25s'}
+function pose(k){const z=Z[k],H=lens.offsetHeight,W=lens.offsetWidth;return{s:z.s,tx:-(z.x/100-.5)*W*z.s,ty:-(z.y/100-.5)*H*z.s}}
+function upd(p){const n=Z.length-1,q=p*n,i=Math.min(n-1,Math.floor(q)),t=q-i,e=t<.2?0:t>.8?1:(t-.2)/.6,ee=e*e*(3-2*e);const a=pose(i),b=pose(i+1);
+ const s=a.s+(b.s-a.s)*ee,tx=a.tx+(b.tx-a.tx)*ee,ty=a.ty+(b.ty-a.ty)*ee;lens.style.transform=`translate(${tx}px,${ty}px) scale(${s})`;copy(t>.5?i+1:i);
+ const r=document.getElementById('ret');r.style.opacity=(s>1.2)?1:0;r.style.left='50%';r.style.top='50%'}
+if(C.RM){copy(0)}else{ScrollTrigger.create({trigger:'#wrap',start:'top top',end:'bottom bottom',scrub:.5,onUpdate:s=>upd(s.progress)});upd(0)}
+addEventListener('resize',()=>upd(ScrollTrigger.getAll()[0]?ScrollTrigger.getAll()[0].progress:0));
+})();</script></body></html>

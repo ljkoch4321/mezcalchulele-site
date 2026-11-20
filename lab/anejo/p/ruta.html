@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0a0a0b">
+<title>Ruta · Chulele Añejo pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="/bottle3d/bottle3d.css?v=BQgvOZWf">
+<style>
+/* PITCH 8 · Ruta (Mexico City). Idea: a camera flight. The whole right side is a living map of Santiago Matatlán; scroll flies the lens along the route from field to cellar. */
+:root{--sw:27%}
+.stage{background:radial-gradient(ellipse 70% 55% at 50% 52%,rgba(175,0,97,.28),transparent 70%)}
+.wrap{position:relative;height:900vh}.pin{position:sticky;top:0;height:100vh;margin-left:var(--sw);overflow:hidden;background:#0c0a08}
+svg#map{position:absolute;inset:0;width:100%;height:100%}
+.cl{fill:none;stroke:#2f2a22;stroke-width:1.2}.cl.m{stroke:#463d2d}.rv{fill:none;stroke:#2b3a4a;stroke-width:4;opacity:.7}
+.rt{fill:none;stroke:#3a3a40;stroke-width:3;stroke-dasharray:4 8}.lv{fill:none;stroke:var(--gold);stroke-width:4;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(184,145,90,.8))}
+.pin circle{fill:#0a0a0b;stroke:var(--wine);stroke-width:4}.pin.on circle{fill:var(--gold);stroke:var(--gold)}.pin text{font:600 17px var(--fd);letter-spacing:.2em;fill:#7a7468;text-transform:uppercase}.pin.on text{fill:var(--bone)}
+.me{fill:#fff;filter:drop-shadow(0 0 8px #fff)}
+.card{position:absolute;right:3vw;bottom:6vh;width:min(380px,32vw);background:rgba(10,10,11,.88);border:1px solid #2a2a30;backdrop-filter:blur(8px);z-index:6}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:contrast(1.05) brightness(.9)}.card .b{padding:16px 18px 18px}
+.card .d{font:600 11px var(--fd);letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}.card h2{font-size:clamp(24px,2.4vw,38px);line-height:1;text-transform:uppercase;margin:5px 0 8px}.card p{margin:0;font-size:clamp(12.5px,1vw,15px);color:#d9d3c7;line-height:1.55}
+.card .ctas{display:flex;flex-direction:column;gap:10px;align-items:flex-start;margin-top:12px}
+.hud{position:absolute;left:3vw;top:12vh;z-index:6}.hud .k{font:600 11px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}.hud h1{font-size:clamp(30px,4vw,64px);line-height:.95;text-transform:uppercase;margin-top:6px}.hud .c{margin-top:8px;font:500 12px var(--fd);letter-spacing:.2em;color:var(--gold)}
+.compass{position:absolute;left:3vw;bottom:6vh;width:64px;height:64px;z-index:6;opacity:.7}
+@media(max-width:899px){:root{--band:37svh}.pin{margin-left:0;margin-top:var(--band);height:calc(100svh - var(--band))}.wrap{height:760vh}.card{left:12px;right:12px;width:auto;bottom:10px;display:flex}.card img{width:36%;aspect-ratio:1;flex:none}.card .b{padding:10px 12px}.card h2{font-size:21px}.card p{font-size:11.5px;line-height:1.4}.hud{top:6px;left:12px}.hud h1{font-size:24px}.compass{display:none}}
+</style></head><body data-id="ruta">
+<div class="stage"><div class="b3d" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="../img/bottle.webp" width="352" height="898" alt="Chulele bottle (3D model stand-in)"></div></div>
+<div class="wrap" id="wrap"><div class="pin">
+ <svg id="map" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g id="topo"></g><path class="rv" d="M-20 860 C200 760 330 900 520 800 S880 760 1060 640 1400 560 1640 430"/><path class="rt" id="rt"/><path class="lv" id="lv"/><g id="pins"></g><circle class="me" id="me" r="10"/></svg>
+ <div class="hud"><div class="k">Santiago Matatlán · Oaxaca · Mexico</div><h1>The route</h1><div class="c" id="coord">Approx. 16°54′N 96°25′W</div></div>
+ <svg class="compass" viewBox="-30 -30 60 60"><circle r="26" fill="none" stroke="#b8915a" opacity=".6"/><path d="M0 -22 L5 0 L0 22 L-5 0Z" fill="#b8915a" opacity=".8"/><text y="-30" text-anchor="middle" font-size="9" fill="#ece7dd" font-family="Arial">N</text></svg>
+ <div class="card" id="card"></div>
+</div></div>
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script>
+<script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
+<script src="../common.js"></script>
+<script>(()=>{
+const NS='http://www.w3.org/2000/svg',$=id=>document.getElementById(id);
+// topographic contours (generated)
+let t='';[[360,640],[900,330],[1280,720],[640,230]].forEach(([cx,cy],k)=>{for(let r=40;r<=300;r+=26){let d='';for(let i=0;i<=72;i++){const a=i/72*Math.PI*2,rr=r*(1+.2*Math.sin(3*a+k)+.11*Math.sin(5*a+k*2)+.06*Math.sin(9*a));d+=(i?'L':'M')+(cx+rr*1.25*Math.cos(a)).toFixed(1)+' '+(cy+rr*.8*Math.sin(a)).toFixed(1)}t+=`<path class="cl${r%104===0?' m':''}" d="${d}Z"/>`}});$('topo').innerHTML=t;
+// stops
+const S=[{x:260,y:760,l:'The fields',img:'harvest',d:'25 October 2022',h:'The fields',p:'About 150 espadín agave, cut by hand in the fields of Benito Ruiz and his son Francisco, from just before 8 am.'},
+{x:520,y:600,l:'The oven',img:'smoke',d:'28 – 31 October',h:'The pit oven',p:'Volcanic stone and four days of slow heat. Night low 46°F when it was opened.'},
+{x:790,y:690,l:'The palenque',img:'fibre',d:'1 – 9 November',h:'Tahona and tanks',p:'Isabella the horse turns the tahona. Seven days of wild fermentation among the marigolds.'},
+{x:1010,y:470,l:'The stills',img:'juice',d:'9 & 23 November',h:'Copper, twice',p:'Clay-sealed stills over a wood fire. Above 53% ABV off the second distillation.'},
+{x:1290,y:330,l:'The cellar',img:'candles',d:'December 2022',h:'Laid in oak',p:'Part of the batch is set apart in California oak. It has not left the barrel since.'}];
+const rt=$('rt'),lv=$('lv'),me=$('me'),pins=$('pins');
+const dpath='M'+S.map(s=>s.x+' '+s.y).join(' ');
+function curve(){let d=`M${S[0].x} ${S[0].y}`;for(let i=1;i<S.length;i++){const a=S[i-1],b=S[i],mx=(a.x+b.x)/2;d+=` C${mx} ${a.y} ${mx} ${b.y} ${b.x} ${b.y}`}return d}
+rt.setAttribute('d',curve());lv.setAttribute('d',curve());const L=rt.getTotalLength();lv.style.strokeDasharray=L;lv.style.strokeDashoffset=L;
+// stop positions along path by nearest length
+function lenAt(i){if(i===0)return 0;let best=0,bd=1e9;for(let l=0;l<=L;l+=2){const p=rt.getPointAtLength(l),d=(p.x-S[i].x)**2+(p.y-S[i].y)**2;if(d<bd){bd=d;best=l}}return best}
+const SL=S.map((s,i)=>lenAt(i));
+const pe=S.map((s,i)=>{const g=document.createElementNS(NS,'g');g.setAttribute('class','pin');g.innerHTML=`<circle cx="${s.x}" cy="${s.y}" r="12"/><text x="${s.x+22}" y="${s.y+6}">${s.l}</text>`;pins.append(g);return g});
+const card=$('card'),W=1600,Hh=1000;let cur=-2;
+const END={img:'cemetery',d:'Five years · held in reserve',h:'The route ends. The wait begins.',p:'One release, by invitation. Suggested retail $249.',fin:1};
+function cardFor(k){if(k===cur)return;cur=k;const s=k<0?{img:'harvest',d:'Overview',h:'From field to cellar',p:'Scroll to fly the route this batch took in the autumn of 2022.'}:k>=S.length?END:S[k];card.style.opacity=0;setTimeout(()=>{card.innerHTML=`<img src="../img/${s.img}.webp" alt=""><div class="b"><div class="d">${s.d}</div><h2>${s.h}</h2><p>${s.p}</p>${s.fin?`<div class="ctas"><a class="cta" href="${C.RES}">Join the reserve list →</a><a class="lux" style="text-decoration:underline" data-film href="https://vimeo.com/883190665" target="_blank" rel="noopener">Watch the documentary</a><div class="lux">Premium luxury spirit · Premium luxury brand</div></div>`:''}</div>`;card.style.opacity=1},130);card.style.transition='opacity .25s'}
+function cam(vx,vy,vw){const vh=vw*.625;$('map').setAttribute('viewBox',`${(vx-vw/2).toFixed(1)} ${(vy-vh/2).toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}`)}
+function upd(p){const n=S.length,q=p*(n+1);                          // 0..n+1 : overview, 5 stops, ending overview
+ const k=Math.min(n-1,Math.max(0,Math.floor(q-.4)));let i=Math.floor(q);
+ // camera: overview(0) -> stop0 .. stop4 -> overview(end)
+ let cx=800,cy=500,cw=1600;
+ if(q<1){const e=q*q*(3-2*q);cx=800+(S[0].x-800)*e;cy=500+(S[0].y-500)*e;cw=1600-(1600-520)*e}
+ else if(q<n){const a=Math.floor(q),t=q-a,e=t*t*(3-2*t),A=S[a-1],B=S[a];cx=A.x+(B.x-A.x)*e;cy=A.y+(B.y-A.y)*e;cw=520-(60*Math.sin(t*Math.PI))}
+ else{const t=Math.min(1,q-n),e=t*t*(3-2*t),A=S[n-1];cx=A.x+(800-A.x)*e;cy=A.y+(500-A.y)*e;cw=520+(1600-520)*e}
+ cam(cx,cy,cw);
+ // route progress
+ const f=q<1?0:Math.min(1,(q-1)/(n-1)),len=SL[0]+(SL[n-1]-SL[0])*f;lv.style.strokeDashoffset=L-len;const pt=rt.getPointAtLength(len);me.setAttribute('cx',pt.x);me.setAttribute('cy',pt.y);me.setAttribute('r',Math.max(6,cw/1600*10+4));
+ pe.forEach((g,j)=>g.classList.toggle('on',q>=j+1-.05));
+ cardFor(q<.6?-1:q>=n+.2?n:Math.max(0,Math.min(n-1,Math.round(q-1))));}
+if(C.RM){cam(800,500,1600);cardFor(-1)}else{ScrollTrigger.create({trigger:'#wrap',start:'top top',end:'bottom bottom',scrub:.6,onUpdate:s=>upd(s.progress)});upd(0)}
+})();</script></body></html>

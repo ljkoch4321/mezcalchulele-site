@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0a0a0b">
+<title>Type Mask · Chulele Añejo pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="/bottle3d/bottle3d.css?v=BQgvOZWf">
+<style>
+/* PITCH 12 · Type Mask (Milan). Idea: the words ARE the pictures. Each word is cut out of its own photograph; scroll drives the photo through the letters. Almost no copy. */
+:root{--sw:26%}
+.stage{background:radial-gradient(ellipse 70% 55% at 50% 52%,rgba(175,0,97,.25),transparent 70%)}
+.wrap{position:relative;height:900vh}.pin{position:sticky;top:0;height:100vh;margin-left:var(--sw);overflow:hidden;background:#0a0a0b}
+.sc{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;padding:0 3vw}
+.mw{font:700 clamp(130px,23vw,420px)/.82 var(--fd);letter-spacing:.01em;text-transform:uppercase;color:transparent;-webkit-background-clip:text;background-clip:text;background-size:160% auto;background-position:50% 50%;background-repeat:no-repeat;filter:brightness(1.35) saturate(1.15);white-space:nowrap;margin-left:-.02em}
+.mw.oak{background-image:repeating-linear-gradient(95deg,#8a5a2c 0 14px,#6c4220 14px 28px,#9a6a35 28px 42px,#5a3518 42px 56px)!important;background-size:auto!important}
+.lt{position:absolute;left:3vw;right:3vw;bottom:7vh;display:flex;justify-content:space-between;align-items:flex-end;gap:5vw}
+.lt .d{font:600 12px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}.lt p{margin:4px 0 0;font-size:clamp(14px,1.25vw,18px);color:#d9d3c7;max-width:34ch}
+.lt .n{font:700 clamp(60px,8vw,120px)/.8 var(--fd);color:transparent;-webkit-text-stroke:1px rgba(236,231,221,.35)}
+.fin .mw{font-size:clamp(150px,30vw,520px)}.fin .lt{align-items:center}.fin .btns{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.tk{position:absolute;left:0;right:0;top:11vh;font:600 12px var(--fd);letter-spacing:.4em;text-transform:uppercase;color:var(--dim);white-space:nowrap;overflow:hidden;padding-left:3vw}
+@media(max-width:899px){:root{--band:37svh}.pin{margin-left:0;margin-top:var(--band);height:calc(100svh - var(--band))}.wrap{height:760vh}.mw{font-size:36vw}.fin .mw{font-size:56vw}.lt{left:14px;right:14px;bottom:2vh}.lt .n{display:none}.tk{top:2vh;padding-left:14px}}
+</style></head><body data-id="mask">
+<div class="stage"><div class="b3d" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="../img/bottle.webp" width="352" height="898" alt="Chulele bottle (3D model stand-in)"></div></div>
+<div class="wrap" id="wrap"><div class="pin"><div class="tk">Premium luxury spirit · Premium luxury brand · The Reserve · No. 003 ·</div>
+ <div class="sc" data-i="0"><div class="mw" style="background-image:url(../img/harvest.webp)">Field</div><div class="lt"><div><div class="d">25 Oct 2022</div><p>About 150 espadín agave, cut by hand in Santiago Matatlán.</p></div><div class="n">01</div></div></div>
+ <div class="sc" data-i="1"><div class="mw" style="background-image:url(../img/smoke.webp)">Fire</div><div class="lt"><div><div class="d">28 – 31 Oct</div><p>A pit oven, volcanic stone, four days.</p></div><div class="n">02</div></div></div>
+ <div class="sc" data-i="2"><div class="mw" style="background-image:url(../img/fibre.webp)">Stone</div><div class="lt"><div><div class="d">1 – 9 Nov</div><p>The tahona, a horse called Isabella, seven wild days.</p></div><div class="n">03</div></div></div>
+ <div class="sc" data-i="3"><div class="mw" style="background-image:url(../img/juice.webp)">Copper</div><div class="lt"><div><div class="d">9 &amp; 23 Nov</div><p>Two distillations, above 53% ABV off the still.</p></div><div class="n">04</div></div></div>
+ <div class="sc" data-i="4"><div class="mw" style="background-image:url(../img/flowers.webp)">Bloom</div><div class="lt"><div><div class="d">The week it was made</div><p>Marigold and cockscomb on every altar. The dead are the guests of honor.</p></div><div class="n">05</div></div></div>
+ <div class="sc" data-i="5"><div class="mw oak">Oak</div><div class="lt"><div><div class="d">December 2022 · California oak</div><p>Set apart in the barrel. It has not left it since.</p></div><div class="n">06</div></div></div>
+ <div class="sc fin" data-i="6"><div class="mw" style="background-image:url(../img/candles.webp)">5</div><div class="lt"><div class="btns"><div class="d">Años · held in reserve · $249 suggested</div><a class="cta" href="#" id="res">Join the reserve list →</a><a class="d" data-film style="text-decoration:underline" href="https://vimeo.com/883190665" target="_blank" rel="noopener">Watch the documentary</a></div></div></div>
+</div></div>
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script>
+<script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
+<script src="../common.js"></script>
+<script>(()=>{
+document.getElementById('res').href=C.RES;
+const S=[...document.querySelectorAll('.sc')];
+if(C.RM){S.forEach(s=>s.style.opacity=1);S.forEach((s,i)=>{s.style.position='relative';s.style.height='60vh'})}else{
+ const tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#wrap',start:'top top',end:'bottom bottom',scrub:.6}});
+ S.forEach((s,i)=>{const w=s.querySelector('.mw'),lt=s.querySelector('.lt'),t=i;
+  tl.fromTo(s,{opacity:i?0:1},{opacity:1,duration:.18},t).fromTo(w,{backgroundPosition:'20% 80%',backgroundSize:'260% auto',scale:1.08,y:40},{backgroundPosition:'80% 20%',backgroundSize:'150% auto',scale:1,y:0,duration:.9},t)
+   .fromTo(lt,{opacity:0,y:30},{opacity:1,y:0,duration:.25},t+.15);
+  if(i<S.length-1)tl.to(s,{opacity:0,y:-60,duration:.2},t+.82)});
+ tl.to({},{duration:.3})}
+})();</script></body></html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0a0a0b">
+<title>Vault Iris · Chulele Añejo pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="/bottle3d/bottle3d.css?v=BQgvOZWf">
+<style>
+/* PITCH 2 · Vault Iris (New York). Idea: the reserve is a vault that opens. One photograph, one word, one circular iris at a time. */
+:root{--sw:34%}
+.stage{background:#000;box-shadow:1px 0 0 #1b1b1f}
+.stage::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 52%,rgba(175,0,97,.3),transparent 70%)}
+.pinwrap{position:relative;height:620vh}
+.pin{position:sticky;top:0;height:100vh;margin-left:var(--sw);overflow:hidden;background:#000}
+.L{position:absolute;inset:0;overflow:hidden;clip-path:circle(75% at 50% 50%)}
+.L img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.62) contrast(1.08) saturate(.9)}
+.L .tint{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 35%,rgba(0,0,0,.7))}
+.L .word{position:absolute;left:0;right:0;top:50%;transform:translateY(-52%);text-align:center;font:700 clamp(90px,17vw,300px)/.8 var(--fd);letter-spacing:.04em;color:transparent;-webkit-text-stroke:2px rgba(236,231,221,.85);text-transform:uppercase;white-space:nowrap}
+.L .cap{position:absolute;left:5%;bottom:7vh;max-width:min(440px,70%);display:flex;flex-direction:column;gap:6px}
+.L .cap b{font:600 12px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}.L .cap span{font-size:clamp(15px,1.3vw,18px);color:#e6e0d3}
+.oak{background:repeating-radial-gradient(circle at 50% 50%,#1a120a 0 6px,#2a1b0e 6px 12px,#150e07 12px 17px)}.oak::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,transparent 20%,#000 90%)}
+.ringo{position:absolute;left:50%;top:50%;width:10px;height:10px;border:2px solid var(--gold);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:10;box-shadow:0 0 30px rgba(184,145,90,.5)}
+.fin{background:#000;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column;gap:18px}
+.fin h2{font-size:clamp(40px,6vw,96px);line-height:.95;text-transform:uppercase}.fin p{margin:0;max-width:44ch;color:#d9d3c7}.fin .big{font:700 clamp(200px,38vw,560px)/.8 var(--fd);color:transparent;-webkit-text-stroke:1px rgba(184,145,90,.45);position:absolute;opacity:.5;z-index:0}.fin>*:not(.big){position:relative;z-index:1}
+.dots{position:absolute;right:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:12}.dots i{width:7px;height:7px;border-radius:50%;background:#3a3a40;display:block}.dots i.on{background:var(--gold);transform:scale(1.5)}
+@media(max-width:899px){:root{--band:37svh}.pin{margin-left:0;margin-top:var(--band);height:calc(100svh - var(--band))}.pinwrap{height:560vh}.L .word{font-size:26vw}.L .cap{left:16px;bottom:18px}.dots{right:10px}}
+</style></head><body data-id="iris">
+<div class="stage"><div class="b3d" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="../img/bottle.webp" width="352" height="898" alt="Chulele bottle (3D model stand-in)"></div></div>
+<div class="pinwrap"><div class="pin" id="pin">
+ <div class="L" data-i="0"><img src="../img/harvest.webp" alt=""><div class="tint"></div><div class="word">Field</div><div class="cap"><b>25 October 2022</b><span>About 150 espadín agave, cut by hand in the fields of Benito Ruiz and his son Francisco.</span></div></div>
+ <div class="L" data-i="1"><img src="../img/smoke.webp" alt=""><div class="tint"></div><div class="word">Fire</div><div class="cap"><b>28 – 31 October</b><span>A pit oven, volcanic stone, four days of slow heat.</span></div></div>
+ <div class="L" data-i="2"><img src="../img/fibre.webp" alt=""><div class="tint"></div><div class="word">Stone</div><div class="cap"><b>1 – 9 November</b><span>The tahona, a horse named Isabella, seven days of wild fermentation.</span></div></div>
+ <div class="L" data-i="3"><img src="../img/juice.webp" alt=""><div class="tint"></div><div class="word">Copper</div><div class="cap"><b>9 &amp; 23 November</b><span>Two distillations. Clay-sealed copper, a wood fire, above 53% off the still.</span></div></div>
+ <div class="L" data-i="4"><div class="oak" style="position:absolute;inset:0"></div><div class="word">Oak</div><div class="cap"><b>December 2022 · California oak</b><span>Set apart and laid in the barrel. It has not left it since.</span></div></div>
+ <div class="L fin" data-i="5"><div class="big">5</div><div class="lux">Premium luxury spirit · Premium luxury brand</div><h2>Held in<br>reserve</h2><p>Five years in oak. One release, by invitation. Suggested retail $249.</p><a class="cta" href="#" id="res">Join the reserve list →</a><a href="https://vimeo.com/883190665" data-film target="_blank" rel="noopener" class="lux" style="text-decoration:underline">Watch the documentary</a></div>
+ <div class="ringo" id="ringo"></div><div class="dots" id="dots"></div>
+</div></div>
+<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script>
+<script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
+<script src="../common.js"></script>
+<script>
+document.getElementById('res').href=C.RES;
+const Ls=[...document.querySelectorAll('.L')],dots=document.getElementById('dots');Ls.forEach(()=>dots.append(document.createElement('i')));
+if(C.RM){Ls.forEach(l=>l.style.clipPath='none');}else{
+ Ls.forEach((l,i)=>{if(i)l.style.clipPath='circle(0% at 50% 50%)';l.style.zIndex=i});
+ const tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'.pinwrap',start:'top top',end:'bottom bottom',scrub:.6,onUpdate:s=>{const k=Math.min(Ls.length-1,Math.floor(s.progress*Ls.length*.9999));[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===k))}}});
+ Ls.forEach((l,i)=>{if(!i){tl.fromTo(l.querySelector('img'),{scale:1.25},{scale:1.02,duration:1},0);return}
+  const t=i-.55;tl.fromTo(l,{clipPath:'circle(0% at 50% 50%)'},{clipPath:'circle(75% at 50% 50%)',duration:.8,ease:'power2.inOut'},t)
+   .fromTo('#ringo',{width:10,height:10,opacity:1},{width:'150vmax',height:'150vmax',opacity:0,duration:.8,ease:'power2.inOut'},t)
+   .fromTo(l.querySelector('.word'),{scale:1.5,opacity:0},{scale:1,opacity:1,duration:.6},t+.2).fromTo(l.querySelector('.cap'),{y:30,opacity:0},{y:0,opacity:1,duration:.4},t+.4);
+  const im=l.querySelector('img');im&&tl.fromTo(im,{scale:1.3},{scale:1.02,duration:1},t)});
+ tl.to({},{duration:.6})}
+</script></body></html>
