@@ -9,7 +9,7 @@ const id=document.body.dataset.id,i=L.findIndex(x=>x[0]===id),pv=L[(i+L.length-1
 const hd=document.createElement('header');hd.className='hd';
 hd.innerHTML=`<a class="lg" href="../index.html" aria-label="All pitches"><img src="../img/logo.webp" alt="Chulele"></a><span class="pn">${L[i][2]} · ${i+1}/15 · ${L[i][1]}</span><nav><a href="${pv[0]}.html" aria-label="Previous pitch">‹</a><a class="all" href="../index.html">All 15</a><a href="${nx[0]}.html" aria-label="Next pitch">›</a></nav>`;
 document.body.prepend(hd);
-const g=document.createElement('div');g.className='grain';document.body.append(g);
+const g=document.createElement('div');g.className='grain';document.body.append(g);const bb=document.createElement('div');bb.className='band-bg';document.body.prepend(bb);
 const a0=new Date(2022,11,1),n0=new Date();let TM=(n0.getFullYear()-a0.getFullYear())*12+n0.getMonth()-a0.getMonth();if(n0.getDate()<a0.getDate())TM--;
 const DAYS=Math.floor((n0-new Date(2022,11,1))/864e5);
 window.C={L,i,TM,DAYS,TIO:`${Math.floor(TM/12)} yr ${TM%12} mo`,RM:matchMedia('(prefers-reduced-motion: reduce)').matches,mob:()=>innerWidth<900,
