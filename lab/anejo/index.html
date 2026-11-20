@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0a0a0b">
+<title>Chulele Añejo · Live prototype</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/bottle3d/bottle3d.css?v=BQgvOZWf">
+<link rel="preload" as="image" href="/assets/mockup/bottle3d-shape-ddm.png" fetchpriority="high">
+<style>@font-face{font-family:Akrobat;src:url('/assets/2023/10/akrobat-bold-webfont.woff') format('woff');font-weight:700;font-display:swap}
+@font-face{font-family:Akrobat;src:url('/assets/2023/10/akrobat-semibold-webfont.woff') format('woff');font-weight:600;font-display:swap}
+
+:root{--ink:#0a0a0b;--ink2:#121215;--bone:#ece7dd;--dim:#9a958b;--gold:#b8915a;--wine:#AF0061;--line:#26262b;--gc:175,0,97;--ga:.34;--rot:0deg;--tilt:0;--p:0;color-scheme:dark}
+*{box-sizing:border-box}
+html{background:var(--ink)}
+body{margin:0;background:var(--ink);color:var(--bone);font-family:'Roboto',system-ui,sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+.disp{font-family:Akrobat,'Arial Narrow',sans-serif}
+/* top bar */
+.bar{position:fixed;z-index:30;left:0;right:0;top:env(safe-area-inset-top,0px);display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px max(14px,env(safe-area-inset-right,0px)) 10px max(14px,env(safe-area-inset-left,0px));background:linear-gradient(#0a0a0bf2,#0a0a0b00)}
+.bar img{height:30px;width:30px;opacity:.95}
+.sw{display:flex;gap:4px;background:#0a0a0bcc;border:1px solid var(--line);border-radius:999px;padding:3px}
+.sw button{font:600 11px Akrobat,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);background:none;border:0;border-radius:999px;padding:6px 11px;cursor:pointer}
+.sw button[aria-pressed=true]{background:var(--bone);color:var(--ink)}
+.sw button:focus-visible,.cta:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.pbar{position:fixed;z-index:31;left:0;top:0;height:2px;width:calc(var(--p)*100%);background:var(--gold)}
+/* stage */
+.wrap{display:grid;grid-template-columns:40% 60%;min-height:100vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 55%,rgba(var(--gc),var(--ga)),transparent 70%);transition:background .6s}
+.b3d{position:relative;z-index:2;height:min(66svh,680px);aspect-ratio:352/898;margin:0 auto;flex:none}
+.b3d>img{width:100%;height:100%;object-fit:contain;display:block}
+.ring,.ring2{position:absolute;z-index:1;border-radius:50%;aspect-ratio:1;display:none}
+.ring{width:min(78%,520px);border:1px solid rgba(184,145,90,.55);transform:rotate(var(--rot))}
+.ring2{width:min(92%,610px);border:1px dashed rgba(175,0,97,.6);transform:rotate(calc(var(--rot)*-.5))}
+.ring::after,.ring2::after{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--gold)}
+.ring2::after{background:var(--wine)}
+.ct{position:absolute;z-index:3;left:max(20px,env(safe-area-inset-left,0px));bottom:26px;display:none}
+.ct .l{font:600 11px Akrobat,sans-serif;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}
+.ct .v{font:600 clamp(36px,4.4vw,64px)/1 Akrobat,sans-serif}
+.ct .v small{font-size:.32em;color:var(--gold);margin:0 .6em 0 .15em}
+.ct .t{height:2px;width:min(240px,60%);background:#2a2a30;margin-top:8px;position:relative}
+.ct .t i{position:absolute;left:0;top:0;height:2px;background:var(--gold);width:0}
+.map{position:absolute;z-index:3;left:max(18px,env(safe-area-inset-left,0px));right:18px;bottom:22px;display:none;pointer-events:none}
+.map svg{width:100%;height:auto;display:block;overflow:visible}
+.map .base{stroke:#3a3a40;stroke-width:1.5;fill:none;stroke-dasharray:3 5}
+.map .live{stroke:var(--gold);stroke-width:2;fill:none}
+.map .pin{fill:#0a0a0b;stroke:var(--wine);stroke-width:2}
+.map .pin.on{fill:var(--gold);stroke:var(--gold)}
+.map .me{fill:var(--bone)}
+.map .lbl{font:600 8.5px Akrobat,sans-serif;letter-spacing:.14em;fill:#9a958b;text-transform:uppercase}
+.rail{position:fixed;z-index:20;right:max(10px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:9px}
+.rail i{width:6px;height:6px;border-radius:50%;background:#3a3a40;display:block;transition:.3s}
+.rail i.on{background:var(--wine);transform:scale(1.7)}
+.rail i.done{background:var(--gold)}
+/* story */
+.story{padding:0 max(24px,env(safe-area-inset-right,0px)) 0 clamp(8px,3vw,48px)}
+.ch{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;gap:16px;max-width:640px;opacity:.3;transform:translateY(14px);transition:opacity .7s,transform .8s cubic-bezier(.16,1,.3,1)}
+.ch.on{opacity:1;transform:none}
+.ey{font:600 12px Akrobat,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.ch h2{margin:0;font:600 clamp(40px,6vw,84px)/.95 Akrobat,sans-serif;text-transform:uppercase;letter-spacing:.01em;text-wrap:balance}
+.ch p{margin:0;font-size:clamp(16px,1.5vw,19px);color:#d9d3c7;max-width:52ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font:600 12px Akrobat,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#cfc9bd;background:#0f0f12}
+.chips b{color:var(--gold);font-weight:500}
+.status{display:inline-flex;align-items:center;gap:8px;font:600 12px Akrobat,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.price{display:flex;flex-direction:column;gap:2px}.price small{font:600 10px Akrobat,sans-serif;letter-spacing:.24em;color:var(--dim);text-transform:uppercase}.price b{font:600 38px Akrobat,sans-serif;color:var(--gold)}
+.cta{display:inline-block;align-self:flex-start;background:var(--wine);color:#fff;text-decoration:none;font:600 14px Akrobat,sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:14px 26px;box-shadow:0 8px 30px rgba(175,0,97,.4)}
+.cue{font:600 11px Akrobat,sans-serif;letter-spacing:.3em;color:var(--dim);text-transform:uppercase}
+.foot{padding:60px 0 calc(60px + env(safe-area-inset-bottom,0px));color:var(--dim);font:600 11px Akrobat,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+/* skins */
+[data-skin=capsule] .ring,[data-skin=capsule] .ring2{display:block}[data-skin=capsule] .rail{display:flex}
+[data-skin=altar] .ct{display:block}
+[data-skin=map] .map{display:block}
+[data-skin=map] .b3d{height:min(56svh,600px);margin-top:-8vh}
+[data-skin=altar] .ch h2,[data-skin=altar] .ey{text-shadow:0 0 30px rgba(var(--gc),.35)}
+/* phone: bottle band */
+@media(max-width:760px){
+ .wrap{grid-template-columns:minmax(0,1fr)}
+ .stage{height:46vh;height:46svh;z-index:10;margin-top:0;background:linear-gradient(#0a0a0b 0,#0a0a0b 0),radial-gradient(ellipse 80% 70% at 50% 55%,rgba(var(--gc),var(--ga)),transparent 70%);background-blend-mode:normal;box-shadow:0 16px 24px -10px #0a0a0b;padding-top:calc(46px + env(safe-area-inset-top,0px))}
+ .stage{background:radial-gradient(ellipse 80% 70% at 50% 60%,rgba(var(--gc),var(--ga)),#0a0a0b 72%)}
+ .b3d{height:calc(46svh - 74px - env(safe-area-inset-top,0px));margin-top:0}
+ [data-skin=map] .b3d{height:calc(46svh - 56px - env(safe-area-inset-top,0px));margin-top:0}
+ .story{padding:0 max(18px,env(safe-area-inset-right,0px)) 0 max(18px,env(safe-area-inset-left,0px))}
+ .ch{min-height:calc(100svh - 46svh);justify-content:center;padding-block:34px}
+ .ch h2{font-size:clamp(36px,11vw,56px)}
+ .ct{left:auto;right:14px;bottom:10px;text-align:right}.ct .v{font-size:30px}.ct .t{margin-left:auto;width:120px}
+ .map{left:auto;width:46%;right:10px;bottom:8px}
+ [data-skin=map] .b3d{margin-left:-30%}
+ .ring{width:62vw}.ring2{width:74vw}
+ .rail{right:4px}
+ .sw button{padding:6px 8px;font-size:10px;letter-spacing:.08em}
+}
+@media(prefers-reduced-motion:reduce){.ch{opacity:1;transform:none;transition:none}}
+</style></head><body>
+<div class="pbar" id="pbar"></div>
+<div class="bar"><img src="/assets/mockup/chulele-crest-white.png" alt="Chulele"><div class="sw" role="group" aria-label="Experience"><button data-s="capsule" aria-pressed="true">Cask Capsule</button><button data-s="altar" aria-pressed="false">Altar Light</button><button data-s="map" aria-pressed="false">Matatlán Map</button></div></div>
+<div id="app" data-skin="capsule">
+<div class="rail" id="rail" aria-hidden="true"></div>
+<div class="wrap">
+ <div class="stage" id="stage">
+  <div class="ring2"></div><div class="ring"></div>
+  <div class="b3d" id="bottle" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="/assets/mockup/bottle-ddlm-dark-nomedal.png" width="352" height="898" alt="Chulele bottle (Día de los Muertos Joven model, stand-in for the Añejo)"></div>
+  <div class="ct" id="ct"><div class="l">Time in oak</div><div class="v" id="ctv">—</div><div class="t"><i id="ctb"></i></div></div>
+  <div class="map" id="map"><svg viewBox="0 0 220 120" aria-hidden="true"><path id="route" class="base" d="M10 104 C40 20 80 112 118 62 S178 24 210 14"/><path id="live" class="live" d="M10 104 C40 20 80 112 118 62 S178 24 210 14"/><g id="pins"></g><circle id="me" class="me" r="4.5"/><text class="lbl" x="10" y="118">Field</text><text class="lbl" x="100" y="80">Palenque</text><text class="lbl" x="172" y="8">Cellar</text></svg></div>
+ </div>
+ <main class="story" id="story"></main>
+</div></div>
+
+<script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
+<script src="/lab/anejo/anejo.js?v=1" defer></script>
+</body></html>
