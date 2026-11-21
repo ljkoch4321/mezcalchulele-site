@@ -22,6 +22,7 @@
 .fin h2{font-size:clamp(40px,6vw,96px);line-height:.95;text-transform:uppercase}.fin p{margin:0;max-width:44ch;color:#d9d3c7}.fin .big{font:700 clamp(200px,38vw,560px)/.8 var(--fd);color:transparent;-webkit-text-stroke:1px rgba(184,145,90,.45);position:absolute;opacity:.5;z-index:0}.fin>*:not(.big){position:relative;z-index:1}
 .dots{position:absolute;right:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:12}.dots i{width:7px;height:7px;border-radius:50%;background:#3a3a40;display:block}.dots i.on{background:var(--gold);transform:scale(1.5)}
 @media(max-width:899px){:root{--band:37svh}.pin{margin-left:0;margin-top:var(--band);height:calc(100svh - var(--band))}.pinwrap{height:560vh}.L .word{font-size:26vw}.L .cap{left:16px;bottom:18px}.dots{right:10px}}
+.plxbar{position:absolute;left:0;right:0;top:11vh;z-index:14;display:flex;align-items:center;justify-content:center;gap:2vw;font:600 clamp(13px,1.5vw,22px) var(--fd);letter-spacing:.36em;text-transform:uppercase;color:var(--bone);text-shadow:0 2px 20px rgba(0,0,0,.8);pointer-events:none}.plxbar i{width:5vw;height:1px;background:var(--gold)}@media(max-width:899px){.plxbar{top:2.5vh;flex-direction:column;gap:2px;font-size:11px;letter-spacing:.26em}.plxbar i{display:none}}
 </style></head><body data-id="iris">
 <div class="stage"><div class="b3d" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="../img/bottle.webp" width="352" height="898" alt="Chulele bottle (3D model stand-in)"></div></div>
 <div class="pinwrap"><div class="pin" id="pin">
@@ -31,7 +32,7 @@
  <div class="L" data-i="3"><img src="../img/juice.webp" alt=""><div class="tint"></div><div class="word">Copper</div><div class="cap"><b>9 &amp; 23 November</b><span>Two distillations. Clay-sealed copper, a wood fire, above 53% off the still.</span></div></div>
  <div class="L" data-i="4"><div class="oak" style="position:absolute;inset:0"></div><div class="word">Oak</div><div class="cap"><b>December 2022 · California oak</b><span>Set apart and laid in the barrel. It has not left it since.</span></div></div>
  <div class="L fin" data-i="5"><div class="big">5</div><div class="lux">Premium luxury spirit · Premium luxury brand</div><h2>Held in<br>reserve</h2><p>Five years in oak. One release, by invitation. Suggested retail $249.</p><a class="cta" href="#" id="res">Join the reserve list →</a><a href="https://vimeo.com/883190665" data-film target="_blank" rel="noopener" class="lux" style="text-decoration:underline">Watch the documentary</a></div>
- <div class="ringo" id="ringo"></div><div class="dots" id="dots"></div>
+ <div class="plxbar"><span>Premium luxury spirit</span><i></i><span>Premium luxury brand</span></div><div class="ringo" id="ringo"></div><div class="dots" id="dots"></div>
 </div></div>
 <script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script>
 <script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>

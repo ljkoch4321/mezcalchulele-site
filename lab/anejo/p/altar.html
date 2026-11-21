@@ -14,7 +14,7 @@ svg.sc{position:absolute;inset:0;width:100%;height:100%}
 .fl{animation:fk .18s ease-in-out infinite alternate;transform-origin:50% 100%}@keyframes fk{from{transform:scale(1,1) skewX(-2deg)}to{transform:scale(.92,1.1) skewX(2deg)}}
 .fr{opacity:0;transform-box:fill-box;transform-origin:50% 100%}
 .say{position:absolute;left:3vw;bottom:5vh;max-width:min(330px,30vw);z-index:5;background:linear-gradient(90deg,rgba(8,3,7,.85),rgba(8,3,7,.0));padding:10px 20px 10px 0}
-.say .d{font:600 12px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:#e0a030}.say h2{font-size:clamp(30px,3.8vw,60px);line-height:.95;text-transform:uppercase;margin:6px 0 8px}.say p{margin:0 0 10px;font-size:clamp(13px,1.15vw,17px);color:#e2d6cf}
+.say .d{font:600 12px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:#e0a030}.say h2{font-size:clamp(24px,2.8vw,44px);line-height:.95;text-transform:uppercase;margin:6px 0 8px}.say p{margin:0 0 10px;font-size:clamp(13px,1.15vw,17px);color:#e2d6cf}
 .ctas{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
 .fx{position:absolute;inset:0;pointer-events:none;z-index:4}
 @media(max-width:899px){:root{--band:37svh}.pin{margin-left:0;margin-top:var(--band);height:calc(100svh - var(--band))}.wrap{height:800vh}svg.sc{height:62%}.say{left:14px;right:14px;max-width:none;bottom:2vh;padding:0}.say h2{font-size:28px}.say p{font-size:12.5px;margin:0 0 6px}}
@@ -58,7 +58,7 @@ const items=$('items');const nodes=O.map((o,i)=>{const g=document.createElementN
 // centre plaque (final)
 const pl=document.createElementNS(NS,'g');pl.setAttribute('opacity',0);pl.innerHTML=`<circle cx="500" cy="120" r="64" fill="url(#gl)" opacity=".5"/><rect x="450" y="86" width="100" height="70" fill="#12060f" stroke="#e0a030" stroke-width="2"/><text x="500" y="136" text-anchor="middle" font-family="Akrobat,Barlow Condensed,sans-serif" font-weight="700" font-size="58" fill="#e0a030">5</text><text x="500" y="150" text-anchor="middle" font-family="Arial Narrow,sans-serif" font-size="8" letter-spacing="3" fill="#ece7dd">AÑOS</text>`;items.append(pl);
 const say=$('say');let cur=-2;
-const IN={t:'Día de los Muertos · 2022',h2:'An ofrenda for the añejo',p:'Scroll to build the altar. Each step of this batch is an offering, and its candle is lit.'};
+const IN={t:'An ofrenda for the añejo',h2:'Premium luxury spirit. Premium luxury brand.',p:'Día de los Muertos, 2022. Scroll to build the altar: each step of this batch is an offering, and its candle is lit.'};
 const END={t:'Five years · held in reserve',h2:'Leave your name at the altar',p:'One release, by invitation. Suggested retail $249.',fin:1};
 function copy(k){if(k===cur)return;cur=k;const o=k<0?IN:k>=O.length?END:O[k];say.style.opacity=0;setTimeout(()=>{say.innerHTML=`<div class="d">${o.t}</div><h2>${o.h2}</h2><p>${o.p}</p>${o.fin?`<div class="ctas"><a class="cta" href="${C.RES}">Join the reserve list →</a><a class="lux" style="text-decoration:underline" data-film href="https://vimeo.com/883190665" target="_blank" rel="noopener">Watch the documentary</a><div class="lux">Premium luxury spirit · Premium luxury brand</div></div>`:''}`;say.style.opacity=1},140);say.style.transition='opacity .25s'}
 function upd(p){const n=O.length+1,q=p*n;nodes.forEach((o,i)=>{const t=Math.max(0,Math.min(1,q-i-.1));o.g.style.opacity=t;o.g.style.transform=`translateY(${(1-t)*-30}px) scale(${.85+.15*t})`;o.c.setAttribute('opacity',Math.min(1,t*1.5))});

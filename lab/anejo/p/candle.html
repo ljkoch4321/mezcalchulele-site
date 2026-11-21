@@ -19,10 +19,11 @@ body{background:#050304}
 .hint{position:fixed;z-index:23;left:calc(var(--sw) + 3vw);bottom:4vh;font:600 11px var(--fd);letter-spacing:.3em;text-transform:uppercase;color:#a89572;transition:opacity .6s}
 .always{position:absolute;z-index:30;left:calc(5% );bottom:7vh}.always .cta{display:inline-block}.always .lux{display:block;margin-top:10px}
 @media(max-width:899px){:root{--band:37svh}.cave{margin-left:0;padding-top:var(--band);height:520vh}.dark,.glow{left:0;top:var(--band)}.hint{left:14px;bottom:2vh}.it.t{max-width:78vw}.it.t h2{font-size:34px}.it.big{font-size:44vw}}
+.plxfix{position:fixed;z-index:25;left:calc(var(--sw) + 3vw);top:5.5vh;font:600 clamp(14px,1.5vw,22px)/1.55 var(--fd);letter-spacing:.34em;text-transform:uppercase;color:var(--gold);text-shadow:0 0 18px rgba(255,160,70,.55);pointer-events:none}.plxfix span{display:block}.plxfix span+span{color:var(--bone)}@media(max-width:899px){.plxfix{left:14px;top:calc(var(--band) + 10px);font-size:10.5px;letter-spacing:.22em}}
 </style></head><body data-id="candle">
 <div class="stage"><div class="b3d" data-bottle3d="ddm-joven-black" style="--b3d-glow:175,0,97;--b3d-mark:url(/assets/mockup/bottle3d-shape-ddm.png)"><img src="../img/bottle.webp" width="352" height="898" alt="Chulele bottle (3D model stand-in)"></div></div>
 <main class="cave" id="cave"></main>
-<div class="dark" id="dark"></div><div class="glow" id="glow"></div><div class="flame" id="flame"><i></i></div><div class="hint" id="hint">Move the light · scroll to go deeper</div>
+<div class="dark" id="dark"></div><div class="glow" id="glow"></div><div class="plxfix"><span>Premium luxury spirit</span><span>Premium luxury brand</span></div><div class="flame" id="flame"><i></i></div><div class="hint" id="hint">Move the light · scroll to go deeper</div>
 <script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../vendor/lenis.min.js"></script>
 <script type="module" src="/bottle3d/bottle3d-tilt1.js"></script>
 <script src="../common.js"></script>
@@ -30,7 +31,7 @@ body{background:#050304}
 const cave=document.getElementById('cave');
 // items positioned in % of cave width/height
 const I=[
-['t',8,3,'Día de los Muertos · 2022','Light a candle','The Reserve · No. 003. A premium luxury spirit from a premium luxury brand, resting in the dark.'],
+['t',8,3,'Día de los Muertos · 2022','Light a candle','<span class="plx" style="display:block;margin:12px 0 4px"><span>Premium luxury spirit</span><span>Premium luxury brand</span></span>The Reserve · No. 003, resting in the dark.'],
 ['img',48,6,'harvest','25 Oct 2022',30],['t',10,17,'25 October 2022','The first cut','About 150 espadín agave, by hand, in the fields of Benito Ruiz and his son Francisco.'],
 ['img',58,24,'smoke','The oven',32],['t',6,30,'28 – 31 October','Four days of fire','Volcanic stone and slow heat. Night low 46°F when it was opened.'],
 ['big',52,38,'53%'],['t',14,43,'9 & 23 November','Twice through copper','Clay-sealed stills over a wood fire. Above 53% ABV off the second distillation.'],
